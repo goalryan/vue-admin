@@ -1,12 +1,25 @@
+@import './common/variable';
 /*
- * 重置部分el表单，单选按钮，输入框的样式
+ * 重置部分el表单，单选按钮，输入框,日期组件的样式
  *
  */
 @import './common/variable';
+.el-icon-time:before, .el-icon-date:before{
+  font-family:@font-family-icon;
+  content:'\e915'!important;
+}
+.el-input.is-disabled .el-input__inner{
+  background-color: #f5f5f5;
+}
 .el-input__inner{
   font-size: 12px;
   border-radius: 2px;
   height: 28px!important;
+
+  &.danger{
+    border-color: #ff0700;
+    color:#ff0700;
+  }
 }
 .el-radio__input.is-checked .el-radio__inner{
   border-color:transparent;
@@ -63,7 +76,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 20px;
+    margin-top:10px;
+    margin-bottom: 10px;
 
     .form-item-label{
       display: flex;
@@ -103,6 +117,11 @@
 
     .form-item{
       width: 100%!important;
+      margin-bottom: 10px!important;
+
+      .form-item-label{
+        justify-content: flex-start!important;
+      }
     }
   }
 }

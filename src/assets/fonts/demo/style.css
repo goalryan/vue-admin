@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?vy7utl');
-  src:  url('fonts/icomoon.eot?vy7utl#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?vy7utl') format('truetype'),
-    url('fonts/icomoon.woff?vy7utl') format('woff'),
-    url('fonts/icomoon.svg?vy7utl#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?1ryrer');
+  src:  url('fonts/icomoon.eot?1ryrer#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?1ryrer') format('truetype'),
+    url('fonts/icomoon.woff?1ryrer') format('woff'),
+    url('fonts/icomoon.svg?1ryrer#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,54 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-传真号:before {
+  content: "\e9c9";
+  color: #e4e4e4;
+}
+.icon-电话:before {
+  content: "\e9ca";
+  color: #e4e4e4;
+}
+.icon-网址:before {
+  content: "\e9cb";
+  color: #e4e4e4;
+}
+.icon-微信:before {
+  content: "\e9cc";
+  color: #e4e4e4;
+}
+.icon-邮箱:before {
+  content: "\e9cd";
+  color: #e4e4e4;
+}
+.icon-qq:before {
+  content: "\e9ce";
+  color: #e4e4e4;
+}
+.icon-skype:before {
+  content: "\e9cf";
+  color: #e4e4e4;
+}
+.icon-评级信息:before {
+  content: "\e9c6";
+  color: #666;
+}
+.icon-充值:before {
+  content: "\e9c4";
+  color: #03a9f4;
+}
+.icon-工作台:before {
+  content: "\e9c5";
+  color: #7085a9;
+}
+.icon-开发:before {
+  content: "\e9c8";
+  color: #666;
+}
+.icon-收件信息:before {
+  content: "\e9c7";
+  color: #666;
+}
 .icon-loading:before {
   content: "\e9c3";
 }
@@ -502,7 +550,7 @@
   content: "\e91a";
   color: #03a9f4;
 }
-.icon-开发:before {
+.icon-开发2:before {
   content: "\e91b";
   color: #666;
 }

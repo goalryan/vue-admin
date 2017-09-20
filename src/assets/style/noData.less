@@ -9,14 +9,31 @@
 
   .no-img{
     display: block;
-    background: url("../images/noData.png") no-repeat;
-    background-size: 100% 100%;
     width: 152px;
     height: 96px;
     transform: translateX(5px);
     margin-bottom: 20px;
+
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
   .no-text{
     color: #757575;
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

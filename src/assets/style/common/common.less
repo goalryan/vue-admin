@@ -25,6 +25,9 @@ input[type='number']{
   -moz-appearance: textfield;
   background-color: #fff;
 }
+input[disabled] {
+  background-color: #f5f5f5;
+}
 [class*='icon-'],[class^='icon-']{
   font-family: @font-family-icon;
   speak: none;
@@ -49,17 +52,21 @@ input[type=checkbox], input[type=radio] {
   margin: 0;
   cursor: pointer;
   vertical-align: middle;
-  background-color: transparent;
+  background-color: white;
   border: none;
-  border-radius: 4px;
   box-sizing: border-box;
+  position: relative;
 }
 input[type=radio] {
+  border-radius: 50%;
+
   &::after {
     font-size: 14px;
     content: "\e939";
-    background-color: transparent;
     color: #e0e0e0;
+    position: absolute;
+    top:-1px;
+    left:0;
   }
   &:checked::after {
     content: "\e96f";
@@ -68,10 +75,16 @@ input[type=radio] {
 }
 
 input[type=checkbox]{
+  border-radius:4px;
+
   &:after{
+    font-size:14px;
     content: "\e935";
     display: block;
     color: #e0e0e0;
+    position: absolute;
+    top:-1px;
+    left:0;
   }
   &:disabled::after{
     font-size: 14px;
@@ -86,8 +99,6 @@ input[type=checkbox]{
     outline: none;
   }
 }
-
-
 
 .cursor{
   cursor: pointer;
@@ -133,7 +144,7 @@ input[type=checkbox]{
   justify-content: center;
   flex-direction: column;
   padding: 10px 0;
-  >p{
+  >p,>div{
     margin-bottom: 5px;
     width: 100%;
   }
@@ -156,6 +167,18 @@ input[type=checkbox]{
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.flex-start{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.flex-end{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 // 停用部门标识
 .flex-space .disabled {
@@ -216,6 +239,25 @@ input[type=checkbox]{
   color: #757575;
 }
 
+// 状态背景样式
+.background-red,.background-green,.background-gray,.background-blue{
+  display: inline-block;
+  color: white;
+  padding: 0 5px;
+}
+.background-red {
+  background-color: #ff0700;
+}
+.background-green {
+  background-color: #61ba5b;
+}
+.background-gray {
+  background-color: #757575;
+}
+.background-blue {
+  background-color: @sub-color;
+}
+
 
 /*
  * 共用的边距
@@ -225,11 +267,23 @@ input[type=checkbox]{
 .pct100{
   width: 100%!important;
 }
+.mt5{
+  margin-top: 5px!important;
+}
+.mt10{
+  margin-top: 10px!important;
+}
+.mt15{
+  margin-top: 10px!important;
+}
 .mt20{
   margin-top: 20px!important;
 }
 .mr4{
   margin-right: 4px!important;
+}
+.mr5{
+  margin-right: 5px!important;
 }
 .mr10{
   margin-right: 10px!important;
@@ -237,14 +291,23 @@ input[type=checkbox]{
 .mr15{
   margin-right: 15px!important;
 }
+.mr20{
+  margin-right: 20px!important;
+}
 .ml4{
   margin-left: 4px!important;
+}
+.ml5{
+  margin-left: 5px!important;
 }
 .ml10{
   margin-left: 10px!important;
 }
 .ml15{
   margin-left: 15px!important;
+}
+.ml20{
+  margin-left: 20px!important;
 }
 .ml30{
    margin-left:30px!important;
@@ -254,4 +317,10 @@ input[type=checkbox]{
 }
 .mb10{
   margin-bottom: 10px!important;
+}
+.mb15{
+  margin-bottom: 15px!important;
+}
+.mb20{
+  margin-bottom: 20px!important;
 }
