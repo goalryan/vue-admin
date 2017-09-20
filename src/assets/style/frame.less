@@ -1,31 +1,142 @@
 @import './common/variable';
-#app{
+
+#app {
   height: 100%;
 }
-.header{
+
+.header {
   position: absolute;
   top: 0;
-  left: 232px;
+  //left: 232px;
   right: 0;
   height: 55px;
 
-
 }
-.sidebar{
+
+.sidebar {
   width: 224px;
   height: 100%;
   position: absolute;
   border-right: 1px solid #d9d9d9;
-  box-shadow: 1px 2px 5px 0 rgba(140,150,171,.41);
+  box-shadow: 1px 2px 5px 0 rgba(140, 150, 171, .41);
   background-color: #f5f6fa;
 }
-.container{
-  padding-left: 232px;
-  padding-top: 55px;
-  width: 100%;
-  height: 100%;
 
-  .content{
+.container {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  .header {
+    height: 60px;
+    line-height: 60px;
+    background: #20a0ff;
+    color: #fff;
+    .userinfo {
+      text-align: right;
+      padding-right: 35px;
+      float: right;
+      .userinfo-inner {
+        cursor: pointer;
+        color: #fff;
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+          margin: 10px 0px 10px 10px;
+          float: right;
+        }
+      }
+    }
+    .logo {
+      height: 60px;
+      font-size: 22px;
+      padding-left: 20px;
+      padding-right: 20px;
+      border-color: rgba(238, 241, 146, 0.3);
+      border-right-width: 1px;
+      border-right-style: solid;
+      img {
+        width: 40px;
+        float: left;
+        margin: 10px 10px 10px 18px;
+      }
+      .txt {
+        color: #fff;
+      }
+    }
+    .logo-width {
+      width: 230px;
+    }
+    .logo-collapse-width {
+      width: 60px
+    }
+    .tools {
+      padding: 0px 23px;
+      width: 14px;
+      height: 60px;
+      line-height: 60px;
+      cursor: pointer;
+    }
+  }
+  .main {
+    display: flex;
+    // background: #324057;
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    overflow: hidden;
+    aside {
+      flex: 0 0 230px;
+      width: 230px;
+      .el-menu {
+        height: 100%;
+      }
+      .collapsed {
+        width: 60px;
+        .item {
+          position: relative;
+        }
+        .submenu {
+          position: absolute;
+          top: 0px;
+          left: 60px;
+          z-index: 99999;
+          height: auto;
+          display: none;
+        }
+
+      }
+    }
+    .menu-collapsed {
+      flex: 0 0 60px;
+      width: 60px;
+    }
+    .menu-expanded {
+      flex: 0 0 230px;
+      width: 230px;
+    }
+    .content-container {
+      flex: 1;
+      overflow-y: scroll;
+      padding: 20px;
+      .breadcrumb-container {
+        .title {
+          width: 200px;
+          float: left;
+          color: #475669;
+        }
+        .breadcrumb-inner {
+          float: right;
+        }
+      }
+      .content-wrapper {
+        background-color: #fff;
+        box-sizing: border-box;
+      }
+    }
+  }
+  .content {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -36,18 +147,18 @@
     box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, .07);
 
   }
-  .container-item{
+  .container-item {
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow: hidden;
-    box-shadow: 1px 2px 5px 0 rgba(0,0,0,.07);
+    box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, .07);
     border-right: 1px solid #e6e8eb;
     position: relative;
-    &:first-of-type{
+    &:first-of-type {
       z-index: 2;
     }
-    .item-head{
+    .item-head {
       width: 100%;
       height: 46px;
       border-bottom: 1px solid #e6e8eb;
@@ -56,23 +167,23 @@
       justify-content: space-between;
       padding: 0 20px;
     }
-    .item-body{
+    .item-body {
       height: calc(~'100% - 46px');
 
-      &.have-footer{
+      &.have-footer {
         height: calc(~'100% - 106px');
       }
-      >.menu{
-        height:calc(~'100% - 52px');
-        overflow-y:auto;
+      > .menu {
+        height: calc(~'100% - 52px');
+        overflow-y: auto;
       }
-      .ec-table{
+      .ec-table {
         margin-left: -1px;
         margin-top: -1px;
       }
 
     }
-    .item-footer{
+    .item-footer {
       position: absolute;
       display: flex;
       align-items: center;
@@ -83,7 +194,7 @@
       padding-right: 20px;
     }
   }
-  .container-right{
+  .container-right {
     display: flex;
     flex: 1;
     height: 100%;
