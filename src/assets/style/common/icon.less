@@ -1,0 +1,843 @@
+/*
+  图标分类:
+    1、页面图标
+    2、职能图标
+    3、文件类型图标
+*/
+//button加戴图标
+.icon-loading:after{
+  content: '\e9c3';
+};
+//展开与收起
+.icon-open:after{
+  content: '\e9c0';
+}
+.icon-shut__down:after{
+  content: '\e9bf';
+}
+//带圆边细线删除
+.icon-fill__del:after{
+  content: '\e9bd';
+}
+//圆边细线添加
+.icon-fill__add:after{
+  content: '\e9be';
+}
+//圆形边框的添加无边
+.icon-null__add:after{
+  content: '\e980';
+  transform:rotate(-45deg);
+  display: inline-block;
+}
+//圆形边框的关闭无边
+.icon-null__close:after{
+  content: '\e980';
+}
+//圆形边框的关闭
+.icon-close__round:after{
+  content: '\e982';
+  color: #d4d5d4;
+}
+//规格型号
+.icon-specification__model:after{
+  content: '\e99d';
+}
+//货品编码
+.icon-product__codes:after{
+  content: '\e99e';
+}
+//货品名称
+.icon-product__name:after{
+  content: '\e99f';
+}
+//货运地址
+.icon-freight__address:after{
+  content: '\e99c';
+}
+//企业概况
+.icon-ent__info:after{
+  content: '\e999';
+}
+//企业注册设置
+.icon-ent__setting:after{
+  content: '\e99a';
+}
+//系统管理员联系方式
+.icon-admin__link:after{
+  content: '\e99b';
+}
+
+//没有充值记录
+.icon-paid__list:after{
+  content: '\e993';
+}
+//钱
+.icon-money:after{
+  content: '\e994';
+}
+//漏斗
+.icon-funnel:after{
+  content: '\e997';
+}
+//最高行政部门
+.icon-top__department:after{
+  content: '\e998';
+}
+//编辑
+.icon-edit:after{
+  content: '\e97d';
+}
+
+// 提示_成功
+.icon-success:after {
+  content: '\e97f';
+}
+// 小提示_完成
+.icon-finish:after {
+  content: '\e985';
+}
+// 小提示_感叹号
+.icon-exclamatory:after {
+  content: '\e983';
+}
+// 邮箱
+.icon-email:after {
+  content: '\e996';
+}
+// 密码
+.icon-password:after {
+  content: '\e995';
+}
+// 备料
+.icon-material__ready:after {
+  content: '\e98b';
+}
+// 标题
+.icon-title:after {
+  content: '\e98c';
+}
+// 返回我的经管
+.icon-ierp__return:after {
+  content: '\e98d';
+}
+// 开票
+.icon-invoice__create:after {
+  content: '\e98e';
+}
+// 批量核销
+.icon-cancel__batch:after {
+  content: '\e98a';
+}
+// 用户帮助
+.icon-user__help:after{
+  content: "\e989";
+}
+// 审核通过
+.icon-verify__success:after{
+  content: "\e96f";
+}
+// 审核未通过
+.icon-verify__failure:after{
+  content: "\e970";
+}
+// 首页进入管理员图标
+.icon-go__admin:after {
+  content: '\e987';
+}
+// 首页顶部返回
+.icon-back:after {
+  content: '\e93e';
+}
+// 下载
+.icon-download:after {
+  content: '\e97e';
+}
+//操作成功图标
+.icon-operate__success:after{
+  content:'\e96c'
+}
+//操作错误图标
+.icon-operate__failure:after{
+  content:'\e96e'
+}
+//岗位职能权限管理
+.icon-authority__manage:after{
+  content:'\e946'
+}
+//管理员初始化
+.icon-manager__init:after{
+  content:'\e947'
+}
+//减号
+.icon-minus__sign:after{
+  content:'\e948'
+}
+//批量审批
+.icon-batch__approval:after{
+  content:'\e949'
+}
+//企业认证
+.icon-enterprise__certification:after{
+  content:'\e94a'
+}
+//期初
+.icon-begin__period:after{
+  content:'\e94b'
+}
+//退货
+.icon-goods__return:after{
+  content:'\e957'
+}
+
+//弹出框搜索
+.icon-modal__serach:after{
+  content:'\e986'
+}
+//提示框感叹号
+.icon-warning__warn:after{
+  content:'\e981'
+}
+//小提示框关闭
+.icon-warning__close:after{
+  content:'\e984'
+}
+// 灯泡
+.icon-light:after {
+  content: '\e900';
+}
+// 弹出框关闭
+.icon-modal__close:after {
+  content: '\e905';
+}
+// BOM配置
+.icon-bom__config:after {
+  content: '\e906';
+}
+// BOM档案管理
+.icon-bom__manage:after {
+  content: '\e907';
+}
+// 增加产品
+.icon-product__add:after {
+  content: '\e908';
+}
+// 业务员管理
+.icon-staff__manage:after {
+  content: '\e909';
+}
+// 新增联系人
+.icon-contacts__add:after {
+  content: '\e90a';
+}
+// 销售
+.icon-sales:after {
+  content: '\e90b';
+}
+// 图片
+.icon-img:after {
+  content: '\e90c';
+}
+// 添加附件_不可操作
+.icon-add_attachment__disabled:after {
+  content: '\e90e';
+}
+// 添加
+.icon-add:after {
+  content: '\e911';
+}
+// 选择框下拉
+.icon-select_caret:after {
+  content: '\e912';
+}
+// 时间
+.icon-time:after {
+  content: '\e913';
+}
+// 删除
+.icon-delete:after {
+  content: '\e914';
+}
+// 日期
+.icon-date:after {
+  content: '\e915';
+}
+// 任职履历
+.icon-resume:after {
+  content: '\e916';
+}
+// 签约
+.icon-contract:after {
+  content: '\e917';
+}
+// 内页关闭
+.icon-innerpage__close:after {
+  content: '\e918';
+}
+// 联系人
+.icon-contacts:after {
+  content: '\e919';
+}
+// 客户
+.icon-customer:after {
+  content: '\e91a';
+}
+// 开发
+.icon-develop:after {
+  content: '\e91b';
+}
+// 合同信息
+.icon-contract__msg:after {
+  content: '\e91c';
+}
+// 岗位信息
+.icon-work__msg:after {
+  content: '\e91d';
+}
+// 岗位管理
+.icon-work__manage:after {
+  content: '\e91e';
+}
+// 返回
+.icon-return:after {
+  content: '\e91f';
+}
+// 对账
+.icon-watch_account:after {
+  content: '\e920';
+}
+// 待处理
+.icon-pending:after {
+  content: '\e921';
+}
+// 查找
+.icon-search:after {
+  content: '\e922';
+}
+// 采购
+.icon-purchase:after {
+  content: '\e923';
+}
+// 用户反馈
+.icon-feedback:after {
+  content: '\e924';
+}
+// 下单
+.icon-place_order:after {
+  content: '\e925';
+}
+// 上箭头
+.icon-arrow__up:after {
+  content: '\e926';
+  transform:rotate(180deg);
+  display: inline-block;
+}
+// 下箭头
+.icon-arrow__down:after {
+  content: '\e926';
+}
+// 左箭头
+.icon-arrow__left:after {
+  content: '\e926';
+  transform:rotate(90deg);
+  display: inline-block;
+}
+// 右箭头
+.icon-arrow__right:after {
+  content: '\e926';
+  transform:rotate(-90deg);
+  display: inline-block;
+}
+// 首页列表下拉 | 下箭头
+.icon-hp_list__dropdown:after {
+  content: '\e926';
+}
+// 列表收起 | 右箭头
+.icon-hp_list__right:after {
+  content: '\e926';
+}
+.icon-hp_list__right{
+  transform:rotate(-90deg);
+}
+// 首页列表新增
+.icon-hp_list__add:after {
+  content: '\e927';
+}
+// 首页表格新增
+.icon-hp_table__add:after {
+  content: '\e928';
+}
+// 筛选
+.icon-filter:after {
+  content: '\e929';
+}
+// 入库
+.icon-store__import:after {
+  content: '\e92a';
+}
+// 确认备货
+.icon-goods__confirm:after {
+  content: '\e92b';
+}
+// 企业基础信息
+.icon-company__msg:after {
+  content: '\e92c';
+}
+// 批量删除
+.icon-delete__batch:after {
+  content: '\e92d';
+}
+// 批量导入人事档案
+.icon-hr_files__import:after {
+  content: '\e92e';
+}
+// 管理员
+.icon-admin:after {
+  content: '\e92f';
+}
+// 岗位管理2
+.icon-work__manage2:after {
+  content: '\e932';
+}
+// 复选框_选中
+.icon-checkbox__checked:after {
+  content: '\e933';
+}
+// 发货
+.icon-goods__cend:after {
+  content: '\e934';
+}
+// 复选框
+.icon-checkbox:after {
+  content: '\e935';
+}
+// 对账2
+.icon-watch_account2:after {
+  content: '\e936';
+}
+// 导入
+.icon-import:after {
+  content: '\e937';
+}
+// 导出
+.icon-export:after {
+  content: '\e938';
+}
+// 单选框
+.icon-radio:after {
+  content: '\e939';
+}
+// 单选框_选中
+.icon-radio__checked:after {
+  content: '\e93a';
+}
+// 出库
+.icon-store__export:after {
+  content: '\e93b';
+}
+// OA协同选中
+.icon-oa__checked:after {
+  content: '\e93c';
+}
+// OA协同默认
+.icon-oa:after {
+  content: '\e93d';
+}
+// iERP选中
+.icon-ierp__checked:after {
+  content: '\e988';
+}
+// iERP默认
+.icon-ierp:after {
+  content: '\e93f';
+}
+// 权限管理
+.icon-authority__manage:after {
+  content: '\e940';
+}
+// 企业eboss
+.icon-eboss:after {
+  content: '\e941';
+}
+
+
+/*********** 以下是职能图标 start  ******************/
+// 固定资产管理
+.icon-fixed_manage:after {
+  content: '\e9b0';
+}
+// 部门行政事务管理
+.icon-department_manage:after {
+  content: '\e9b1';
+}
+// 采购分工设置
+.icon-purchase_setting:after {
+  content: '\e9b2';
+}
+// 管理系统应用检视
+.icon-system_review:after {
+  content: '\e9b3';
+}
+// 库存盘点计划与审核
+.icon-warehouse_audit:after {
+  content: '\e9b4';
+}
+
+// 委外加工备料与发料
+.icon-outsource_prepare:after {
+  content: '\e9b5';
+}
+// 委外加工补料审核
+.icon-outsource_audit:after {
+  content: '\e9b6';
+}
+// 销售订单提前备料管理
+.icon-sale_prepare:after {
+  content: '\e9b7';
+}
+// 行政通知与管理
+.icon-administrative_notification:after {
+  content: '\e9b8';
+}
+// 营销业务基础设置
+.icon-market_setting:after {
+  content: '\e9b9';
+}
+// 员工档案与关系管理
+.icon-employee_files:after {
+  content: '\e9ba';
+}
+// 制程品质检验作业
+.icon-quantity_inspection:after {
+  content: '\e9bb';
+}
+// 质检基础设置
+.icon-quantity_setting:after {
+  content: '\e9bc';
+}
+
+// 仓库工作分配
+.icon-warehouse_assignment:after {
+  content: '\e9ac';
+}
+// 仓库基础设置
+.icon-warehouse_infrastructure:after {
+  content: '\e9ad';
+}
+// 储位管理
+.icon-storage_management:after {
+  content: '\e9ae';
+}
+// 收票
+.icon-ticket:after {
+  content: '\e9af';
+}
+// 任务协同
+.icon-task_coordination:after {
+  content: '\e9aa';
+}
+// 行政通知
+.icon-administrative_notice:after {
+  content: '\e9ab';
+}
+// 采购对账与请款管理2
+.icon-purchase_manage:after {
+  content: '\e9a0';
+}
+// 成品入库品质检验作业
+.icon-product_check:after {
+  content: '\e9a1';
+}
+// 待完善销售订单BOM
+.icon-sale_bom:after {
+  content: '\e9a2';
+}
+// 供应商报价与配额管理2
+.icon-supplier_manage:after {
+  content: '\e9a3';
+}
+// 供应商报价与配额审核2
+.icon-supplier_audit:after {
+  content: '\e9a4';
+}
+// 供应商开发与合作管理2
+.icon-supplier_coporation:after {
+  content: '\e9a5';
+}
+// 货品非正常出入库审核
+.icon-sale_abnormal:after {
+  content: '\e9a6';
+}
+// 货品销售出库与退货
+.icon-sale_out:after {
+  content: '\e9a7';
+}
+// 人资行政基础设置
+.icon-hr_setting:after {
+  content: '\e9a8';
+}
+// 生产工序流转与生产成品入库
+.icon-process_product:after {
+  content: '\e9a9';
+}
+// 采购对账与请款管理
+.icon-supplier_funds:after {
+  content: '\e902';
+}
+// 供应商报价与配额管理
+.icon-supplier_offer__quota:after {
+  content: '\e903';
+}
+// 供应商报价与配额审核
+.icon-supplier_offer__audit:after {
+  content: '\e904';
+}
+// 供应商开发与合作管理
+.icon-supplier_cooperation:after {
+  content: '\e97c';
+}
+// 退收
+.icon-return_receipt:after {
+  content: '\e901';
+}
+// 库存查询
+.icon-stock_search:after {
+  content: '\e990';
+}
+// 库存盘点
+.icon-stock_inventory:after {
+  content: '\e991';
+}
+// 资本管理
+.icon-money_manage:after {
+  content: '\e992';
+}
+// 企业级客户开发与关系管理
+.icon-enterprise_customer__manage:after {
+  content: '\e95e';
+}
+// 批量导入货品档案
+.icon-goods_files__import:after {
+  content: '\e978';
+}
+// 基础设置
+.icon-base__config:after {
+  content: '\e979';
+}
+// 存货核算
+.icon-goods__inventory:after {
+  content: '\e98f';
+}
+
+// Bom档案审核管理
+.icon-bom_files__watch:after {
+  content: '\e942';
+}
+// Bom档案管理
+.icon-bom_files__manage:after {
+  content: '\e943';
+}
+// 应收审核
+.icon-receivable__watch:after {
+  content: '\e944';
+}
+// 应付审核
+.icon-payable__watch:after {
+  content: '\e945';
+}
+// 业务基础设置
+.icon-business__config:after {
+  content: '\e96a';
+}
+// 行政公告
+.icon-notice:after {
+  content: '\e94c';
+}
+// 新增与更新销售订单
+.icon-sales_order__edit:after {
+  content: '\e94d';
+}
+// 新增与更新客户档案
+.icon-customer_files__edit:after {
+  content: '\e94e';
+}
+// 新增与更新货品档案
+.icon-goods_files__edit:after {
+  content: '\e94f';
+}
+// 新增与更新工序档案
+.icon-process_files__edit:after {
+  content: '\e950';
+}
+// 销售跟单管理
+.icon-sales_order__manage:after {
+  content: '\e951';
+}
+// 销售订单审核
+.icon-sales_order__watch:after {
+  content: '\e952';
+}
+// 销售报价审核
+.icon-sales_offer__watch:after {
+  content: '\e953';
+}
+// 销售报价管理
+.icon-sales_offer__manage:after {
+  content: '\e954';
+}
+// 委外加工采购入库
+.icon-outside_task_store:after {
+  content: '\e955';
+}
+// 委外加工采购
+.icon-outside_task:after {
+  content: '\e956';
+}
+// 委外备料与发料
+.icon-outside_material:after {
+  content: '\e968';
+}
+// 生产领料与退料
+.icon-production_material:after {
+  content: '\e959';
+}
+// 生产备料与发料
+.icon-production_material__edit:after {
+  content: '\e95a';
+}
+// 人员档案管理
+.icon-personnel_files__manage:after {
+  content: '\e969';
+}
+// 期初库存录入
+.icon-stock__import:after {
+  content: '\e95c';
+}
+// 来料品质检验
+.icon-quality__watch:after {
+  content: '\e95d';
+}
+// 客户对账
+.icon-customer_watch_account:after {
+  content: '\e95f';
+}
+// 开发基础设置
+.icon-develop_base__config:after {
+  content: '\e960';
+}
+// 会计应收管理
+.icon-accountant_receivable__manage:after {
+  content: '\e961';
+}
+// 会计应付管理
+.icon-accountant_payable__manage:after {
+  content: '\e962';
+}
+// 供应商建档与档案管理
+.icon-supplier_files__manage:after {
+  content: '\e963';
+}
+// 供应商对账
+.icon-supplier_watch_account:after {
+  content: '\e964';
+}
+// 供应商报价管理
+.icon-supplier_offer__manage:after {
+  content: '\e965';
+}
+// 公司全部生产订单管理
+.icon-all_order__manage:after {
+  content: '\e966';
+}
+// 跟单管理审核
+.icon-follow_order__watch:after {
+  content: '\e967';
+}
+// 发票审核
+.icon-invoice__watch:after {
+  content: '\e95b';
+}
+// 发票管理
+.icon-invoice__manage:after {
+  content: '\e96b';
+}
+// 订单物料采购入库
+.icon-order_material__import:after {
+  content: '\e957';
+}
+// 订单物料采购管理
+.icon-order_material__manage:after {
+  content: '\e96d';
+}
+// 出纳审核
+.icon-teller__watch:after {
+  content: '\e958';
+}
+// 出纳管理
+.icon-teller__manage:after {
+  content: '\e971';
+}
+// 成品入库与出库管理
+.icon-finished_product__manage:after {
+  content: '\e972';
+}
+// 产成品入库转仓
+.icon-finished_product__move:after {
+  content: '\e973';
+}
+// 采购基础设置
+.icon-purchase_base__config:after {
+  content: '\e975';
+}
+// 财务基础设置
+.icon-finance_base__config:after {
+  content: '\e976';
+}
+// 部门职能工作审核
+.icon-department_work__watch:after {
+  content: '\e977';
+}
+// 部门人员管理
+.icon-department_personnel__manage:after {
+  content: '\e97a';
+}
+// 本班组生产订单管理
+.icon-group_order__manage:after {
+  content: '\e97b';
+}
+
+/*********** 职能图标 end  ******************/
+
+
+
+
+/*********** 文件格式图标 start  ******************/
+
+.icon-word{
+  background-image: url("../../images/fileIcon/extWord.png");
+}
+.icon-ppt{
+  background-image: url("../../images/fileIcon/extPpt.png");
+}
+.icon-excel{
+  background-image: url("../../images/fileIcon/extExcel.png");
+}
+.icon-other{
+  background-image: url("../../images/fileIcon/extOther.png");
+}
+.icon-jpg{
+  background-image: url("../../images/fileIcon/extJpg.png");
+}
+.icon-png{
+  background-image: url("../../images/fileIcon/extPng.png");
+}
+.icon-txt{
+  background-image: url("../../images/fileIcon/extTxt.png");
+}
+.icon-zip{
+  background-image: url("../../images/fileIcon/extZip.png");
+}
+.icon-pdf{
+  background-image: url("../../images/fileIcon/extPdf.png");
+}
+
+/*********** 文件格式图标 end  ******************/

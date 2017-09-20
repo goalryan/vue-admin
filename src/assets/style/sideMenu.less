@@ -1,0 +1,48 @@
+.menu-list {
+  height: 100%;
+  overflow: auto;
+  .icon{
+    color: #7085a9;
+  }
+  >li >a{
+    font-size: 15px;
+    color: #223452;
+    height: 40px;
+    cursor: default;
+  }
+  ul li a {
+    padding-left: 56px;
+    color: #373f4f;
+    font-size: 13px;
+  }
+  a {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    padding: 0 20px;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:hover {
+      background-color:#E8F7FE;
+    }
+
+    &.router-link-active {
+      background-color:@link-hover-color;
+      span {
+        color: white;
+      }
+    }
+  }
+  .gray {
+    span {
+      color:#223452 ;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+    .icon{
+      color: #7085a9;
+    }
+  }
+}

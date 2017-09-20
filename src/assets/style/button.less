@@ -1,0 +1,176 @@
+@import './common/variable';
+
+/*
+ * Button 样式
+ *
+ */
+.disabled{
+  color: white;
+  background-color: @sub-color;
+  cursor: no-drop;
+  opacity: 0.5;
+  border-color: transparent;
+
+  &:hover{
+    color: white;
+    background-color: @sub-color;
+    border-color: transparent;
+    opacity: 0.5;
+  }
+}
+.button {
+  padding: 10px 15px;
+  min-width: 92px;
+  white-space: nowrap;
+  text-align: center;
+  font-size: @font-size-base;
+  background-color: white;
+  border: 1px solid @border-color;
+  border-radius: @border-radius-base;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  user-select: none;
+
+  &:hover {
+    color: white;
+    background-color: @button-hover-color;
+    border-color: @button-hover-color;
+    transition: @all-transition;
+  }
+  &.is-disabled {
+    .disabled;
+  }
+}
+button.button[disabled]{
+  .disabled;
+}
+.button-primary {
+  border-color: @sub-color;
+  background-color: @sub-color;
+  color: white;
+}
+
+.button-danger {
+  border-color: @button-danger-color;
+  background-color:  @button-danger-color;
+  color: white;
+
+  &:hover{
+    border-color: @button-danger-hover-color;
+    background-color:  @button-danger-hover-color;
+  }
+}
+
+.button-plain-primary{
+  color:@button-hover-color;
+  border-color: @button-hover-color;
+}
+.button-plain-danger{
+  color:@button-danger-color;
+  border-color: @border-color;
+}
+
+.button-plain-default{
+  color:@text-color;
+  border-color: @border-color;
+}
+
+.button + .button {
+  margin-left: 10px;
+}
+
+
+
+
+
+/*
+ * CrystalButton 水晶按钮样式
+ *
+ */
+.crystal-button{
+  padding: 2px 5px;
+  border-radius: 12px;
+  min-width: 60px;
+  font-size: @font-size-sub;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+button.crystal-button[disabled]{
+  color: white!important;
+  background-color: #c3c3c3;
+  border-color: #c3c3c3;
+}
+
+.crystal-button-default {
+  border: 1px solid #E1E6E9;
+  background-color: white;
+  color: #37474F !important;
+
+  &:hover {
+    border-color: #E8ECEE;
+    background-color: #E8ECEE;
+    color: #37474F !important;
+  }
+}
+
+.crystal-button-danger {
+  border: 1px solid #FF9494;
+  background-color: #FFF9F8;
+  color: @button-danger-hover-color !important;
+
+  &:hover {
+    border-color: #FF9494;
+    background-color: #FF9494;
+    color: white !important;
+  }
+}
+
+.crystal-button-primary {
+  border: 1px solid #94DEFF;
+  background-color: white;
+  color: #03a9f4 !important;
+
+  &:hover {
+    border-color: #94DEFF;
+    background-color: #94DEFF;
+    color: white !important;
+  }
+}
+
+/*
+ * 文字按钮样式
+ *
+ */
+.text-button + .text-button {
+  margin-left: 10px;
+}
+.text-button{
+  color:@text-color;
+  line-height: 16px;
+
+  &:hover{
+    color: @link-hover-color;
+  }
+}
+
+.text-button-primary{
+  color: @link-hover-color;
+  &:hover{
+    color: @link-hover-color;
+  }
+}
+.text-button-danger{
+  color: @button-danger-color;
+  &:hover{
+    color: @button-danger-color;
+  }
+}
+.text-button-success{
+  color:#61ba5b;
+  &:hover{
+    color:#61ba5b;
+  }
+}

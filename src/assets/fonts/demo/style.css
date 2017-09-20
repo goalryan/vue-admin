@@ -1,0 +1,815 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?vy7utl');
+  src:  url('fonts/icomoon.eot?vy7utl#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?vy7utl') format('truetype'),
+    url('fonts/icomoon.woff?vy7utl') format('woff'),
+    url('fonts/icomoon.svg?vy7utl#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-loading:before {
+  content: "\e9c3";
+}
+.icon-管理员中心(1):before {
+  content: "\e9c2";
+  color: #33a5f9;
+}
+.icon-设置:before {
+  content: "\e9c1";
+}
+.icon-删除连贯工序:before {
+  content: "\e9bd";
+  color: #666;
+}
+.icon-新增连贯工序:before {
+  content: "\e9be";
+  color: #666;
+}
+.icon-收起:before {
+  content: "\e9bf";
+  color: #666;
+}
+.icon-展开:before {
+  content: "\e9c0";
+  color: #666;
+}
+.icon-固定资产管理:before {
+  content: "\e9b0";
+  color: #666;
+}
+.icon-部门行政事务管理:before {
+  content: "\e9b1";
+  color: #666;
+}
+.icon-采购分工设置:before {
+  content: "\e9b2";
+  color: #666;
+}
+.icon-管理系统应用检视:before {
+  content: "\e9b3";
+  color: #666;
+}
+.icon-库存盘点计划与审核:before {
+  content: "\e9b4";
+  color: #666;
+}
+.icon-委外加工备料与发料:before {
+  content: "\e9b5";
+  color: #666;
+}
+.icon-委外加工补料审核:before {
+  content: "\e9b6";
+  color: #666;
+}
+.icon-销售订单提前备料管理:before {
+  content: "\e9b7";
+  color: #666;
+}
+.icon-行政通知与管理:before {
+  content: "\e9b8";
+  color: #666;
+}
+.icon-营销业务基础设置:before {
+  content: "\e9b9";
+  color: #666;
+}
+.icon-员工档案与关系管理:before {
+  content: "\e9ba";
+  color: #666;
+}
+.icon-制程品质检验作业:before {
+  content: "\e9bb";
+  color: #666;
+}
+.icon-质检基础设置:before {
+  content: "\e9bc";
+  color: #666;
+}
+.icon-仓库工作分配:before {
+  content: "\e9ac";
+  color: #666;
+}
+.icon-仓库基础设置:before {
+  content: "\e9ad";
+  color: #666;
+}
+.icon-储位管理:before {
+  content: "\e9ae";
+  color: #666;
+}
+.icon-收票:before {
+  content: "\e9af";
+  color: #666;
+}
+.icon-任务协同:before {
+  content: "\e9aa";
+  color: #666;
+}
+.icon-行政通知:before {
+  content: "\e9ab";
+  color: #666;
+}
+.icon-采购对账与请款管理2:before {
+  content: "\e9a0";
+  color: #666;
+}
+.icon-成品入库品质检验作业:before {
+  content: "\e9a1";
+  color: #757575;
+}
+.icon-待完善销售订单BOM:before {
+  content: "\e9a2";
+  color: #757575;
+}
+.icon-供应商报价与配额管理2:before {
+  content: "\e9a3";
+  color: #666;
+}
+.icon-供应商报价与配额审核2:before {
+  content: "\e9a4";
+  color: #666;
+}
+.icon-供应商开发与合作管理2:before {
+  content: "\e9a5";
+  color: #666;
+}
+.icon-货品非正常出入库审核:before {
+  content: "\e9a6";
+  color: #757575;
+}
+.icon-货品销售出库与退货:before {
+  content: "\e9a7";
+  color: #757575;
+}
+.icon-人资行政基础设置:before {
+  content: "\e9a8";
+  color: #757575;
+}
+.icon-生产工序流转与生产成品入库:before {
+  content: "\e9a9";
+  color: #757575;
+}
+.icon-规格型号:before {
+  content: "\e99d";
+  color: #666;
+}
+.icon-货品编码:before {
+  content: "\e99e";
+  color: #666;
+}
+.icon-货品名称:before {
+  content: "\e99f";
+  color: #666;
+}
+.icon-货运地址:before {
+  content: "\e99c";
+  color: #666;
+}
+.icon-企业概况:before {
+  content: "\e999";
+  color: #666;
+}
+.icon-企业注册设置:before {
+  content: "\e99a";
+  color: #666;
+}
+.icon-系统管理员联系方式:before {
+  content: "\e99b";
+  color: #666;
+}
+.icon-没有充值记录:before {
+  content: "\e993";
+  color: #666;
+}
+.icon-钱:before {
+  content: "\e994";
+}
+.icon-沙漏斗:before {
+  content: "\e997";
+  color: #666;
+}
+.icon-最高行政管理部门:before {
+  content: "\e998";
+  color: #f6a623;
+}
+.icon-采购对账与请款管理:before {
+  content: "\e902";
+  color: #666;
+}
+.icon-供应商报价与配额管理:before {
+  content: "\e903";
+  color: #666;
+}
+.icon-供应商报价与配额审核:before {
+  content: "\e904";
+  color: #666;
+}
+.icon-供应商开发与合作管理:before {
+  content: "\e97c";
+  color: #666;
+}
+.icon-编辑:before {
+  content: "\e97d";
+  color: #666;
+}
+.icon-提示:before {
+  content: "\e900";
+  color: #ff8c22;
+}
+.icon-退收:before {
+  content: "\e901";
+  color: #757575;
+}
+.icon-注册_邮箱:before {
+  content: "\e996";
+  color: #666;
+}
+.icon-找回密码:before {
+  content: "\e995";
+  color: #666;
+}
+.icon-库存查询:before {
+  content: "\e990";
+  color: #666;
+}
+.icon-库存盘点:before {
+  content: "\e991";
+  color: #757575;
+}
+.icon-资本管理:before {
+  content: "\e992";
+  color: #666;
+}
+.icon-企业级客户开发与关系管理:before {
+  content: "\e95e";
+  color: #666;
+}
+.icon-批量导入货品档案:before {
+  content: "\e978";
+  color: #757575;
+}
+.icon-基础设置:before {
+  content: "\e979";
+  color: #666;
+}
+.icon-存货核算:before {
+  content: "\e98f";
+  color: #757575;
+}
+.icon-备料:before {
+  content: "\e98b";
+  color: #757575;
+}
+.icon-标题:before {
+  content: "\e98c";
+}
+.icon-返回我的经管:before {
+  content: "\e98d";
+}
+.icon-开票:before {
+  content: "\e98e";
+  color: #757575;
+}
+.icon-批量核销:before {
+  content: "\e98a";
+  color: #666;
+}
+.icon-用户帮助与反馈:before {
+  content: "\e989";
+  color: #666;
+}
+.icon-返回2:before {
+  content: "\e93e";
+  color: #03a9f4;
+}
+.icon-进入:before {
+  content: "\e987";
+  color: #03a9f4;
+}
+.icon-注册验证成功:before {
+  content: "\e96f";
+  color: #6cb82c;
+}
+.icon-注册验证失败:before {
+  content: "\e970";
+  color: #f6a623;
+}
+.icon-操作错误:before {
+  content: "\e96e";
+  color: #666;
+}
+.icon-操作成功:before {
+  content: "\e96c";
+  color: #666;
+}
+.icon-订单物料采购入库:before {
+  content: "\e957";
+  color: #666;
+}
+.icon-期初库存录入:before {
+  content: "\e95c";
+  color: #666;
+}
+.icon-岗位职能权限管理:before {
+  content: "\e946";
+  color: #666;
+}
+.icon-管理员初始化:before {
+  content: "\e947";
+  color: #666;
+}
+.icon-减号:before {
+  content: "\e948";
+  color: #666;
+}
+.icon-批量审批:before {
+  content: "\e949";
+  color: #666;
+}
+.icon-企业认证:before {
+  content: "\e94a";
+  color: #666;
+}
+.icon-期初:before {
+  content: "\e94b";
+  color: #666;
+}
+.icon-退货:before {
+  content: "\1f330";
+  color: #666;
+}
+.icon-出纳审核:before {
+  content: "\e958";
+  color: #666;
+}
+.icon-发票审核:before {
+  content: "\e95b";
+  color: #666;
+}
+.icon-会计应收管理:before {
+  content: "\e961";
+  color: #666;
+}
+.icon-委外备料与发料:before {
+  content: "\e968";
+  color: #666;
+}
+.icon-人员档案管理:before {
+  content: "\e969";
+  color: #666;
+}
+.icon-业务基础设置:before {
+  content: "\e96a";
+  color: #666;
+}
+.icon-弹出框_搜索:before {
+  content: "\e986";
+  color: #666;
+}
+.icon-提示_成功:before {
+  content: "\e97f";
+  color: #666;
+}
+.icon-提示_感叹号:before {
+  content: "\e980";
+  color: #666;
+}
+.icon-提示_失败:before {
+  content: "\e981";
+  color: #666;
+}
+.icon-小提示_错误:before {
+  content: "\e982";
+  color: #666;
+}
+.icon-小提示_感叹号:before {
+  content: "\e983";
+  color: #666;
+}
+.icon-小提示_关闭:before {
+  content: "\e984";
+  color: #666;
+}
+.icon-小提示_完成:before {
+  content: "\e985";
+  color: #666;
+}
+.icon-弹出框关闭:before {
+  content: "\e905";
+  color: #666;
+}
+.icon-BOM配置:before {
+  content: "\e906";
+  color: #666;
+}
+.icon-BOM档案管理:before {
+  content: "\e907";
+  color: #666;
+}
+.icon-增加产品:before {
+  content: "\e908";
+  color: #666;
+}
+.icon-业务员管理:before {
+  content: "\e909";
+  color: #03a9f4;
+}
+.icon-新增联系人:before {
+  content: "\e90a";
+  color: #666;
+}
+.icon-销售:before {
+  content: "\e90b";
+  color: #757575;
+}
+.icon-图片 .path1:before {
+  content: "\e90c";
+  color: rgb(102, 102, 102);
+}
+.icon-图片 .path2:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-添加附件_不可操作 .path1:before {
+  content: "\e90e";
+  color: rgb(225, 230, 233);
+}
+.icon-添加附件_不可操作 .path2:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(241, 241, 241);
+}
+.icon-添加附件_不可操作 .path3:before {
+  content: "\e910";
+  margin-left: -1em;
+  color: rgb(216, 216, 216);
+}
+.icon-添加:before {
+  content: "\e911";
+  color: #666;
+}
+.icon-输入框选择下拉:before {
+  content: "\e912";
+  color: #757575;
+}
+.icon-时间:before {
+  content: "\e913";
+  color: #ff8b36;
+}
+.icon-删除:before {
+  content: "\e914";
+  color: #757575;
+}
+.icon-日期:before {
+  content: "\e915";
+  color: #666;
+}
+.icon-任职履历:before {
+  content: "\e916";
+  color: #757575;
+}
+.icon-签约:before {
+  content: "\e917";
+  color: #666;
+}
+.icon-内页关闭:before {
+  content: "\e918";
+  color: #666;
+}
+.icon-联系人:before {
+  content: "\e919";
+  color: #666;
+}
+.icon-客户:before {
+  content: "\e91a";
+  color: #03a9f4;
+}
+.icon-开发:before {
+  content: "\e91b";
+  color: #666;
+}
+.icon-合同信息:before {
+  content: "\e91c";
+  color: #666;
+}
+.icon-岗位信息:before {
+  content: "\e91d";
+  color: #757575;
+}
+.icon-岗位管理:before {
+  content: "\e91e";
+  color: #666;
+}
+.icon-返回:before {
+  content: "\e91f";
+  color: #666;
+}
+.icon-对账:before {
+  content: "\e920";
+  color: #666;
+}
+.icon-待处理:before {
+  content: "\e921";
+  color: #666;
+}
+.icon-查找:before {
+  content: "\e922";
+  color: #666;
+}
+.icon-采购:before {
+  content: "\e923";
+  color: #757575;
+}
+.icon-用户反馈:before {
+  content: "\e924";
+  color: #666;
+}
+.icon-下单:before {
+  content: "\e925";
+  color: #666;
+}
+.icon-首页列表下拉:before {
+  content: "\e926";
+  color: #666;
+}
+.icon-首页列表_新增:before {
+  content: "\e927";
+  color: #666;
+}
+.icon-首页表格_新增:before {
+  content: "\e928";
+  color: #666;
+}
+.icon-筛选:before {
+  content: "\e929";
+  color: #666;
+}
+.icon-入库:before {
+  content: "\e92a";
+  color: #666;
+}
+.icon-确认备货:before {
+  content: "\e92b";
+  color: #666;
+}
+.icon-企业基础信息:before {
+  content: "\e92c";
+  color: #666;
+}
+.icon-批量删除:before {
+  content: "\e92d";
+  color: #666;
+}
+.icon-批量导入人事档案:before {
+  content: "\e92e";
+  color: #666;
+}
+.icon-管理员 .path1:before {
+  content: "\e92f";
+  color: rgb(102, 102, 102);
+}
+.icon-管理员 .path2:before {
+  content: "\e930";
+  margin-left: -1em;
+  color: rgb(102, 102, 102);
+}
+.icon-管理员 .path3:before {
+  content: "\e931";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-岗位管理2:before {
+  content: "\e932";
+  color: #666;
+}
+.icon-复选框_选中:before {
+  content: "\e933";
+  color: #666;
+}
+.icon-发货:before {
+  content: "\e934";
+  color: #666;
+}
+.icon-多选框:before {
+  content: "\e935";
+  color: #666;
+}
+.icon-对账2:before {
+  content: "\e936";
+  color: #666;
+}
+.icon-导入:before {
+  content: "\e937";
+  color: #666;
+}
+.icon-导出:before {
+  content: "\e938";
+  color: #666;
+}
+.icon-单选框:before {
+  content: "\e939";
+  color: #666;
+}
+.icon-单选框_选中:before {
+  content: "\e93a";
+  color: #666;
+}
+.icon-出库:before {
+  content: "\e93b";
+  color: #666;
+}
+.icon-OA协同选中:before {
+  content: "\e93c";
+  color: #666;
+}
+.icon-OA协同默认:before {
+  content: "\e93d";
+  color: #666;
+}
+.icon-iERP选中:before {
+  content: "\e988";
+  color: #666;
+}
+.icon-iERP默认:before {
+  content: "\e93f";
+  color: #757575;
+}
+.icon-权限管理:before {
+  content: "\e940";
+  color: #666;
+}
+.icon-企业eboss:before {
+  content: "\e941";
+  color: #666;
+}
+.icon-Bom档案审核管理:before {
+  content: "\e942";
+  color: #666;
+}
+.icon-Bom档案管理:before {
+  content: "\e943";
+  color: #666;
+}
+.icon-应收审核:before {
+  content: "\e944";
+  color: #666;
+}
+.icon-应付审核:before {
+  content: "\e945";
+  color: #666;
+}
+.icon-行政公告:before {
+  content: "\e94c";
+  color: #666;
+}
+.icon-新增与更新销售订单:before {
+  content: "\e94d";
+  color: #666;
+}
+.icon-新增与更新客户档案:before {
+  content: "\e94e";
+  color: #666;
+}
+.icon-新增与更新货品档案:before {
+  content: "\e94f";
+  color: #666;
+}
+.icon-新增与更新工序档案:before {
+  content: "\e950";
+  color: #666;
+}
+.icon-销售跟单管理:before {
+  content: "\e951";
+  color: #666;
+}
+.icon-销售订单审核:before {
+  content: "\e952";
+  color: #666;
+}
+.icon-销售报价审核:before {
+  content: "\e953";
+  color: #666;
+}
+.icon-销售报价管理:before {
+  content: "\e954";
+  color: #666;
+}
+.icon-委外加工采购入库:before {
+  content: "\e955";
+  color: #666;
+}
+.icon-委外加工采购:before {
+  content: "\e956";
+  color: #666;
+}
+.icon-生产领料与退料:before {
+  content: "\e959";
+  color: #666;
+}
+.icon-生产备料与发料:before {
+  content: "\e95a";
+  color: #666;
+}
+.icon-来料品质检验:before {
+  content: "\e95d";
+  color: #666;
+}
+.icon-客户对账:before {
+  content: "\e95f";
+  color: #666;
+}
+.icon-开发基础设置:before {
+  content: "\e960";
+  color: #666;
+}
+.icon-会计应付管理:before {
+  content: "\e962";
+  color: #666;
+}
+.icon-供应商建档与档案管理:before {
+  content: "\e963";
+  color: #666;
+}
+.icon-供应商对账:before {
+  content: "\e964";
+  color: #666;
+}
+.icon-供应商报价管理:before {
+  content: "\e965";
+  color: #666;
+}
+.icon-公司全部生产订单管理:before {
+  content: "\e966";
+  color: #666;
+}
+.icon-跟单管理审核:before {
+  content: "\e967";
+  color: #666;
+}
+.icon-发票管理:before {
+  content: "\e96b";
+  color: #666;
+}
+.icon-订单物料采购管理:before {
+  content: "\e96d";
+  color: #666;
+}
+.icon-出纳管理:before {
+  content: "\e971";
+  color: #666;
+}
+.icon-成品入库与出库管理:before {
+  content: "\e972";
+  color: #666;
+}
+.icon-产成品入库转仓 .path1:before {
+  content: "\e973";
+  color: rgb(102, 102, 102);
+}
+.icon-产成品入库转仓 .path2:before {
+  content: "\e974";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-采购基础设置:before {
+  content: "\e975";
+  color: #666;
+}
+.icon-财务基础设置:before {
+  content: "\e976";
+  color: #666;
+}
+.icon-部门职能工作审核:before {
+  content: "\e977";
+  color: #666;
+}
+.icon-部门人员管理:before {
+  content: "\e97a";
+  color: #666;
+}
+.icon-本班组生产订单管理:before {
+  content: "\e97b";
+  color: #666;
+}
+.icon-下载:before {
+  content: "\e97e";
+  color: #757575;
+}

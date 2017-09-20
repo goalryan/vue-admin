@@ -1,0 +1,61 @@
+@import './common/variable';
+
+/*
+ * menu 样式
+ *
+ */
+
+.menu {
+  padding: 0;
+  margin: 0;
+  .menu {
+    background-color: @extra-background-color;
+  }
+
+  .icon-margin-right {
+    margin-right: 6px;
+  }
+
+  .icon-transparent {
+    opacity: 0;
+  }
+
+  .sub-title {
+    display: flex;
+    align-items: center;
+    padding: 16px 16px 16px 15px;
+    min-height: 49px;
+    border-bottom: 1px solid @border-color;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      background-color: @menu-hover-background-color;
+      color: @menu-hover-text;
+    }
+
+    &.is-active {
+      color: @menu-hover-text;
+      border-left: 3px solid @menu-hover-text;
+    }
+
+    //图标旋转
+    .icon-arrow__right:after {
+      transition: transform .3s;
+    }
+    .opened {
+      &.icon-arrow__right:after {
+        transform: rotate(0deg);
+      }
+    }
+  }
+
+  .menu-item {
+    .sub-title;
+  }
+  .no-data{
+    display: flex;
+
+  }
+}

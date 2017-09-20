@@ -1,0 +1,123 @@
+@import './common/variable';
+
+/*
+ * 弹出框样式
+ *
+ */
+.dialog{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+}
+.dialog-wrap {
+  min-width: 300px;
+  border-radius: @border-radius-base;
+  background-color: white;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.dialog-head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 46px;
+  padding: 0 20px;
+  font-size: @font-size-large;
+  border-radius: @border-radius-base @border-radius-base 0 0;
+  background-color: #f7f4fd;
+  color: #6c7a95;
+}
+.dialog-content{
+  color: @sub-text-color;
+  padding: 20px 20px 30px 20px;
+}
+
+.dialog-footer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 66px;
+  padding: 0 20px;
+}
+
+.dialog-fade-enter-active {
+  animation: dialog-fade-in .4s;
+}
+
+.dialog-fade-leave-active {
+  animation: dialog-fade-out .2s;
+}
+
+@keyframes dialog-fade-in {
+  0% {
+    margin-top: -20px;
+    opacity: 0;
+  }
+  100% {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-fade-out {
+  0% {
+    margin-top: 0;
+    opacity: 1;
+  }
+  100% {
+    margin-top: -20px;
+    opacity: 0;
+  }
+}
+
+/*
+ * message dialog 的特别样式
+ **/
+.dialog-message{
+  max-width: 400px;
+
+  .dialog-message-content{
+    padding: 20px 20px 30px 20px;
+    text-align: center;
+
+    .sub-message{
+      margin-top: 10px;
+      font-size: 12px;
+      color: #757575;
+    }
+  }
+  .dialog-footer{
+    justify-content: center!important;
+  }
+
+  .dialog-message-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 36px;
+  }
+  .icon-dialog_message__success{
+    color: #91d938;
+  }
+  .icon-dialog_message__success:after{
+    content: '\e97f';
+  }
+  .icon-dialog_message__warning{
+    color:#FFB616;
+  }
+  .icon-dialog_message__warning:after{
+    content: '\e981';
+  }
+  .icon-dialog_message__failure{
+    color:#FE5A00;
+  }
+  .icon-dialog_message__failure:after{
+    content: '\e980';
+  }
+}

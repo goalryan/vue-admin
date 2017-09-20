@@ -1,0 +1,71 @@
+@import './common/variable';
+/*
+ * tab 样式
+ *
+ */
+.tab-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid @border-color;
+  &.gray{
+    background-color:@background-color;
+  }
+}
+.tab-items{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 10px;
+
+  &:hover{
+    color: @link-hover-color;
+  }
+}
+
+.tab-bottom-wrapper{
+  .tab-wrapper;
+
+  .tab-item{
+    .tab-items;
+    height: 52px;
+  }
+  .is-active{
+    border-bottom: 2px solid @link-hover-color;
+    margin-bottom: -2px;
+    color: @link-hover-color;
+  }
+}
+
+.tab-top-wrapper{
+  .tab-wrapper;
+
+  .tab-item{
+    .tab-items;
+    height: 42px;
+    border:1px solid transparent;
+    border-top:2px solid transparent;
+    margin-bottom: -1px;
+
+  }
+
+  .is-active{
+    border-left-color: @border-color;
+    border-right-color:@border-color;
+    border-top-color:@link-hover-color;
+    background-color: white;
+    color: @link-hover-color;
+  }
+}
+.tab-min-width{
+  .tab-item{
+    min-width:120px!important;
+  }
+}
+.tab-flex-width{
+  .tab-item{
+    flex: 1 1 auto;
+  }
+}
+

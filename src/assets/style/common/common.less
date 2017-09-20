@@ -1,0 +1,257 @@
+@import './variable';
+@font-face {
+  font-family: @font-family-icon;
+  src: url('../../fonts/icomoon.eot?okyye1');
+  src: url('../../fonts/icomoon.eot?okyye1#iefix') format('embedded-opentype'), url('../../fonts/icomoon.ttf?okyye1') format('truetype'), url('../../fonts/icomoon.woff?okyye1') format('woff'), url('../../fonts/icomoon.svg?okyye1#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+html,body{
+  height: 100%;
+  min-width: 1280px;
+  font-size: 14px;
+  font-family: @font-family;
+  color: @text-color;
+}
+body{
+  background-color: #f7f8fc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+input[type='number']{
+  border: 1px solid @border-color;
+  border-radius: 2px;
+  vertical-align: top;
+  -moz-appearance: textfield;
+  background-color: #fff;
+}
+[class*='icon-'],[class^='icon-']{
+  font-family: @font-family-icon;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -1px;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input[type=checkbox], input[type=radio] {
+  font-family: @font-family-icon;
+  width: 14px;
+  height: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  cursor: pointer;
+  vertical-align: middle;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=radio] {
+  &::after {
+    font-size: 14px;
+    content: "\e939";
+    background-color: transparent;
+    color: #e0e0e0;
+  }
+  &:checked::after {
+    content: "\e96f";
+    color: @link-color;
+  }
+}
+
+input[type=checkbox]{
+  &:after{
+    content: "\e935";
+    display: block;
+    color: #e0e0e0;
+  }
+  &:disabled::after{
+    font-size: 14px;
+    content: "\e933";
+    color: #999999;
+  }
+  &:checked::after{
+    content: "\e933";
+    color: @link-color;
+  }
+  &:focus{
+    outline: none;
+  }
+}
+
+
+
+.cursor{
+  cursor: pointer;
+}
+
+//清除浮动
+.clear-fix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clear-fix {
+  display: inline-block;
+}
+
+
+// 图标定位及样式
+.icon-right{
+  margin-left: 4px;
+}
+.icon-left{
+  margin-right: 4px;
+}
+.icon-loading{
+  animation: rotating 1s linear infinite;
+}
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+// 表格中多行列表
+.table-item-wrap{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 0;
+  >p{
+    margin-bottom: 5px;
+    width: 100%;
+  }
+}
+// 表格中的 mark 标记
+.table-mark {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  padding: 0 4px;
+  background-color: #7ed321;
+  border-radius: 2px;
+  color: #fff;
+}
+
+// 左中右平分布局
+.flex-space{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+// 停用部门标识
+.flex-space .disabled {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 18px;
+  background-color: #f8f9fa;
+  color: #9B9B9B !important;
+  font-size: 12px;
+}
+
+// 内页表单头部标题样式
+.page-space{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 46px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 15px 0 25px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e6e8eb;
+
+  &:after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    width: 4px;
+    height: 20px;
+    border-radius: 2px;
+    background-color: #212121;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+
+// menu 所在的 ec-container-item 的宽度
+.menu-width {
+  flex: none !important;
+  width: 380px;
+}
+
+// 状态文字样式
+.text-red {
+  color: #ff0700;
+}
+.text-green {
+  color: #61ba5b;
+}
+.text-gray {
+  color: #757575;
+}
+
+
+/*
+ * 共用的边距
+ *
+ **/
+
+.pct100{
+  width: 100%!important;
+}
+.mt20{
+  margin-top: 20px!important;
+}
+.mr4{
+  margin-right: 4px!important;
+}
+.mr10{
+  margin-right: 10px!important;
+}
+.mr15{
+  margin-right: 15px!important;
+}
+.ml4{
+  margin-left: 4px!important;
+}
+.ml10{
+  margin-left: 10px!important;
+}
+.ml15{
+  margin-left: 15px!important;
+}
+.ml30{
+   margin-left:30px!important;
+}
+.mb5{
+  margin-bottom: 5px!important;
+}
+.mb10{
+  margin-bottom: 10px!important;
+}

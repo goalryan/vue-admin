@@ -1,0 +1,119 @@
+/*
+ * 重置elementUI table 的某些样式
+ *
+ */
+@import './common/variable';
+// table 当中的多选按钮样式处理
+.el-checkbox__input.is-checked .el-checkbox__inner{
+  border-color:transparent;
+  background-color: transparent;
+  &:after{
+    content: "\e933";
+    color: @link-color;
+  }
+}
+.el-checkbox__inner{
+  font-family: @font-family-icon;;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  border: none;
+  &:after{
+    content: "\e935";
+    background-color: transparent;
+    border: none;
+    position: relative;
+    font-size: 14px;
+    top:0;
+    left:0;
+    color: #e0e0e0;
+  }
+}
+
+// 外页table，及有二级时的处理
+.ec-table{
+  color: #212121!important;
+  height: 100% !important;
+  .cell {
+    font-size: 12px !important;
+    line-height: 16px;
+  }
+  .el-table__header-wrapper {
+    th {
+      background-color: white !important;
+      height: 53px!important;
+    }
+  }
+  .el-table__footer-wrapper thead div, .el-table__header-wrapper thead div {
+    background-color: white !important;
+    font-weight: normal !important;
+    color: #757575 !important;
+  }
+  .el-table__body-wrapper{
+    height: calc(~'100% - 52px')!important;
+    td{
+      height: 49px!important;
+      padding: 10px 0;
+    }
+  }
+  &.expand-table {
+    .el-table__expanded-cell {
+      padding: 0;
+      border-bottom: none;
+      .el-table {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+// 内页table样式处理
+.ec-table-page {
+  color: #212121!important;
+
+  .cell {
+    font-size: 12px !important;
+    line-height: 16px;
+    text-overflow: clip;
+  }
+  .el-table__header-wrapper {
+    th {
+      background-color: #fafafa !important;
+      height: 52px;
+      border-right: transparent;
+    }
+  }
+  .el-table__footer-wrapper thead div, .el-table__header-wrapper thead div {
+    background-color: #fafafa !important;
+    font-weight: normal !important;
+    color: #37474f !important;
+  }
+  .el-table__body-wrapper tr:hover > td {
+    background-color: transparent;
+    td{
+      height: 49px!important;
+      padding: 10px 0;
+    }
+  }
+}
+
+// table 无数据时的处理
+.ec-table,.ec-table-page{
+  .el-table__empty-block {
+    min-height: 200px;
+  }
+  .el-table__empty-text {
+    color: #757575;
+
+    &:before{
+      display: block;
+      content: '';
+      width: 152px;
+      height: 96px;
+      background: url("../images/noData.png") no-repeat;
+      background-size: 100% 100%;
+      margin-bottom: 20px;
+      transform: translateX(5px);
+    }
+  }
+}
