@@ -1,42 +1,46 @@
 <template>
     <ec-container-item>
-
         <template slot="head">
-            <el-button type="primary" @click="handleAdd">header</el-button>
+            <el-button size="small" type="primary" @click="addBill()">添加账单</el-button>
         </template>
 
-        <el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange">
-            <el-table-column type="selection" width="55">
+        <el-table :data="bills" highlight-current-row
+                  style="width: 100%;">
+            <el-table-column type="index" label="序号" width="60" align="center">
             </el-table-column>
-            <el-table-column type="index" width="60">
+            <el-table-column prop="docNo" label="单号" sortable>
             </el-table-column>
-            <el-table-column prop="name" label="姓名" width="120" sortable>
-            </el-table-column>
-            <el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
-            </el-table-column>
-            <el-table-column prop="age" label="年龄" width="100" sortable>
-            </el-table-column>
-            <el-table-column prop="birth" label="生日" width="120" sortable>
-            </el-table-column>
-            <el-table-column prop="addr" label="地址" min-width="180" sortable>
-            </el-table-column>
-            <el-table-column label="操作" width="150">
-                <template scope="scope">
-                    <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
+            <!--<el-table-column label="操作" align="center" width="150">-->
+            <!--<template scope="scope">-->
+            <!--<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
+            <!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>-->
+            <!--</template>-->
+            <!--</el-table-column>-->
         </el-table>
-
-        <template slot="footer">
-            <el-button type="primary" @click="handleAdd">foot</el-button>
-            <el-button type="primary" @click="handleAdd">foot</el-button>
-        </template>
+        <router-view></router-view>
     </ec-container-item>
+
 </template>
 
 <script>
-    export default {}
+    export default {
+        data() {
+            return {
+                bills: [
+                    {docNo: '20170910'},
+                    {docNo: '20170911'},
+                    {docNo: '20170912'},
+                ]
+            }
+        },
+        methods: {
+            addBill(){
+                this.$router.push({
+                    name: 'billAdd'
+                })
+            }
+        }
+    }
 
 </script>
 

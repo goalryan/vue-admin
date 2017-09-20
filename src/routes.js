@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Main from './views/Main.vue'
 import user from './views/nav1/user.vue'
 import Bill from './views/bill/bill.vue'
+import BillAdd from './views/bill/billAdd.vue'
 import Customer from './views/customer/customer.vue'
 import echarts from './views/charts/echarts.vue'
 
@@ -27,8 +28,12 @@ let routes = [
         name: '账单管理',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/bill', component: Bill, name: '账单清单' }
+            {path: '/main', component: Main, name: '主页', hidden: true},
+            {
+                path: '/bill', component: Bill, name: '账单清单', children: [{
+                path: 'add', component: BillAdd, name: 'billAdd'
+            }]
+            }
         ]
     },
     {
@@ -37,7 +42,7 @@ let routes = [
         name: '客户管理',
         iconCls: 'fa fa-id-card-o',
         children: [
-            { path: '/customer', component: Customer, name: '客户清单' }
+            {path: '/customer', component: Customer, name: '客户清单'}
         ]
     },
     // {
@@ -56,13 +61,13 @@ let routes = [
         name: 'Charts',
         iconCls: 'fa fa-bar-chart',
         children: [
-            { path: '/echarts', component: echarts, name: '图表' }
+            {path: '/echarts', component: echarts, name: '图表'}
         ]
     },
     {
         path: '*',
         hidden: true,
-        redirect: { path: '/404' }
+        redirect: {path: '/404'}
     }
 ];
 
