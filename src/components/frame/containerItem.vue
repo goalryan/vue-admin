@@ -3,7 +3,7 @@
     <div class="item-head">
       <slot name="head"></slot>
     </div>
-    <div class="item-body" :class="{'have-footer':$slots.footer}">
+    <div class="item-body">
       <slot></slot>
     </div>
     <div class="item-footer" v-if="$slots.footer">
