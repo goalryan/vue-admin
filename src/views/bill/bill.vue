@@ -1,10 +1,19 @@
 <template>
-    <section>
-        <!--工具条-->
-        <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-            <el-button type="primary" @click="handleAdd">新建账单</el-button>
-        </el-col>
-    </section>
+    <ec-container-item>
+        <template slot="head">
+            <el-button type="primary" @click="handleAdd">header</el-button>
+        </template>
+
+        <div style="height: 500px">
+            <el-button type="primary" @click="handleAdd">body</el-button>
+        </div>
+
+
+
+        <template slot="footer">
+            <el-button type="primary" @click="handleAdd">foot</el-button>
+        </template>
+    </ec-container-item>
 </template>
 
 <script>

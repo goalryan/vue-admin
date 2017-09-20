@@ -2,18 +2,20 @@ import babelpolyfill from 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-//import './assets/theme/theme-green/index.css'
+import EcUI from './components';
 import VueRouter from 'vue-router'
 import store from './vuex/store'
 import Vuex from 'vuex'
 import routes from './routes'
 import Mock from './mock'
 Mock.bootstrap();
+import 'element-ui/lib/theme-default/index.css'
+//import './assets/theme/theme-green/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 import './assets/index.less';
 
 Vue.use(ElementUI)
+Vue.use(EcUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
