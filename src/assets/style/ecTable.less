@@ -1,0 +1,51 @@
+@import './common/variable';
+
+.ec-self-table {
+  table{
+    border: 1px solid @border-color;
+    border-bottom: none;
+  }
+  .no-border{
+    border-top:none;
+  }
+  tr:nth-child(even) {
+    background: #fafafa;
+  }
+  th,td{
+    height: 49px;
+    font-size: 12px;
+    line-height: 1.2;
+    padding: 10px;
+    border-bottom:1px solid @border-color;
+  }
+  th {
+    font-weight: normal;
+    text-align: left;
+    box-sizing: border-box;
+    height: 52px;
+    color: @sub-text-color;
+  }
+  .fixed {
+    height: calc(~'100% - 52px');
+    overflow-y:auto;
+  }
+  &.strip {
+    table {
+      border-left:none;
+      border-right:none;
+    }
+    th,td{
+      border-left: 1px solid @border-color;
+
+      &:last-of-type{
+        border-right:1px solid @border-color;
+      }
+    }
+  }
+  &.hover{
+    tbody tr:hover{
+      background-color: #eef1f6;
+    }
+  }
+
+}
