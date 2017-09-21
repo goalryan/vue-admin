@@ -38,6 +38,7 @@
             }
         },
         mounted(){
+            console.log(store.fetchStorage());
             this.fetchBillList();
         },
         methods: {

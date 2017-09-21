@@ -2,8 +2,11 @@
  * Created by liushaojun on 2017/8/26.
  */
 const STORAGE_KEY = "todos-vuejs";
-const DOC_NO_LIST = "doc_no_list";
+const BILL_DOC_NO_LIST = "billDocNoList";
 export default{
+    fetchStorage(){
+        return JSON.parse(window.localStorage);
+    },
     fetch(){
         return JSON.parse(window.localStorage.getItem(
             STORAGE_KEY || "[]"))
@@ -30,14 +33,14 @@ export default{
     },
     delBill(docNo){
         this.delBillDocNo(docNo);
-        window.localStorage.setItem(docNo, JSON.stringify({}));
+        window.localStorage.removeItem(docNo);
     },
     /**
      * 获取单据号列表
      */
     fetchBillList(){
         return JSON.parse(window.localStorage.getItem(
-            DOC_NO_LIST || "[]"));
+            BILL_DOC_NO_LIST || "[]"));
     },
     /**
      * 添加单据号
@@ -46,12 +49,12 @@ export default{
     saveBillDocNo(docNo){
         let docNoList = this.fetchBillList();
         if (!docNoList) {
-            window.localStorage.setItem(DOC_NO_LIST, JSON.stringify([]));
+            window.localStorage.setItem(BILL_DOC_NO_LIST, JSON.stringify([]));
         }
         // 不存在单号才添加
         if (docNoList.filter(item => item.docNo == docNo).length === 0) {
             docNoList.splice(0, 0, { docNo: docNo });
-            window.localStorage.setItem(DOC_NO_LIST, JSON.stringify(docNoList));
+            window.localStorage.setItem(BILL_DOC_NO_LIST, JSON.stringify(docNoList));
         }
     },
     /**
@@ -60,7 +63,7 @@ export default{
      */
     delBillDocNo(docNo) {
         let newDocNoList = this.fetchBillList().filter(item => item.docNo !== docNo);
-        window.localStorage.setItem(DOC_NO_LIST, JSON.stringify(newDocNoList));
+        window.localStorage.setItem(BILL_DOC_NO_LIST, JSON.stringify(newDocNoList));
     },
     /**
      * 删除所有单据号和单据数据
@@ -70,7 +73,7 @@ export default{
         docNoList.forEach(item => {
             this.delBill(item.docNo);
         });
-        window.localStorage.setItem(DOC_NO_LIST, JSON.stringify([]));
+        window.localStorage.setItem(BILL_DOC_NO_LIST, JSON.stringify([]));
     }
 
 }
