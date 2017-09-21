@@ -4,9 +4,8 @@
             <el-button size="small" type="primary" @click="addBill()">添加账单</el-button>
         </template>
 
-        <el-table :data="bills" highlight-current-row
-                  style="width: 100%;">
-            <el-table-column type="index" label="序号" width="60" align="center">
+        <el-table :data="bills" highlight-current-row>
+            <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
             </el-table-column>
             <el-table-column prop="docNo" label="单号" sortable>
             </el-table-column>
@@ -27,9 +26,9 @@
         data() {
             return {
                 bills: [
-                    {docNo: '20170910'},
-                    {docNo: '20170911'},
-                    {docNo: '20170912'},
+                    { docNo: '20170910' },
+                    { docNo: '20170911' },
+                    { docNo: '20170912' },
                 ]
             }
         },

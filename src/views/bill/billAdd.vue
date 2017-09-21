@@ -1,67 +1,72 @@
 <template>
-    <div>
-        <el-form :inline="true" class="demo-form-inline">
-            <el-form-item label="账单号:">{{order.docNo}}</el-form-item>
-            <el-form-item label="汇率:">
-                <el-input v-model="order.taxRate" placeholder="请输入汇率" @change="changeTaxRate"></el-input>
-            </el-form-item>
-        </el-form>
-        <el-row>
-            <el-col :span="12">
-                <el-button size="small" @click="saveDoc">保存账单</el-button>
-                <el-button size="small" @click="closeDoc">关闭账单</el-button>
-                <el-button size="small" @click="delDoc">删除账单</el-button>
-            </el-col>
-        </el-row>
-        <el-table
-                :data="order.customers" :row-key="getRowKeys" :expand-row-keys="expands" :stripe="true"
-                @cell-click="cellClick"
-                :show-summary="true" style="width: 100%" height="550">
-            <el-table-column label="序号" type="index" width="50">
-            </el-table-column>
-            <el-table-column type="expand">
-                <template scope="scope">
-                    <child-list :products="scope.row.products" :taxRate="order.taxRate"
-                                @updateCustomer="updateCustomer(scope.$index)"></child-list>
-                </template>
-            </el-table-column>
-            <el-table-column label="客户名称">
-                <template scope="scope">
-                    <el-input v-model="scope.row.customerName" size="small" placeholder="请输入客户名称"></el-input>
-                </template>
-            </el-table-column>
-            <el-table-column label="数量" prop="quantity">
-            </el-table-column>
-            <el-table-column label="成本" prop="inTotalPrice">
-            </el-table-column>
-            <el-table-column label="收入" prop="outTotalPrice">
-            </el-table-column>
-            <el-table-column label="利润" prop="profit">
-            </el-table-column>
-            <el-table-column
-                    prop="tag"
-                    label="收款状态"
-                    width="100"
-                    :filters="[{ text: '已收款', value: true }, { text: '未收款', value: false }]"
-                    :filter-method="filterTag"
-                    filter-placement="bottom-end">
-                <template scope="scope">
-                    <el-tag :type="scope.row.isPaid? 'primary' : 'success'"
-                            close-transition>{{paymentStatus(scope.row)}}
-                    </el-tag>
-                </template>
-            </el-table-column>
-            <el-table-column label="操作">
-                <template scope="scope">
-                    <el-button size="small" type="text" @click="doOrCancelPaid(scope.row)">{{operationText(scope.row)}}                    </el-button>
-                    <el-button v-if="scope.$index === order.customers.length - 1" size="small"
-                               type="text" @click="addCustomer(scope.$index+1)">添加
-                    </el-button>
-                    <el-button size="small" type="text" @click="delCustomer(scope.$index)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-    </div>
+    <ec-page @close="close" title="添加账单">
+        <!--<div class='page-space'>-->
+            <!--<div>{{order.docNo}}</div>-->
+        <!--</div>-->
+        <ec-page-item>
+            <el-form :inline="true" class="demo-form-inline">
+                <el-form-item label="汇率:">
+                    <el-input v-model="order.taxRate" placeholder="请输入汇率" @change="changeTaxRate"></el-input>
+                </el-form-item>
+            </el-form>
+
+            <el-table
+                    :data="order.customers" :row-key="getRowKeys" :expand-row-keys="expands" :stripe="true"
+                    @cell-click="cellClick"
+                    :show-summary="true" style="width: 100%" height="550">
+                <el-table-column label="序号" type="index" width="50">
+                </el-table-column>
+                <el-table-column type="expand">
+                    <template scope="scope">
+                        <child-list :products="scope.row.products" :taxRate="order.taxRate"
+                                    @updateCustomer="updateCustomer(scope.$index)"></child-list>
+                    </template>
+                </el-table-column>
+                <el-table-column label="客户名称">
+                    <template scope="scope">
+                        <el-input v-model="scope.row.customerName" size="small" placeholder="请输入客户名称"></el-input>
+                    </template>
+                </el-table-column>
+                <el-table-column label="数量" prop="quantity">
+                </el-table-column>
+                <el-table-column label="成本" prop="inTotalPrice">
+                </el-table-column>
+                <el-table-column label="收入" prop="outTotalPrice">
+                </el-table-column>
+                <el-table-column label="利润" prop="profit">
+                </el-table-column>
+                <el-table-column
+                        prop="tag"
+                        label="收款状态"
+                        width="100"
+                        :filters="[{ text: '已收款', value: true }, { text: '未收款', value: false }]"
+                        :filter-method="filterTag"
+                        filter-placement="bottom-end">
+                    <template scope="scope">
+                        <el-tag :type="scope.row.isPaid? 'primary' : 'success'"
+                                close-transition>{{paymentStatus(scope.row)}}
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template scope="scope">
+                        <el-button size="small" type="text" @click="doOrCancelPaid(scope.row)">
+                            {{operationText(scope.row)}}
+                        </el-button>
+                        <el-button v-if="scope.$index === order.customers.length - 1" size="small"
+                                   type="text" @click="addCustomer(scope.$index+1)">添加
+                        </el-button>
+                        <el-button size="small" type="text" @click="delCustomer(scope.$index)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </ec-page-item>
+        <ec-page-item slot="footer">
+            <el-button @click="closeDoc">关闭</el-button>
+            <el-button @click="delDoc" type="danger">删除</el-button>
+            <el-button @click="saveDoc" type="primary">保存</el-button>
+        </ec-page-item>
+    </ec-page>
 </template>
 
 <script>
@@ -114,6 +119,9 @@
             this.fetchDocNoList();
         },
         methods: {
+            close() {
+                this.$router.back();
+            },
             addOrder(){
                 this.isEdit = true;
                 this.initDocNo();
@@ -137,7 +145,7 @@
             },
             delCustomer(index) {
                 if (this.order.customers.length === 1) {
-                    this.$message({message: '必须保留一个客户', type: 'warning'});
+                    this.$message({ message: '必须保留一个客户', type: 'warning' });
                     return;
                 }
                 this.confirmDialog(this.order.customers[index].customerName, () => {
@@ -183,7 +191,7 @@
                 }).then(() => {
                     callback();
                 }).catch(() => {
-                    this.$message({type: 'success', message: '已取消删除'});
+                    this.$message({ type: 'success', message: '已取消删除' });
                 });
             },
             initDocNo() {
@@ -197,7 +205,7 @@
             },
             saveDoc(){
                 store.saveDoc(this.order, this.docNo);
-                this.$message({message: '保存账单成功', type: 'success'});
+                this.$message({ message: '保存账单成功', type: 'success' });
             },
             delDoc() {
 //                store.delDoc(this.docNo);
@@ -212,7 +220,7 @@
                 this.fetchDocNoList();
             },
             getSummaries(param) {
-                const {columns, data} = param;
+                const { columns, data } = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {

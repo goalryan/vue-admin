@@ -5,6 +5,7 @@ import EcHeader from './frame/header';
 import EcContainer from './frame/container';
 import EcSideBar from './frame/sideBar';
 import EcContainerItem from './frame/containerItem';
+import { EcPage, EcPageItem } from './page';
 // import EcButton from './button';
 // import EcText from './text';
 // import EcCrystalButton from './crystalButton';
@@ -12,7 +13,6 @@ import EcContainerItem from './frame/containerItem';
 // import { EcTab, EcTabs } from './tab';
 // import { EcMenu, EcSubmenu, EcMenuItem } from './menu';
 // import EcSideMenu from './sideMenu';
-// import { EcPage, EcPageItem } from './page';
 // import EcPagination from './pagination';
 // import { EcForm, EcFormItem } from './form';
 // import confirm from './confirm';
@@ -29,6 +29,8 @@ const components = {
     EcContainer,
     EcSideBar,
     EcContainerItem,
+    EcPage,
+    EcPageItem,
     // EcButton,
     // EcText,
     // EcCrystalButton,
@@ -39,8 +41,6 @@ const components = {
     // EcSubmenu,
     // EcMenuItem,
     // EcSideMenu,
-    // EcPage,
-    // EcPageItem,
     // EcPagination,
     // EcForm,
     // EcFormItem,

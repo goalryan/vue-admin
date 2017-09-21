@@ -4,64 +4,65 @@
  */
 @import './common/variable';
 // 重置全局多选按钮样式处理
-.el-checkbox__input.is-checked .el-checkbox__inner{
-  border-color:transparent;
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  border-color: transparent;
   background-color: transparent;
-  &:after{
+  &:after {
     content: "\e933";
     color: @link-color;
     transform: none;
   }
 }
-.el-checkbox__inner{
+
+.el-checkbox__inner {
   font-family: @font-family-icon;;
   width: 15px;
   height: 14px;
   vertical-align: middle;
   border: none;
   background-color: transparent;
-  &:after{
+  &:after {
     content: "\e935";
     background-color: transparent;
     transform: none;
     border: none;
     position: relative;
     font-size: 14px;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     color: #e0e0e0;
   }
 }
 
 //重置全局table内边跑
-.el-table .cell, .el-table th>div {
-  padding-left:7px;
+.el-table .cell, .el-table th > div {
+  display: block;
+  padding-left: 7px;
   padding-right: 7px;
 }
-.el-table--enable-row-hover .el-table__body tr:hover>td{
+
+.el-table--enable-row-hover .el-table__body tr:hover > td {
   background-color: #ebf7fd;
 }
 
-
-
 // 外页table，及有二级时的处理
-.ec-table{
+.ec-table {
   height: 100% !important;
 
   .el-table__header-wrapper {
     th {
       background-color: white !important;
-      height: 53px!important;
+      height: 53px !important;
     }
   }
   .el-table__footer-wrapper thead div, .el-table__header-wrapper thead div {
     background-color: white !important;
   }
-  .el-table__body-wrapper{
-    height: calc(~'100% - 52px')!important;
+  .el-table__body-wrapper {
+    height: calc(~'100% - 52px') !important;
     overflow-x: hidden;
-    td{
-      height: 49px!important;
+    td {
+      height: 40px !important;
       padding: 10px 0;
     }
   }
@@ -90,22 +91,22 @@
     background-color: #fafafa !important;
   }
   .el-table__body-wrapper {
-    tr:hover > td{
+    tr:hover > td {
       background-color: transparent;
     }
-    td{
-      height: 49px!important;
+    td {
+      height: 49px !important;
       padding: 10px 0;
     }
   }
 }
 
 // ec-table 内的部分样式处理
-.ec-table,.ec-table-page{
-  color: #212121!important;
+.ec-table, .ec-table-page {
+  color: #212121 !important;
   .cell {
     font-size: 12px !important;
-    line-height: 16px!important;
+    line-height: 16px !important;
     text-overflow: clip;
   }
   .el-table__footer-wrapper thead div, .el-table__header-wrapper thead div {
@@ -118,7 +119,7 @@
   .el-table__empty-text {
     color: #757575;
 
-    &:before{
+    &:before {
       display: block;
       content: '';
       width: 152px;
