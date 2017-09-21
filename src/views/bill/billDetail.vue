@@ -83,7 +83,7 @@
                 docNo: '',
                 order: {
                     docNo: '',
-                    taxRate: '1',
+                    taxRate: 1,
                     customers: []
                 },
                 // 获取row的key值
@@ -133,6 +133,7 @@
             },
             selectDocNo(){
                 this.isEdit = true;
+                this.docNo = this.$route.params.docNo;
                 this.order = store.fetchBill(this.docNo);
                 console.log(JSON.stringify(this.order));
             },
