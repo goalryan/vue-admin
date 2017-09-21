@@ -7,8 +7,8 @@ import EcSideBar from './frame/sideBar';
 import EcContainerItem from './frame/containerItem';
 import { EcPage, EcPageItem } from './page';
 // import EcButton from './button';
-// import EcText from './text';
-// import EcCrystalButton from './crystalButton';
+import EcText from './text';
+import EcCrystalButton from './crystalButton';
 // import EcDialog from './dialog';
 // import { EcTab, EcTabs } from './tab';
 // import { EcMenu, EcSubmenu, EcMenuItem } from './menu';
@@ -32,8 +32,8 @@ const components = {
     EcPage,
     EcPageItem,
     // EcButton,
-    // EcText,
-    // EcCrystalButton,
+    EcText,
+    EcCrystalButton,
     // EcDialog,
     // EcTab,
     // EcTabs,

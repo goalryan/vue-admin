@@ -11,57 +11,66 @@ export default{
     save(items){
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
     },
-
+    /**
+     * 获取单据
+     * @param docNo
+     */
+    fetchBill(docNo){
+        return JSON.parse(window.localStorage.getItem(
+            docNo || "{}"))
+    },
     /**
      * 保存单据
      * @param items 数据
      * @param docNo 单号，按日期生成 20170826
      */
-    saveDoc(items, docNo){
-        this.saveDocNo(docNo);
+    saveBill(items, docNo){
+        this.saveBillDocNo(docNo);
         window.localStorage.setItem(docNo, JSON.stringify(items));
     },
-    delDoc(docNo){
-        this.delDocNo(docNo);
+    delBill(docNo){
+        this.delBillDocNo(docNo);
         window.localStorage.setItem(docNo, JSON.stringify({}));
     },
     /**
-     * 获取单据
-     * @param docNo
+     * 获取单据号列表
      */
-    fetchDoc(docNo){
+    fetchBillList(){
         return JSON.parse(window.localStorage.getItem(
-            docNo || "{}"))
+            DOC_NO_LIST || "[]"));
     },
     /**
      * 添加单据号
      * @param docNo
      */
-    saveDocNo(docNo){
-        var docNoList = this.fetchDocNoList();
+    saveBillDocNo(docNo){
+        let docNoList = this.fetchBillList();
         if (!docNoList) {
             window.localStorage.setItem(DOC_NO_LIST, JSON.stringify([]));
         }
         // 不存在单号才添加
-        if (docNoList.filter(item => item == docNo).length === 0) {
-            docNoList.splice(0, 0, docNo);
+        if (docNoList.filter(item => item.docNo == docNo).length === 0) {
+            docNoList.splice(0, 0, { docNo: docNo });
             window.localStorage.setItem(DOC_NO_LIST, JSON.stringify(docNoList));
         }
     },
     /**
-     * 获取单据号列表
+     * 删除指单据号
+     * @param docNo
      */
-    fetchDocNoList(){
-        return JSON.parse(window.localStorage.getItem(
-            DOC_NO_LIST || "[]"));
-    },
-    delDocNo(docNo) {
-        let newDocNoList = this.fetchDocNoList().filter(item => item !== docNo);
+    delBillDocNo(docNo) {
+        let newDocNoList = this.fetchBillList().filter(item => item.docNo !== docNo);
         window.localStorage.setItem(DOC_NO_LIST, JSON.stringify(newDocNoList));
     },
-    delDocNoList(){
+    /**
+     * 删除所有单据号和单据数据
+     */
+    delAllBill(){
+        let docNoList = this.fetchBillList();
+        docNoList.forEach(item => {
+            this.delBill(item.docNo);
+        });
         window.localStorage.setItem(DOC_NO_LIST, JSON.stringify([]));
     }
-
 
 }

@@ -1,7 +1,7 @@
 <template>
     <ec-page @close="close" title="添加账单">
         <!--<div class='page-space'>-->
-            <!--<div>{{order.docNo}}</div>-->
+        <!--<div>{{order.docNo}}</div>-->
         <!--</div>-->
         <ec-page-item>
             <el-form :inline="true" class="demo-form-inline">
@@ -18,8 +18,8 @@
                 </el-table-column>
                 <el-table-column type="expand">
                     <template scope="scope">
-                        <child-list :products="scope.row.products" :taxRate="order.taxRate"
-                                    @updateCustomer="updateCustomer(scope.$index)"></child-list>
+                        <products :products="scope.row.products" :taxRate="order.taxRate"
+                                  @updateCustomer="updateCustomer(scope.$index)"></products>
                     </template>
                 </el-table-column>
                 <el-table-column label="客户名称">
@@ -81,7 +81,6 @@
             return {
                 isEdit: false,
                 docNo: '',
-                docNoList: [],
                 order: {
                     docNo: '',
                     taxRate: '1',
@@ -96,6 +95,12 @@
             }
         },
         computed: {
+            /**
+             * 是否添加
+             */
+            isAdd () {
+                return this.$route.params.status === 'add';
+            },
             /**
              * 是否最后一行
              * @param index
@@ -114,9 +119,7 @@
             }
         },
         mounted() {
-            // 在这里你想初始化的时候展开哪一行都可以了
-            // this.expands.push(this.order.customers[0].id);
-            this.fetchDocNoList();
+            this.isAdd ? this.addOrder() : this.selectDocNo();
         },
         methods: {
             close() {
@@ -128,12 +131,9 @@
                 this.order.docNo = this.docNo;
                 this.order.customers = [common.initCustomer()];
             },
-            fetchDocNoList() {
-                this.docNoList = store.fetchDocNoList();
-            },
             selectDocNo(){
                 this.isEdit = true;
-                this.order = store.fetchDoc(this.docNo);
+                this.order = store.fetchBill(this.docNo);
                 console.log(JSON.stringify(this.order));
             },
             addCustomer(index) {
@@ -204,20 +204,16 @@
                 console.log(this.docNo);
             },
             saveDoc(){
-                store.saveDoc(this.order, this.docNo);
+                store.saveBill(this.order, this.docNo);
                 this.$message({ message: '保存账单成功', type: 'success' });
             },
             delDoc() {
-//                store.delDoc(this.docNo);
-//                this.$message({message: '删除账单成功', type: 'success'});
-//                this.fetchDocNoList();
-//                this.isEdit = false;
-//                this.docNo = '';
+                store.delBill(this.docNo);
+                this.$message({ message: '删除账单成功', type: 'success' });
             },
             closeDoc(){
                 this.isEdit = false;
                 this.docNo = '';
-                this.fetchDocNoList();
             },
             getSummaries(param) {
                 const { columns, data } = param;

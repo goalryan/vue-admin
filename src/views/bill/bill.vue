@@ -2,12 +2,16 @@
     <ec-container-item>
         <template slot="head">
             <el-button size="small" type="primary" @click="addBill()">添加账单</el-button>
+            <el-button size="small" type="primary" @click="delAllBill()">删除账单</el-button>
         </template>
 
         <el-table :data="bills" highlight-current-row>
             <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
             </el-table-column>
             <el-table-column prop="docNo" label="单号" sortable>
+                <template scope="scope">
+                    <ec-text type="primary" @click="showBill(scope.row)">{{scope.row.docNo}}</ec-text>
+                </template>
             </el-table-column>
             <!--<el-table-column label="操作" align="center" width="150">-->
             <!--<template scope="scope">-->
@@ -22,6 +26,7 @@
 </template>
 
 <script>
+    import store from '../../common/js/store.js';
     export default {
         data() {
             return {
@@ -32,11 +37,28 @@
                 ]
             }
         },
+        mounted(){
+            this.fetchBillList();
+        },
         methods: {
+            fetchBillList(){
+                this.bills = store.fetchBillList();
+                console.log(this.bills);
+            },
             addBill(){
                 this.$router.push({
-                    name: 'billAdd'
+                    name: 'billDetail',
+                    params: { status: 'add' }
                 })
+            },
+            showBill(obj){
+                this.$router.push({
+                    name: 'billDetail',
+                    params: { status: 'show', docNo: obj.docNo }
+                })
+            },
+            delAllBill(){
+                store.delAllBill();
             }
         }
     }
