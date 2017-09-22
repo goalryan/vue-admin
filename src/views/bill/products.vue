@@ -2,28 +2,31 @@
     <el-table
             :data="products" border :show-summary="false" :stripe="true"
             style="width: 100%">
-        <el-table-column label="序号" type="index" width="50">
+        <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
         </el-table-column>
         <el-table-column label="商品名称">
             <template scope="scope">
-                <el-input v-model="scope.row.name" size="small" placeholder="请输入商品名称"></el-input>
+                <el-input v-if="isEdit" v-model="scope.row.name" size="small" placeholder="请输入商品名称"></el-input>
+                <p v-else="">{{scope.row.name}}</p>
             </template>
         </el-table-column>
         <el-table-column label="数量">
             <template scope="scope">
-                <el-input v-model="scope.row.quantity" size="small" placeholder="请输入数量"
+                <el-input v-if="isEdit" v-model="scope.row.quantity" size="small" placeholder="请输入数量"
                           @change="changeQuantity(scope.$index)"></el-input>
+                <p v-else="">{{scope.row.quantity}}</p>
             </template>
         </el-table-column>
         <el-table-column label="成本价">
             <template scope="scope">
-                <el-input v-model="scope.row.inUnitPrice" size="small" placeholder="请输入成本价"
+                <el-input v-if="isEdit" v-model="scope.row.inUnitPrice" size="small" placeholder="请输入成本价"
                           @change="changeInUnitPrice(scope.$index)"></el-input>
+                <p v-else="">{{scope.row.inUnitPrice}}</p>
             </template>
         </el-table-column>
-        <el-table-column label="币种" width="60">
+        <el-table-column label="币种" width="60" header-align="center" align="center">
             <template scope="scope">
-                <el-button size="small" :type="scope.row.isRMB ? 'danger' : 'primary'"
+                <el-button :disabled="!isEdit" size="small" :type="scope.row.isRMB ? 'danger' : 'primary'"
                            @click="changeCurrency(scope.$index,scope.row)">
                     {{scope.row.isRMB ? 'RMB' : 'HKD'}}
                 </el-button>
@@ -31,8 +34,9 @@
         </el-table-column>
         <el-table-column prop="outUnitPrice" label="卖出价(人民币)">
             <template scope="scope">
-                <el-input v-model="scope.row.outUnitPrice" size="small" placeholder="请输入成本价"
+                <el-input v-if="isEdit" v-model="scope.row.outUnitPrice" size="small" placeholder="请输入成本价"
                           @change="changeOutUnitPrice(scope.$index)"></el-input>
+                <p v-else="">{{scope.row.outUnitPrice}}</p>
             </template>
         </el-table-column>
         <el-table-column prop="inTotalPrice" label="总成本(人民币)">
@@ -41,29 +45,34 @@
         </el-table-column>
         <el-table-column prop="profit" sortable label="利润">
         </el-table-column>
-        <el-table-column label="操作" width="160">
-            <template scope="scope">
+        <el-table-column label="操作" width="160" header-align="center" align="center">
+            <template scope="scope" v-if="isEdit">
                 <el-button size="small" type="text" @click="addProduct(scope.$index)">添加商品</el-button>
                 <el-button size="small" type="text" @click="delProduct(scope.$index, scope.row)">删除商品</el-button>
             </template>
+            <template v-else=""></template>
         </el-table-column>
     </el-table>
 </template>
 
 <script>
-    import common from './common.js';
+    import common from './billCommon.js';
 
     export default {
         components: {},
         name: 'childList',
         props: {
+            isEdit: {
+                type: Boolean,
+                default: false
+            },
             products: {
                 type: Array,
                 default: []
             },
             taxRate: {
-                type: String,
-                default: '1'
+                type: Number,
+                default: 1
             }
         },
         data() {

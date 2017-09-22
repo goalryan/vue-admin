@@ -2,6 +2,14 @@
  * Created by liushaojun on 2017/9/8.
  */
 export default{
+    initBillDocNo() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        month = month < 10 ? `0${month}` : `${month}`;
+        let day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+        return `BILL${year}${month}${day}`;
+    },
     initCustomer()
     {
         return {
