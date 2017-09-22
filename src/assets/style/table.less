@@ -75,6 +75,7 @@
       }
     }
   }
+
 }
 
 // 内页table样式处理
@@ -95,9 +96,11 @@
       background-color: transparent;
     }
     td {
-      height: 49px !important;
-      padding: 10px 0;
+      height: 42px !important;
     }
+  }
+  .el-table__expanded-cell {
+    padding: 10px 20px;
   }
 }
 
@@ -105,13 +108,13 @@
 .ec-table, .ec-table-page {
   color: #212121 !important;
   .cell {
-    font-size: 12px !important;
+    font-size: 13px !important;
     line-height: 16px !important;
     text-overflow: clip;
   }
   .el-table__footer-wrapper thead div, .el-table__header-wrapper thead div {
     font-weight: normal !important;
-    color: #757575 !important;
+    //color: #757575 !important;
   }
   .el-table__empty-block {
     min-height: 200px;
@@ -123,7 +126,7 @@
       display: block;
       content: '';
       width: 152px;
-      height: 96px;
+      height: 42px;
       background: url("../images/noData.png") no-repeat;
       background-size: 100% 100%;
       margin-bottom: 20px;

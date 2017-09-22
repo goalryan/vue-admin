@@ -52,7 +52,7 @@
                 if (docNo === '') {
                     this.$router.push({
                         name: 'billDetail',
-                        params: { status: 'add' }
+                        params: {status: 'add'}
                     })
                 } else {
                     this.showBill(docNo);
@@ -61,7 +61,7 @@
             showBill(docNo){
                 this.$router.push({
                     name: 'billDetail',
-                    params: { status: 'show', docNo: docNo }
+                    params: {status: 'show', docNo: docNo}
                 })
             },
             delAllBill(){
@@ -71,7 +71,7 @@
             },
             checkExistDocNo(){
                 const docNo = billCommon.initBillDocNo();
-                if (this.bills.findIndex(item => item.docNo === docNo) > -1) {
+                if (this.bills && this.bills.findIndex(item => item.docNo === docNo) > -1) {
                     return docNo;
                 } else {
                     return '';

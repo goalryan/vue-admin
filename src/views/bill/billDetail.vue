@@ -4,7 +4,7 @@
         <!--<div>{{order.docNo}}</div>-->
         <!--</div>-->
         <ec-page-item>
-            <el-form :inline="true" class="demo-form-inline">
+            <el-form :inline="true">
                 <el-form-item label="汇率:">
                     <el-input v-if="isEdit" v-model="order.taxRate" placeholder="请输入汇率"
                               @change="changeTaxRate"></el-input>
@@ -15,7 +15,7 @@
             <el-table
                     :data="order.customers" :row-key="getRowKeys" :expand-row-keys="expands" :stripe="true"
                     @cell-click="cellClick"
-                    :show-summary="true" style="width: 100%" height="550">
+                    :show-summary="true" class="ec-table-page" height="550">
                 <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
                 </el-table-column>
                 <el-table-column type="expand">
@@ -31,40 +31,44 @@
                         <p v-else="">{{scope.row.customerName}}</p>
                     </template>
                 </el-table-column>
-                <el-table-column label="数量" prop="quantity" align="center">
+                <el-table-column label="数量" prop="quantity" header-align="right" align="right">
                 </el-table-column>
-                <el-table-column label="成本" prop="inTotalPrice" align="right">
+                <el-table-column label="成本" prop="inTotalPrice" header-align="right" align="right">
                 </el-table-column>
-                <el-table-column label="收入" prop="outTotalPrice" align="right">
+                <el-table-column label="收入" prop="outTotalPrice" header-align="right" align="right">
                 </el-table-column>
-                <el-table-column label="利润" prop="profit" align="right">
+                <el-table-column label="利润" prop="profit" header-align="right" align="right">
                 </el-table-column>
                 <el-table-column
                         prop="tag"
                         label="收款状态"
                         :filters="[{ text: '已收款', value: true }, { text: '未收款', value: false }]"
                         :filter-method="filterTag"
-                        filter-placement="bottom-end" header-align="center" align="center">
+                        filter-placement="bottom-end" header-align="right" align="right" width="100">
                     <template scope="scope">
                         <el-tag :type="scope.row.isPaid? 'primary' : 'success'"
                                 close-transition>{{paymentStatus(scope.row)}}
+
                         </el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column label="收款" header-align="center" align="center">
+                <el-table-column label="收款" header-align="center" align="center" width="100">
                     <template scope="scope" v-if="isEdit">
                         <template v-if="isEdit">
                             <el-button size="small" type="text" @click="doOrCancelPaid(scope.row)">
                                 {{operationText(scope.row)}}
+
                             </el-button>
                         </template>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作" header-align="center" align="center">
+                <el-table-column label="操作" header-align="center" align="center" width="100">
                     <template scope="scope">
                         <template v-if="isEdit">
                             <el-button v-if="scope.$index === order.customers.length - 1" size="small"
                                        type="text" @click="addCustomer(scope.$index+1)">添加
+
+
                             </el-button>
                             <el-button size="small" type="text" @click="delCustomer(scope.$index)">删除</el-button>
                         </template>
@@ -74,7 +78,7 @@
         </ec-page-item>
         <ec-page-item slot="footer">
             <template v-if="isEdit">
-                <el-button @click="cancel" type="primary">取消</el-button>
+                <el-button @click="cancel">取消</el-button>
                 <el-button @click="saveDoc" type="primary">保存</el-button>
             </template>
             <template v-else="">
@@ -166,7 +170,7 @@
             },
             delCustomer(index) {
                 if (this.order.customers.length === 1) {
-                    this.$message({ message: '必须保留一个客户', type: 'warning' });
+                    this.$message({message: '必须保留一个客户', type: 'warning'});
                     return;
                 }
                 this.doConfirm(() => {
@@ -206,16 +210,16 @@
             },
             saveDoc(){
                 store.saveBill(this.order, this.docNo);
-                this.$message({ message: '保存成功', type: 'success' });
+                this.$message({message: '保存成功', type: 'success'});
             },
             delDoc() {
                 this.doConfirm(() => {
                     store.delBill(this.docNo);
-                    this.$message({ message: '删除成功', type: 'success' });
+                    this.$message({message: '删除成功', type: 'success'});
                 });
             },
             getSummaries(param) {
-                const { columns, data } = param;
+                const {columns, data} = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
