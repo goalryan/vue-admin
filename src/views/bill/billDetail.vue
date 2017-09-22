@@ -53,20 +53,22 @@
                 </el-table-column>
                 <el-table-column label="收款" header-align="center" align="center">
                     <template scope="scope" v-if="isEdit">
-                        <el-button size="small" type="text" @click="doOrCancelPaid(scope.row)">
-                            {{operationText(scope.row)}}
-                        </el-button>
+                        <template v-if="isEdit">
+                            <el-button size="small" type="text" @click="doOrCancelPaid(scope.row)">
+                                {{operationText(scope.row)}}
+                            </el-button>
+                        </template>
                     </template>
-                    <template v-else=""></template>
                 </el-table-column>
                 <el-table-column label="操作" header-align="center" align="center">
-                    <template scope="scope" v-if="isEdit">
-                        <el-button v-if="scope.$index === order.customers.length - 1" size="small"
-                                   type="text" @click="addCustomer(scope.$index+1)">添加
-                        </el-button>
-                        <el-button size="small" type="text" @click="delCustomer(scope.$index)">删除</el-button>
+                    <template scope="scope">
+                        <template v-if="isEdit">
+                            <el-button v-if="scope.$index === order.customers.length - 1" size="small"
+                                       type="text" @click="addCustomer(scope.$index+1)">添加
+                            </el-button>
+                            <el-button size="small" type="text" @click="delCustomer(scope.$index)">删除</el-button>
+                        </template>
                     </template>
-                    <template v-else=""></template>
                 </el-table-column>
             </el-table>
         </ec-page-item>

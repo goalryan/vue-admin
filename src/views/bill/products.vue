@@ -47,10 +47,11 @@
         </el-table-column>
         <el-table-column label="操作" width="160" header-align="center" align="center">
             <template scope="scope" v-if="isEdit">
-                <el-button size="small" type="text" @click="addProduct(scope.$index)">添加商品</el-button>
-                <el-button size="small" type="text" @click="delProduct(scope.$index, scope.row)">删除商品</el-button>
+                <template v-if="isEdit">
+                    <el-button size="small" type="text" @click="addProduct(scope.$index)">添加商品</el-button>
+                    <el-button size="small" type="text" @click="delProduct(scope.$index, scope.row)">删除商品</el-button>
+                </template>
             </template>
-            <template v-else=""></template>
         </el-table-column>
     </el-table>
 </template>
