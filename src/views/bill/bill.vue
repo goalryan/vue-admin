@@ -27,7 +27,7 @@
 
 <script>
     import MessageMixin from '../../utils/MessageMixin.js';
-    import store from '../../utils/store.js';
+    import store from '../../utils/storeBill.js';
     import billCommon from './billCommon';
     export default {
         mixins: [MessageMixin],

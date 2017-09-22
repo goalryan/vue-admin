@@ -88,7 +88,7 @@
 
 <script>
     import MessageMixin from '../../utils/MessageMixin.js';
-    import store from '../../utils/store.js';
+    import store from '../../utils/storeBill.js';
     import Products from './products.vue';
     import billCommon from './billCommon.js';
     export default {
