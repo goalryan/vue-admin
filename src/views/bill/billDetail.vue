@@ -4,9 +4,9 @@
         <!--<div>{{order.docNo}}</div>-->
         <!--</div>-->
         <ec-page-item>
-            <el-form :inline="true" class="demo-form-inline">
+            <el-form :inline="true" class="module-form">
                 <el-form-item label="汇率:">
-                    <el-input v-if="isEdit" v-model="order.taxRate" placeholder="请输入汇率"
+                    <el-input v-if="isEdit" v-model="order.taxRate" placeholder="请输入汇率" size="small"
                               @change="changeTaxRate"></el-input>
                     <p v-else="">{{order.taxRate}}</p>
                 </el-form-item>

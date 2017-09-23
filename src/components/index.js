@@ -9,6 +9,7 @@ import { EcPage, EcPageItem } from './page';
 // import EcButton from './button';
 import EcText from './text';
 import EcCrystalButton from './crystalButton';
+import EcTransfer from './transfer';
 // import EcDialog from './dialog';
 // import { EcTab, EcTabs } from './tab';
 // import { EcMenu, EcSubmenu, EcMenuItem } from './menu';
@@ -34,6 +35,7 @@ const components = {
     // EcButton,
     EcText,
     EcCrystalButton,
+    EcTransfer,
     // EcDialog,
     // EcTab,
     // EcTabs,
