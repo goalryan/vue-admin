@@ -4,125 +4,23 @@
  *
  */
 @import './common/variable';
-.el-icon-time:before, .el-icon-date:before{
-  font-family:@font-family-icon;
-  content:'\e915'!important;
-}
-.el-input.is-disabled .el-input__inner{
-  background-color: #f5f5f5;
-}
-.el-input__inner{
-  font-size: 12px;
-  border-radius: 2px;
-  height: 28px!important;
 
-  &.danger{
-    border-color: #ff0700;
-    color:#ff0700;
+.module-form {
+  .el-form-item {
+    margin-bottom: 0px;
+  }
+  .el-form-item__label {
+    text-align: right;
+    vertical-align: middle;
+    float: left;
+    font-size: 13px;
+    color: #48576a;
+    line-height: 1;
+    padding: 11px 12px 11px 0;
+    box-sizing: border-box;
+  }
+  .el-input--small .el-input__inner {
+    height: 32px;
+    font-size: 13px;
   }
 }
-.el-radio__input.is-checked .el-radio__inner{
-  border-color:transparent;
-  background-color: transparent;
-  &:after{
-    content: "\e96f";
-    color: @link-color;
-  }
-}
-.el-radio__inner{
-  font-family: @font-family-icon;;
-  width: 14px;
-  height: 14px;
-  vertical-align: middle;
-  border: none;
-
-  &:after{
-    content: "\e939";
-    background-color: #fff;
-    position: relative;
-    font-size: 14px;
-    top:0;
-    left:0;
-    color: #e0e0e0;
-  }
-}
-.el-radio__label{
-  vertical-align: middle;
-}
-.el-input-group__append,.el-input-group__prepend {
-  padding: 0;
-  background-color: #f2f3f3;
-  border-radius: 2px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-
-  [class^="icon-"]{
-    display: inline-block;
-    padding: 0 6px;
-    cursor: pointer;
-  }
-}
-.el-date-editor.el-input{
-  width: 100%;
-}
-
-.page-form{
-  font-size: 12px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  .form-item{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top:10px;
-    margin-bottom: 10px;
-
-    .form-item-label{
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      width: 90px;
-      flex-shrink: 0;
-      line-height: 1;
-      padding: 8px 15px 8px 0;
-    }
-    .form-item-content{
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      word-break: break-all;
-      word-wrap: break-word;
-      width: 210px;
-
-      .el-select{
-        width: 100%!important;
-      }
-      .el-date-editor .el-input{
-        width: 100%!important;
-      }
-    }
-  }
-}
-
-/**
- * 在dialog弹框中使用form表单时的布局样式
- */
-.dialog {
-
-  .page-form {
-    flex-direction: column;
-    padding: 20px 20px 0px 15px;
-
-    .form-item{
-      width: 100%!important;
-      margin-bottom: 10px!important;
-
-      .form-item-label{
-        justify-content: flex-start!important;
-      }
-    }
-  }
-}
-
