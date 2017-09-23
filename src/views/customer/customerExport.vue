@@ -88,7 +88,7 @@
                     const filterVal = ['id', 'name', 'phone', 'address'];
                     const list = this.customers;
                     const data = this.formatJson(filterVal, list);
-                    export_json_to_excel(tHeader, data, '列表excel');
+                    export_json_to_excel(tHeader, data, '收件人信息');
                 })
             },
             formatJson(filterVal, jsonData) {

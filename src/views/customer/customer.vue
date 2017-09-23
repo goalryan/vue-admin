@@ -26,6 +26,7 @@
                 </template>
             </el-table-column>
         </el-table>
+        <customer-dialog :show.sync="showCustomerDialog"></customer-dialog>
         <router-view @refresh="refresh"></router-view>
     </ec-container-item>
 
@@ -34,12 +35,16 @@
 <script>
     import MessageMixin from '../../utils/MessageMixin.js';
     import storeCustomer from '../../utils/storeCustomer.js';
+    import customerDialog from './customerDetail.vue';
     export default {
         mixins: [MessageMixin],
+        components: {
+            customerDialog
+        },
         data() {
-
             return {
                 customers: [],
+                showCustomerDialog: false,
                 formInline: {
                     user: '',
                     region: ''
@@ -66,6 +71,12 @@
                 });
             },
             search(){
+            },
+            addCustomer(){
+                this.showCustomerDialog = true;
+            },
+            editCustomer(){
+                this.showCustomerDialog = true;
             },
             exportCustomer(){
                 this.$router.push({
