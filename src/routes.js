@@ -6,6 +6,7 @@ import user from './views/nav1/user.vue'
 import Bill from './views/bill/bill.vue'
 import BillDetail from './views/bill/billDetail.vue'
 import Customer from './views/customer/customer.vue'
+import CustomerExport from './views/customer/customerExport.vue'
 import echarts from './views/charts/echarts.vue'
 
 let routes = [
@@ -43,7 +44,12 @@ let routes = [
         name: '客户管理',
         iconCls: 'fa fa-id-card-o',
         children: [
-            { path: '/customer', component: Customer, name: '客户清单' }
+            {
+                path: '/customer', component: Customer, name: '客户清单',
+                children: [{
+                    path: 'export', component: CustomerExport, name: 'customerExport'
+                }]
+            },
         ]
     },
     // {
