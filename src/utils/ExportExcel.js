@@ -99,7 +99,7 @@ export function export_table_to_excel(id) {
 
     /* original data */
     var data = oo[0];
-    var ws_name = "SheetJS";
+    var ws_name = "自定义打印导入数据模板";
     console.log(data);
 
     var wb = new Workbook(), ws = sheet_from_array_of_arrays(data);
@@ -126,7 +126,7 @@ export function export_json_to_excel(th, jsonData, defaultTitle) {
 
     var data = jsonData;
     data.unshift(th);
-    var ws_name = "SheetJS";
+    var ws_name = "自定义打印导入数据模板";
 
     var wb = new Workbook(), ws = sheet_from_array_of_arrays(data);
 

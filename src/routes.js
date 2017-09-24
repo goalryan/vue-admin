@@ -30,7 +30,7 @@ let routes = [
         iconCls: 'el-icon-message',//图标样式class
         leaf: true,//只有一个节点
         children: [
-            {path: '/main', component: Main, name: '主页', hidden: true},
+            // {path: '/main', component: Main, name: '主页', hidden: true},
             {
                 path: '/bill', component: Bill, name: '账单清单',
                 children: [{

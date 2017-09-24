@@ -27,21 +27,24 @@
 <script>
     import MessageMixin from '../../utils/MessageMixin.js';
     import storeCustomer from '../../utils/storeCustomer.js';
-    export default{
+
+    export default {
         mixins: [MessageMixin],
-        data(){
+        data() {
             return {
                 customers: [],
                 selectCustomers: [],
+                exportCustomers: [],
                 renderFunc(createElement, option) {
                     return createElement('div', [renderFirstRow(createElement, option), renderSecondRow(createElement, option)])
                 },
-                filterMethod(query, item){
+                filterMethod(query, item) {
                     let names = item.name.indexOf(query) > -1;
                     let phones = item.phone.indexOf(query) > -1;
                     return phones || names;
                 }
             };
+
             function renderFirstRow(createElement, option) {
                 return createElement('p', [renderNameCell(createElement, option), renderPhoneCell(createElement, option)])
             }
@@ -58,17 +61,17 @@
                 return createElement('h6', `${ option.address }`)
             }
         },
-        created(){
+        created() {
             this.fetchCustomerList();
         },
         mounted() {
 
         },
         methods: {
-            close(){
+            close() {
                 this.$router.back();
             },
-            fetchCustomerList(){
+            fetchCustomerList() {
                 this.customers = storeCustomer.fetchCustomers();
                 this.customers.forEach(item => {
                     item.key = item.id;
@@ -81,14 +84,22 @@
                 console.log(value, direction, movedKeys);
             },
             export2Excel() {
-                console.log(this.selectCustomers);
+                this.selectCustomers.forEach(item => {
+                    for (let i = 0; i < this.customers.length; i++) {
+                        if (item === this.customers[i].id) {
+                            this.customers[i].zeroCol = '';
+                            this.exportCustomers.push(this.customers[i]);
+                            break;
+                        }
+                    }
+                });
                 require.ensure([], () => {
-                    const { export_json_to_excel } = require('../../utils/ExportExcel');
-                    const tHeader = ['序号', '姓名', '手机', '地址'];
-                    const filterVal = ['id', 'name', 'phone', 'address'];
-                    const list = this.customers;
+                    const {export_json_to_excel} = require('../../utils/ExportExcel');
+                    const tHeader = ['订单编号', '收件人姓名（必填）', '收件人手机（二选一）', '收件人电话（二选一）', '收件人地址（必填）'];
+                    const filterVal = ['zeroCol', 'name', 'phone', 'zeroCol', 'address'];
+                    const list = this.exportCustomers;
                     const data = this.formatJson(filterVal, list);
-                    export_json_to_excel(tHeader, data, '收件人信息');
+                    export_json_to_excel(tHeader, data, '收件人信息');//自定义打印导入数据模板
                 })
             },
             formatJson(filterVal, jsonData) {

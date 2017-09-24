@@ -83,18 +83,23 @@
             editCustomer(customer) {
                 this.isAdd = false;
                 // 要给新的对象
-                this.customer = JSON.parse(customer);
+                this.customer = JSON.parse(JSON.stringify(customer));
                 this.showCustomerDialog = true;
             },
             deleteCustomer(index) {
                 this.doConfirm(() => {
                     this.customers.splice(index, 1);
+                    storeCustomer.saveCustomers(this.customers);
                 }, `确定删除客户【${this.customers[index].name}】?`)
             },
             updateCustomer(isAdd) {
                 if (isAdd) {
-                    this.customers.splice(0, 0, this.customer);
+                    this.customers.splice(0, 0, JSON.parse(JSON.stringify(this.customer)));
+                } else {
+                    let index = this.customers.findIndex(item => item.id = this.customer.id);
+                    this.customers[index] = this.customer;
                 }
+                storeCustomer.saveCustomers(this.customers);
             },
             exportCustomer() {
                 this.$router.push({
@@ -103,7 +108,10 @@
                 })
             },
             importCustomer() {
-
+                this.customers.forEach(item => {
+                    item.id = this.getRandom();
+                })
+                storeCustomer.initCustomers(this.customers);
             }
         }
     }
