@@ -9,6 +9,7 @@
                     <el-button size="small" type="primary" @click="search">查询</el-button>
                     <el-button size="small" type="primary" @click="addCustomer">添加客户</el-button>
                     <el-button size="small" type="primary" @click="exportCustomer">导出收件人</el-button>
+                    <el-button size="small" type="primary" @click="importCustomer">导入历史收件人</el-button>
                 </el-form-item>
             </el-form>
         </template>
@@ -21,12 +22,13 @@
             <el-table-column prop="address" label="地址" sortable></el-table-column>
             <el-table-column label="操作" align="center" width="150">
                 <template scope="scope">
-                    <el-button type="primary" size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+                    <el-button type="primary" size="small" @click="editCustomer(scope.row)">编辑</el-button>
+                    <el-button type="danger" size="small" @click="deleteCustomer(scope.$index)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
-        <customer-dialog :show.sync="showCustomerDialog"></customer-dialog>
+        <customer-dialog :show.sync="showCustomerDialog" :isAdd="isAdd" :customer="customer"
+                         @confirm="updateCustomer"></customer-dialog>
         <router-view @refresh="refresh"></router-view>
     </ec-container-item>
 
@@ -34,16 +36,20 @@
 
 <script>
     import MessageMixin from '../../utils/MessageMixin.js';
+    import CommonMixin from '../../utils/CommonMixin.js';
     import storeCustomer from '../../utils/storeCustomer.js';
     import customerDialog from './customerDetail.vue';
+
     export default {
-        mixins: [MessageMixin],
+        mixins: [MessageMixin, CommonMixin],
         components: {
             customerDialog
         },
         data() {
             return {
+                isAdd: false,
                 customers: [],
+                customer: {},
                 showCustomerDialog: false,
                 formInline: {
                     user: '',
@@ -51,38 +57,53 @@
                 }
             }
         },
-        mounted(){
+        mounted() {
             this.fetchCustomerList();
         },
         methods: {
-            refresh(){
+            refresh() {
                 this.fetchCustomerList();
             },
-            fetchCustomerList(){
+            fetchCustomerList() {
                 this.customers = storeCustomer.fetchCustomers();
                 console.log(this.customers);
             },
-            addCustomer(){
-
+            search() {
             },
-            delAllBill(){
+            addCustomer() {
+                this.isAdd = true;
+                this.customer = {
+                    id: this.getRandom(),
+                    name: '',
+                    phone: '',
+                    address: ''
+                }
+                this.showCustomerDialog = true;
+            },
+            editCustomer(customer) {
+                this.isAdd = false;
+                // 要给新的对象
+                this.customer = JSON.parse(customer);
+                this.showCustomerDialog = true;
+            },
+            deleteCustomer(index) {
                 this.doConfirm(() => {
-                    store.delAllBill();
-                });
+                    this.customers.splice(index, 1);
+                }, `确定删除客户【${this.customers[index].name}】?`)
             },
-            search(){
+            updateCustomer(isAdd) {
+                if (isAdd) {
+                    this.customers.splice(0, 0, this.customer);
+                }
             },
-            addCustomer(){
-                this.showCustomerDialog = true;
-            },
-            editCustomer(){
-                this.showCustomerDialog = true;
-            },
-            exportCustomer(){
+            exportCustomer() {
                 this.$router.push({
                     name: 'customerExport',
                     params: {}
                 })
+            },
+            importCustomer() {
+
             }
         }
     }

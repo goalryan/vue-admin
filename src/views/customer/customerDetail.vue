@@ -1,15 +1,15 @@
 <template>
-    <ec-dialog :show.sync="showDialog" :title="getTitle"
-               :showCancelButton="false" :showConfirmButton="false" width="650px">
-        <el-form label-width="120px">
+    <ec-dialog :show.sync="showDialog" :title="getTitle" @confirm="confirm"
+               :showCancelButton="true" :showConfirmButton="true" width="550px">
+        <el-form label-width="90px">
             <el-form-item label="姓名：">
-                <p>{{formData.header.productQuantity}}</p>
+                <el-input v-model="customer.name" size="small" placeholder="请输入姓名"></el-input>
             </el-form-item>
             <el-form-item label="手机号：">
-                <p>{{formData.header.completeQuantity}}</p>
+                <el-input v-model="customer.phone" size="small" placeholder="手机号"></el-input>
             </el-form-item>
             <el-form-item label="地址：">
-                <p>{{formData.header.redirectQuantity}}</p>
+                <el-input v-model="customer.address" size="small" placeholder="地址"></el-input>
             </el-form-item>
         </el-form>
     </ec-dialog>
@@ -26,19 +26,13 @@
             isAdd: {
                 type: Boolean,
                 default: true
+            },
+            customer: {
+                type: Object
             }
         },
         data() {
-            return {
-                formData: {
-                    header: {
-                        productionQuantity: '',
-                        finishedProductQuantity: '',
-                        waitInboundQuantity: '',
-                        inboundTotalQuantity: ''
-                    }
-                }
-            };
+            return {};
         },
         computed: {
             showDialog: {
@@ -50,8 +44,8 @@
                 }
             },
             getTitle: {
-                get(){
-                    return this.isAdd ? "d" : "编辑--客户";
+                get() {
+                    return this.isAdd ? "添加客户" : "编辑客户";
                 }
             }
         },
@@ -62,7 +56,12 @@
                 }
             }
         },
-        methods: {}
+        methods: {
+            confirm() {
+                this.showDialog = false;
+                this.$emit('confirm', this.isAdd);
+            }
+        }
     };
 </script>
 

@@ -6,7 +6,7 @@ import EcContainer from './frame/container';
 import EcSideBar from './frame/sideBar';
 import EcContainerItem from './frame/containerItem';
 import { EcPage, EcPageItem } from './page';
-// import EcButton from './button';
+import EcButton from './button';
 import EcText from './text';
 import EcCrystalButton from './crystalButton';
 import EcDialog from './dialog';
@@ -31,7 +31,7 @@ const components = {
     EcContainerItem,
     EcPage,
     EcPageItem,
-    // EcButton,
+    EcButton,
     EcText,
     EcCrystalButton,
     EcDialog,
