@@ -2,7 +2,7 @@
     <ec-container-item>
         <template slot="head">
             <el-button size="small" type="primary" @click="addBill()">添加账单</el-button>
-            <el-button size="small" type="primary" @click="delAllBill()">删除账单</el-button>
+            <!--<el-button size="small" type="primary" @click="delAllBill()">删除账单</el-button>-->
         </template>
 
         <el-table :data="bills" highlight-current-row>

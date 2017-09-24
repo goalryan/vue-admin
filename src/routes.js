@@ -28,8 +28,9 @@ let routes = [
         component: Home,
         name: '账单管理',
         iconCls: 'el-icon-message',//图标样式class
+        leaf: true,//只有一个节点
         children: [
-            { path: '/main', component: Main, name: '主页', hidden: true },
+            {path: '/main', component: Main, name: '主页', hidden: true},
             {
                 path: '/bill', component: Bill, name: '账单清单',
                 children: [{
@@ -43,6 +44,7 @@ let routes = [
         component: Home,
         name: '客户管理',
         iconCls: 'fa fa-id-card-o',
+        leaf: true,//只有一个节点
         children: [
             {
                 path: '/customer', component: Customer, name: '客户清单',
@@ -68,13 +70,13 @@ let routes = [
         name: 'Charts',
         iconCls: 'fa fa-bar-chart',
         children: [
-            { path: '/echarts', component: echarts, name: '图表' }
+            {path: '/echarts', component: echarts, name: '图表'}
         ]
     },
     {
         path: '*',
         hidden: true,
-        redirect: { path: '/404' }
+        redirect: {path: '/404'}
     }
 ];
 

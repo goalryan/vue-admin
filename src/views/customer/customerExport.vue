@@ -83,7 +83,7 @@
             export2Excel() {
                 console.log(this.selectCustomers);
                 require.ensure([], () => {
-                    const { export_json_to_excel } = require('../../utils/Export2Excel');
+                    const { export_json_to_excel } = require('../../utils/ExportExcel');
                     const tHeader = ['序号', '姓名', '手机', '地址'];
                     const filterVal = ['id', 'name', 'phone', 'address'];
                     const list = this.customers;

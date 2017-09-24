@@ -15,7 +15,7 @@
             <el-table
                     :data="order.customers" :row-key="getRowKeys" :expand-row-keys="expands" :stripe="true"
                     @cell-click="cellClick"
-                    :show-summary="true" class="ec-table-page" height="550">
+                    :show-summary="true" class="ec-table-page" height="500">
                 <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
                 </el-table-column>
                 <el-table-column type="expand">
@@ -49,6 +49,7 @@
                         <el-tag :type="scope.row.isPaid? 'primary' : 'success'"
                                 close-transition>{{paymentStatus(scope.row)}}
 
+
                         </el-tag>
                     </template>
                 </el-table-column>
@@ -57,6 +58,7 @@
                         <template v-if="isEdit">
                             <el-button size="small" type="text" @click="doOrCancelPaid(scope.row)">
                                 {{operationText(scope.row)}}
+
 
                             </el-button>
                         </template>
@@ -67,6 +69,7 @@
                         <template v-if="isEdit">
                             <el-button v-if="scope.$index === order.customers.length - 1" size="small"
                                        type="text" @click="addCustomer(scope.$index+1)">添加
+
 
 
                             </el-button>
@@ -147,6 +150,7 @@
         methods: {
             close() {
                 this.$router.back();
+                this.$emit('refresh');
             },
             edit(){
                 this.isEdit = true;

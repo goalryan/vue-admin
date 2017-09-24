@@ -1,23 +1,17 @@
 <template>
-    <ec-dialog :show.sync="showDialog" title="工序流转详情"
+    <ec-dialog :show.sync="showDialog" :title="getTitle"
                :showCancelButton="false" :showConfirmButton="false" width="650px">
-
         <el-form label-width="120px">
-            <el-form-item label="生产数量：">
+            <el-form-item label="姓名：">
                 <p>{{formData.header.productQuantity}}</p>
             </el-form-item>
-            <el-form-item label="登记数量：">
+            <el-form-item label="手机号：">
                 <p>{{formData.header.completeQuantity}}</p>
             </el-form-item>
-            <el-form-item label="待流转数量：">
+            <el-form-item label="地址：">
                 <p>{{formData.header.redirectQuantity}}</p>
             </el-form-item>
-            <el-form-item label="已流转数量：">
-                <p>{{formData.header.redirectedQuantity}}</p>
-            </el-form-item>
         </el-form>
-        </el-col>
-
     </ec-dialog>
 </template>
 
@@ -28,6 +22,10 @@
             show: {
                 type: Boolean,
                 default: false
+            },
+            isAdd: {
+                type: Boolean,
+                default: true
             }
         },
         data() {
@@ -49,6 +47,11 @@
                 },
                 set(val) {
                     this.$emit('update:show', val);
+                }
+            },
+            getTitle: {
+                get(){
+                    return this.isAdd ? "d" : "编辑--客户";
                 }
             }
         },
