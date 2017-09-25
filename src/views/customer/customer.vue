@@ -28,7 +28,7 @@
             </el-table-column>
         </el-table>
         <customer-dialog :show.sync="showCustomerDialog" :isAdd="isAdd" :customer="customer"
-                         @confirm="updateCustomer"></customer-dialog>
+                         @confirm="updateCustomer" @customerEvent="addNextCustomer"></customer-dialog>
         <router-view @refresh="refresh"></router-view>
     </ec-container-item>
 
@@ -108,6 +108,10 @@
                 }
                 this.filterCustomers();
                 storeCustomer.saveCustomers(this.customers);
+            },
+            addNextCustomer(isAdd) {
+                this.updateCustomer(isAdd);
+                this.addCustomer();
             },
             filterCustomers() {
                 this.searchCustomers = this.customers.filter((item) => {

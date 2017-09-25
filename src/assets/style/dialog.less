@@ -4,7 +4,7 @@
  * 弹出框样式
  *
  */
-.dialog{
+.dialog {
   display: flex;
   position: fixed;
   width: 100%;
@@ -14,6 +14,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .dialog-wrap {
   min-width: 300px;
   border-radius: @border-radius-base;
@@ -21,7 +22,8 @@
   word-wrap: break-word;
   word-break: break-all;
 }
-.dialog-head{
+
+.dialog-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,12 +34,20 @@
   background-color: #f4f7fd;
   color: #6c7a95;
 }
-.dialog-content{
-  color: @sub-text-color;
-  padding: 20px 20px 30px 20px;
+
+.el-form-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 20px;
 }
 
-.dialog-footer{
+.dialog-content {
+  color: @sub-text-color;
+  padding: 20px 20px 30px 20px;
+
+}
+
+.dialog-footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -78,46 +88,46 @@
 /*
  * message dialog 的特别样式
  **/
-.dialog-message{
+.dialog-message {
   max-width: 400px;
 
-  .dialog-message-content{
+  .dialog-message-content {
     padding: 20px 20px 30px 20px;
     text-align: center;
 
-    .sub-message{
+    .sub-message {
       margin-top: 10px;
       font-size: 12px;
       color: #757575;
     }
   }
-  .dialog-footer{
-    justify-content: center!important;
+  .dialog-footer {
+    justify-content: center !important;
   }
 
-  .dialog-message-icon{
+  .dialog-message-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
     font-size: 36px;
   }
-  .icon-dialog_message__success{
+  .icon-dialog_message__success {
     color: #91d938;
   }
-  .icon-dialog_message__success:after{
+  .icon-dialog_message__success:after {
     content: '\e97f';
   }
-  .icon-dialog_message__warning{
-    color:#FFB616;
+  .icon-dialog_message__warning {
+    color: #FFB616;
   }
-  .icon-dialog_message__warning:after{
+  .icon-dialog_message__warning:after {
     content: '\e981';
   }
-  .icon-dialog_message__failure{
-    color:#FE5A00;
+  .icon-dialog_message__failure {
+    color: #FE5A00;
   }
-  .icon-dialog_message__failure:after{
+  .icon-dialog_message__failure:after {
     content: '\e980';
   }
 }

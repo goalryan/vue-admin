@@ -1,6 +1,6 @@
 <template>
-    <ec-dialog :show.sync="showDialog" :title="getTitle" @confirm="confirm"
-               :showCancelButton="true" :showConfirmButton="true" width="550px">
+    <ec-dialog :show.sync="showDialog" :title="getTitle" @confirm="confirm" @customerEvent="customerEvent"
+               :showCancelButton="true" :showConfirmButton="true" :showCustomerButton="isAdd" width="400px">
         <el-form label-width="90px">
             <el-form-item label="姓名：">
                 <el-input v-model="customer.name" size="small" placeholder="请输入姓名"></el-input>
@@ -25,7 +25,7 @@
             },
             isAdd: {
                 type: Boolean,
-                default: true
+                default: false
             },
             customer: {
                 type: Object
@@ -60,6 +60,9 @@
             confirm() {
                 this.showDialog = false;
                 this.$emit('confirm', this.isAdd);
+            },
+            customerEvent() {
+                this.$emit('customerEvent', this.isAdd);
             }
         }
     };
