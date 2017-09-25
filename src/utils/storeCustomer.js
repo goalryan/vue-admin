@@ -77,11 +77,8 @@ export default {
         return JSON.parse(window.localStorage.getItem(
             CUS_DOC_NO_LIST || "[]"))
     },
-    fetchCustomersByPhone(phone) {
-
-    },
     initCustomers(customers) {
-        window.localStorage.setItem(CUS_DOC_NO_LIST, JSON.stringify(customers));
+        window.localStorage.setItem(CUS_DOC_NO_LIST, JSON.stringify([]));
     },
     saveCustomers(customers) {
         window.localStorage.setItem(CUS_DOC_NO_LIST, JSON.stringify(customers));
