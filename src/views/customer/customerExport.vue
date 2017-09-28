@@ -95,11 +95,13 @@
                 });
                 require.ensure([], () => {
                     const {export_json_to_excel} = require('../../utils/ExportExcel');
-                    const tHeader = ['订单编号', '收件人姓名（必填）', '收件人手机（二选一）', '收件人电话（二选一）', '收件人地址（必填）'];
-                    const filterVal = ['zeroCol', 'name', 'phone', 'zeroCol', 'address'];
+                    const tHeader = ['订单编号', '收件人姓名（必填）', '收件人手机（二选一）', '收件人电话（二选一）', '收件人地址（必填）', '商品信息', '寄件人姓名', '寄件人手机（二选一）', '寄件人电话（二选一）', '寄件人地址'];
+                    const filterVal = ['zeroCol', 'name', 'phone', 'zeroCol', 'address', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol'];
                     const list = this.exportCustomers;
                     const data = this.formatJson(filterVal, list);
                     export_json_to_excel(tHeader, data, '收件人信息');//自定义打印导入数据模板
+
+
                 })
             },
             formatJson(filterVal, jsonData) {

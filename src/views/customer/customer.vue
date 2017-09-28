@@ -23,7 +23,7 @@
             <el-table-column label="操作" align="center" width="150">
                 <template scope="scope">
                     <el-button type="primary" size="small" @click="editCustomer(scope.row)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="deleteCustomer(scope.$index)">删除</el-button>
+                    <el-button type="danger" size="small" @click="deleteCustomer(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -88,7 +88,8 @@
                 this.customer = JSON.parse(JSON.stringify(customer));
                 this.showCustomerDialog = true;
             },
-            deleteCustomer(index) {
+            deleteCustomer(id) {
+                let index = this.customers.findIndex(item => item.id === id);
                 this.doConfirm(() => {
                     this.customers.splice(index, 1);
                     this.filterCustomers();
