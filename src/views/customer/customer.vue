@@ -18,7 +18,7 @@
             <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
             </el-table-column>
             <el-table-column prop="name" label="姓名" width="80" sortable></el-table-column>
-            <el-table-column prop="phone" label="手机号" width="100" sortable></el-table-column>
+            <el-table-column prop="phone" label="手机号" width="120" sortable></el-table-column>
             <el-table-column prop="address" label="地址" sortable></el-table-column>
             <el-table-column label="操作" align="center" width="150">
                 <template scope="scope">
