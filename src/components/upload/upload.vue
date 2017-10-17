@@ -91,6 +91,7 @@
        * ==============
        * */
       postData(file) {
+          debugger;
         this.uploading = true;
         const formData = new FormData();
         formData.append('file', file);

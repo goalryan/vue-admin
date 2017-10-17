@@ -1,8 +1,8 @@
 import Login from './views/Login.vue'
+import Test from  './views/Test.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Main from './views/Main.vue'
-import user from './views/nav1/user.vue'
 import Bill from './views/bill/bill.vue'
 import BillDetail from './views/bill/billDetail.vue'
 import Customer from './views/customer/customer.vue'
@@ -10,6 +10,12 @@ import CustomerExport from './views/customer/customerExport.vue'
 import echarts from './views/charts/echarts.vue'
 
 let routes = [
+    {
+        path: '/test',
+        component: Test,
+        name: '',
+        hidden: true
+    },
     {
         path: '/login',
         component: Login,
@@ -70,13 +76,13 @@ let routes = [
         name: 'Charts',
         iconCls: 'fa fa-bar-chart',
         children: [
-            {path: '/echarts', component: echarts, name: '图表'}
+            { path: '/echarts', component: echarts, name: '图表' }
         ]
     },
     {
         path: '*',
         hidden: true,
-        redirect: {path: '/404'}
+        redirect: { path: '/404' }
     }
 ];
 
