@@ -16,7 +16,7 @@ import EcDialog from './dialog';
 // import EcPagination from './pagination';
 // import { EcForm, EcFormItem } from './form';
 // import confirm from './confirm';
-// import EcUpload from './upload';
+import EcUpload from './upload';
 // import EcPreviewImage from './previewImage';
 // import EcOperateMenu from './operateMenu';
 // import EcNumber from './number';
@@ -44,7 +44,7 @@ const components = {
     // EcPagination,
     // EcForm,
     // EcFormItem,
-    // EcUpload,
+    EcUpload,
     // EcPreviewImage,
     // EcOperateMenu,
     // EcNumber,

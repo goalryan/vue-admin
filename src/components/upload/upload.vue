@@ -2,7 +2,7 @@
   <div class="upload-wrap" @click="handleClick">
     <slot>
       <div class="upload-text">
-        <i :class="{'icon-add':!uploading,'icon-loading':uploading}"></i>
+        <el-button size="small" type="primary">上传<i :class="{'el-icon-upload upload-icon--right':!uploading,'icon-loading upload-icon--right':uploading}"></i></el-button>
       </div>
     </slot>
     <input type="file" :value="fileData" ref="input" name="file" @change="fileChanged" class="upload-file" :multiple="multiple">
