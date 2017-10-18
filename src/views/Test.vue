@@ -9,8 +9,6 @@
 
 <script>
 
-    import qs from 'qs'
-
     export default {
         data() {
             return {
@@ -21,15 +19,14 @@
 
         },
         methods: {
-            importAddress(){
+            importAddress() {
                 const obj = {
-                    "Id": "123",
-                    "CustomerId": "sss",
-                    "Receiver": "ssfdfa",
-                    "Phone": "123",
-                    "DeliveryAddress": "深圳"
+                    Id: "123",
+                    CustomerId: "sss",
+                    Receiver: "ssfdfa",
+                    Phone: "123",
+                    DeliveryAddress: "深圳"
                 }
-
                 this.$http.post('/api/address', obj)
                     .then((response => {
                         console.log(response);
@@ -38,7 +35,7 @@
                         console.log(error);
                     });
             },
-            importData(){
+            importData() {
                 this.$http.get('/api/address')
                     .then((response => {
                         console.log(response);
@@ -47,7 +44,7 @@
                         console.log(error);
                     });
             },
-            getData(val){
+            getData(val) {
                 console.log(val);
             }
 

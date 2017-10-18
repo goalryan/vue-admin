@@ -15,7 +15,7 @@ export default function plugin(Vue, axios, qs) {
     }
 
     //响应时间
-    axios.defaults.timeout = 5000;
+    // axios.defaults.timeout = 5000;
     //配置请求头
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
     //配置接口地址
@@ -34,14 +34,12 @@ export default function plugin(Vue, axios, qs) {
     });
 
     axios.interceptors.response.use((response) => {
-        debugger;
         //对响应数据做些事
         if (!response.data.success) {
             return Promise.reject(response);
         }
         return response;
     }, (error) => {
-        debugger;
         console.log("网络异常");
         return Promise.reject(error);
     });
