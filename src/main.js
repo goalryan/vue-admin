@@ -16,9 +16,8 @@ import './assets/index.less';
 Vue.use(ElementUI)
 Vue.use(EcUI)
 Vue.use(VueRouter)
-Vue.use(VueAxios, Axios);
+Vue.use(VueAxios, Axios, Qs);
 Vue.use(VueQueryString, Qs);
-
 
 
 const router = new VueRouter({
@@ -31,17 +30,17 @@ router.beforeEach((to, from, next) => {
         sessionStorage.removeItem('user');
     }
     let user = JSON.parse(sessionStorage.getItem('user'));
-    if (!user && to.path != '/login') {
-        next({ path: '/login' });
-    } else {
-        next()
-    }
-
-    // if (!user && to.path != '/test') {
-    //     next({ path: '/test' });
+    // if (!user && to.path != '/login') {
+    //     next({ path: '/login' });
     // } else {
     //     next()
     // }
+
+    if (!user && to.path != '/test') {
+        next({ path: '/test' });
+    } else {
+        next()
+    }
 })
 
 new Vue({

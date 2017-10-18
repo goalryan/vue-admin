@@ -1,8 +1,8 @@
 /**
- * Created by lucas on 2017/8/4.
+ * Created by liushaojun on 2017/8/4.
  */
 
-export default function plugin(Vue, axios) {
+export default function plugin(Vue, axios, qs) {
     const VueAxios = Vue;
 
     if (plugin.installed) {
@@ -13,74 +13,36 @@ export default function plugin(Vue, axios) {
         console.error('You have to install axios');
         return;
     }
-    /**
-     * 全局ajax请求的loading效果
-     * */
-    let ajaxLinks = 0;
-    let ajaxLoading = false;
-    let loadDiv = document.getElementById('ecAjaxLoading');
 
-    const showAjaxLoading = () => {
-        ajaxLinks += 1;
-        if (!loadDiv) {
-            loadDiv = document.createElement('div');
-            loadDiv.className = 'loading-mask';
-            loadDiv.id = 'ecAjaxLoading';
-            loadDiv.innerHTML = '<div class="ball-pulse"> <div></div> <div></div> <div></div></div>';
-            if (ajaxLinks && !ajaxLoading) {
-                document.body.appendChild(loadDiv);
-                ajaxLoading = true;
-            }
-        } else if (ajaxLinks && !ajaxLoading) {
-            loadDiv.style.display = 'flex';
-            ajaxLoading = true;
-        }
-    };
+    //响应时间
+    axios.defaults.timeout = 5000;
+    //配置请求头
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+    //配置接口地址
+    axios.defaults.baseURL = 'http://localhost:5000';
 
-    const closeAjaxLoading = () => {
-        ajaxLinks -= 1;
-        if (ajaxLinks <= 0) {
-            if (loadDiv) {
-                loadDiv.style.display = 'none';
-            }
-            ajaxLoading = false;
-            ajaxLinks = 0;
-        }
-    };
 
     axios.interceptors.request.use((config) => {
-        showAjaxLoading();
+        //在发送请求之前做某件事
+        if (config.method === 'post') {
+            config.data = qs.stringify(config.data);
+        }
         return config;
+    }, (error) => {
+        console.log("错误的传参");
+        return Promise.reject(error);
     });
 
     axios.interceptors.response.use((response) => {
-        const { success, errCode, errMsg } = response.data;
-        if (!success) {
-            if (errCode === 'unlogin') {
-                window.location.href = '/ierp/logout';
-            } else if (errCode === 'exception') {
-                Vue.prototype.$ecConfirm({
-                    message: '网络错误，请刷新后重试',
-                    type: 'warning',
-                    showCancelButton: false,
-                    confirmButtonText: '刷新'
-                }).then(
-                    () => {
-                        window.location.reload();
-                    },
-                    () => {
-                    }
-                );
-            } else {
-                Vue.prototype.$message.error(errMsg === undefined || errMsg === null || errMsg === '' ? '服务器异常' : errMsg);
-            }
+        debugger;
+        //对响应数据做些事
+        if (!response.data.success) {
+            return Promise.reject(response);
         }
-
-        closeAjaxLoading();
-
         return response;
     }, (error) => {
-        closeAjaxLoading();
+        debugger;
+        console.log("网络异常");
         return Promise.reject(error);
     });
 
