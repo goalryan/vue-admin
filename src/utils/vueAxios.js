@@ -23,10 +23,10 @@ export default function plugin(Vue, axios, qs) {
 
 
     axios.interceptors.request.use((config) => {
-        //在发送请求之前做某件事
-        if (config.method === 'post') {
-            config.data = qs.stringify(config.data);
-        }
+        //在发送请求之前做某件事（以表单形式提交数据）
+        // if (config.method === 'post') {
+        //     config.data = qs.stringify(config.data);
+        // }
         return config;
     }, (error) => {
         console.log("错误的传参");
