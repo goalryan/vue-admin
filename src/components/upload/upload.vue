@@ -95,7 +95,7 @@
              * */
             postData(file) {
                 //修改了这个状态，要还原为true
-                this.uploading = false;
+                this.uploading = true;
                 const formData = new FormData();
                 formData.append('file', file);
                 this.$http.post(this.action, formData).then(
