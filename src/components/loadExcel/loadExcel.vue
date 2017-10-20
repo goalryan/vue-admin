@@ -7,30 +7,23 @@
                 </el-button>
             </div>
         </slot>
-        <input type="file" :value="fileData" ref="input" name="file" @change="fileChanged" class="upload-file"
-               :multiple="multiple">
+        <input type="file" :value="fileData" ref="input" name="file" @change="fileChanged" class="upload-file">
     </div>
 </template>
 
 <script>
+    import XLSX from 'xlsx';
+
     export default {
-        name: 'EcUpload',
+        name: 'EcLoadExcel',
         props: {
             accept: {
                 type: String,
-                default: '.csv, .txt, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .wps, .rtf, .pdf, .xmind, .rp,.rar, .zip, .gz, .z, .7z,.bmp, .gif, .jpg, .jpeg, .pic, .png, .tif,.ai, .psd, .cdr,.svg'
-            },
-            multiple: {
-                type: Boolean,
-                default: false
+                default: '.xls, .xlsx'
             },
             size: {
                 type: Number,
                 default: 5 * 1024 * 1024
-            },
-            action: {
-                type: String,
-                require: true
             }
         },
         data() {
@@ -47,7 +40,7 @@
             fileChanged(e) {
                 let files = Array.prototype.slice.call(e.target.files);
                 if (files.length === 0) return;
-                if (this.multiple && files.length > 1) {
+                if (files.length > 1) {
                     if (!this.checkExt(files)) {
                         this.$ecConfirm({
                             message: '您所选的文件中，有不支持的文件格式',
@@ -65,7 +58,7 @@
                         return;
                     }
                     files.forEach((item) => {
-                        this.postData(item);
+                        this.loadData(item);
                     });
                 } else {
                     files = e.target.files[0];
@@ -84,7 +77,7 @@
                             type: 'warning'
                         });
                     } else {
-                        this.postData(files);
+                        this.loadData(files);
                     }
                 }
             },
@@ -93,26 +86,39 @@
              * 上传文件
              * ==============
              * */
-            postData(file) {
+            loadData(file) {
                 //修改了这个状态，要还原为true
                 this.uploading = false;
-                const formData = new FormData();
-                formData.append('file', file);
-                this.$http.post(this.action, formData).then(
-                    (res) => {
-                        const { success, data, errMsg } = res.data;
-                        this.uploading = false;
-                        if (success) {
-                            data.fileName = file.name;
-                            this.$emit('success', data);
-                        } else {
-                            this.$message({
-                                message: errMsg,
-                                type: 'error'
-                            });
+                var fileReader = new FileReader();
+                var jsonData = []; // 存储获取到的数据
+                var _this = this;
+                fileReader.onload = function (ev) {
+                    try {
+                        var data = ev.target.result,
+                            workbook = XLSX.read(data, {
+                                type: 'binary'
+                            }) // 以二进制流方式读取得到整份excel表格对象
+
+                    } catch (e) {
+                        console.log('文件类型不正确');
+                        return;
+                    }
+
+                    // 表格的表格范围，可用于判断表头是否数量是否正确
+                    var fromTo = '';
+                    // 遍历每张表读取
+                    for (var sheet in workbook.Sheets) {
+                        if (workbook.Sheets.hasOwnProperty(sheet)) {
+                            fromTo = workbook.Sheets[sheet]['!ref'];
+                            console.log(fromTo);
+                            jsonData = jsonData.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
+                            break; // 如果只取第一张表，就取消注释这行
                         }
                     }
-                );
+                    _this.$emit('success', jsonData);
+                };
+                // 以二进制方式打开文件
+                fileReader.readAsBinaryString(file);
             },
             /**
              * ==============

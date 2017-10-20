@@ -21,7 +21,6 @@ export default function plugin(Vue, axios, qs) {
     //配置接口地址
     axios.defaults.baseURL = 'http://localhost:5000';
 
-
     axios.interceptors.request.use((config) => {
         //在发送请求之前做某件事（以表单形式提交数据）
         // if (config.method === 'post') {
@@ -38,9 +37,10 @@ export default function plugin(Vue, axios, qs) {
         if (!response.data.success) {
             return Promise.reject(response);
         }
-        return response;
+        return response.data;
     }, (error) => {
         console.log("网络异常");
+        // this.$message({message: error, type: 'error'});
         return Promise.reject(error);
     });
 

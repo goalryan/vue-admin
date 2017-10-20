@@ -5,17 +5,18 @@ import EcHeader from './frame/header';
 import EcContainer from './frame/container';
 import EcSideBar from './frame/sideBar';
 import EcContainerItem from './frame/containerItem';
-import { EcPage, EcPageItem } from './page';
+import {EcPage, EcPageItem} from './page';
 import EcButton from './button';
 import EcText from './text';
 import EcCrystalButton from './crystalButton';
 import EcDialog from './dialog';
+import EcLoadExcel from './loadExcel';
 // import { EcTab, EcTabs } from './tab';
 // import { EcMenu, EcSubmenu, EcMenuItem } from './menu';
 // import EcSideMenu from './sideMenu';
 // import EcPagination from './pagination';
 // import { EcForm, EcFormItem } from './form';
-// import confirm from './confirm';
+import confirm from './confirm';
 import EcUpload from './upload';
 // import EcPreviewImage from './previewImage';
 // import EcOperateMenu from './operateMenu';
@@ -35,6 +36,7 @@ const components = {
     EcText,
     EcCrystalButton,
     EcDialog,
+    EcLoadExcel,
     // EcTab,
     // EcTabs,
     // EcMenu,
@@ -65,5 +67,5 @@ const install = (Vue) => {
     Vue.prototype.$ecConfirm = confirm;
 };
 
-export default { install };
+export default {install};
 

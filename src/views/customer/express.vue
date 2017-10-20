@@ -7,8 +7,7 @@
                               placeholder="输入单号/手机号/姓名" size="small"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <ec-upload :multiple="false" :action="action" @success="importEnd"></ec-upload>
-                    <!--<el-button size="small" type="primary" @click="importExpress">导入快递单</el-button>-->
+                    <ec-load-excel @success="postData"></ec-load-excel>
                 </el-form-item>
             </el-form>
         </template>
@@ -45,11 +44,11 @@
                 searchValue: '',
                 expressList: [],
                 express: {},
-                action:"/api/express/import"
+                action: "/api/express/import"
             }
         },
         mounted() {
-//            this.fetchExpressList();
+            this.fetchExpressList();
         },
         filters: {},
         methods: {
@@ -59,7 +58,11 @@
             fetchExpressList() {
                 this.$http.get('/api/express')
                     .then(res => {
-                        this.expressList = res.result.data;
+                        if (res.success) {
+                            this.expressList = res.result.data;
+                        } else {
+                            this.$message({message: res.msg, type: 'error'});
+                        }
                     });
                 this.searchExpress = this.expressList;
             },
@@ -80,10 +83,29 @@
                         item.receiver.indexOf(this.searchValue) >= 0 || item.phone.indexOf(this.searchValue) >= 0
                 });
             },
-            importEnd() {
-
-            },
-
+            postData(data) {
+                let params = [];
+                for (let i = 0; i < data.length; i = i + 1) {
+                    const item = data[i];
+                    if (item.运单号 == '')
+                        continue;
+                    params.push({
+                        id: item.运单号,
+                        receiver: item.收件人姓名,
+                        phone: item.收件人手机,
+                        deliveryAddress: item.所在省份 + item.所在城市 + item.所在地区 + item.详细地址,
+                        importTime: item.打印时间
+                    })
+                }
+                this.$http.post('/api/express/import', params)
+                    .then(res => {
+                        if (res.success) {
+                            this.$message({message: '导入成功', type: 'success'});
+                        } else {
+                            this.$message({message: res.msg, type: 'error'});
+                        }
+                    });
+            }
         }
     }
 
