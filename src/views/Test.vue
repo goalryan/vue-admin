@@ -5,7 +5,7 @@
         <el-button type="small" @click="updateAddress">Update</el-button>
         <el-button type="small" @click="deleteAddress">Delete</el-button>
         <el-button type="small" @click="importAddress">Import</el-button>
-        <ec-upload :multiple="false" @action="getAddress" @success="getData"></ec-upload>
+        <ec-upload :multiple="false" action="/api/address/express" @success="getData"></ec-upload>
     </ec-container-item>
 
 </template>
@@ -84,7 +84,9 @@
                         console.log(error);
                     });
             },
+            importExcel(){
 
+            },
             getData(val) {
                 console.log(val);
             }

@@ -119,7 +119,8 @@
             },
             filterAddress() {
                 this.searchAddress = this.addressList.filter((item) => {
-                    return item.receiver.indexOf(this.searchValue) >= 0 || item.phone.indexOf(this.searchValue) >= 0
+                    return item.receiver.indexOf(this.searchValue) >= 0
+                        || item.phone.indexOf(this.searchValue) >= 0 || item.memo.indexOf(this.searchValue) >= 0
                 });
             },
             exportAddress() {
