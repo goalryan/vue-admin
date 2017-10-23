@@ -12,18 +12,18 @@
             </el-form>
         </template>
 
-        <el-table :data="searchExpress" highlight-current-row>
+        <el-table :data="searchExpress" highlight-current-row height="500">
             <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="id" label="单号" width="80" sortable></el-table-column>
+            <el-table-column prop="id" label="单号" width="180" sortable></el-table-column>
             <el-table-column prop="receiver" label="姓名" width="80" sortable></el-table-column>
             <el-table-column prop="phone" label="手机号" width="120" sortable></el-table-column>
             <el-table-column prop="deliveryAddress" label="地址" sortable></el-table-column>
-            <el-table-column label="操作" align="center" width="150">
-                <template scope="scope">
-                    <el-button type="danger" size="small" @click="deleteExpress(scope.row.id)">删除</el-button>
-                </template>
-            </el-table-column>
+            <!--<el-table-column label="操作" align="center" width="150">-->
+                <!--<template scope="scope">-->
+                    <!--<el-button type="danger" size="small" @click="deleteExpress(scope.row.id)">删除</el-button>-->
+                <!--</template>-->
+            <!--</el-table-column>-->
         </el-table>
     </ec-container-item>
 
@@ -60,11 +60,11 @@
                     .then(res => {
                         if (res.success) {
                             this.expressList = res.result.data;
+                            this.searchExpress = this.expressList;
                         } else {
                             this.$message({message: res.msg, type: 'error'});
                         }
                     });
-                this.searchExpress = this.expressList;
             },
             clearFilter() {
                 this.searchValue = '';
