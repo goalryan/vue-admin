@@ -2,24 +2,28 @@
     <ec-container-item>
         <template slot="head">
             <el-button size="small" type="primary" @click="addBill()">添加账单</el-button>
-            <!--<el-button size="small" type="primary" @click="delAllBill()">删除账单</el-button>-->
         </template>
 
         <el-table :data="bills" highlight-current-row>
             <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="docNo" label="单号" sortable>
+            <el-table-column prop="docNo" label="单号" width="160" sortable>
                 <template scope="scope">
                     <ec-text type="primary" @click="showBill(scope.row.docNo)">{{scope.row.docNo}}</ec-text>
                 </template>
             </el-table-column>
-            <!--<el-table-column label="操作" align="center" width="150">-->
-            <!--<template scope="scope">-->
-            <!--<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
-            <!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>-->
-            <!--</template>-->
-            <!--</el-table-column>-->
+            <el-table-column prop="taxRate" label="汇率" width="100"/>
+            <el-table-column prop="memo" label="备注"/>
+            <el-table-column label="操作" align="center" width="150">
+                <template scope="scope">
+                    <el-button type="primary" size="small" @click="editBill(scope.row.docNo)">编辑</el-button>
+                    <el-button type="danger" size="small" @click="deleteBill(scope.$index, scope.row.docNo)">删除
+                    </el-button>
+                </template>
+            </el-table-column>
         </el-table>
+        <add-bill-dialog :show.sync="showAddBillDialog" :docNo="selectedDocNo"
+                         @confirm="addBillSuccess"></add-bill-dialog>
         <router-view @refresh="refresh"></router-view>
     </ec-container-item>
 
@@ -27,55 +31,73 @@
 
 <script>
     import MessageMixin from '../../utils/MessageMixin.js';
+    import AddBillDialog from './billAdd';
     import store from '../../utils/storeBill.js';
     import billCommon from './billCommon';
+
     export default {
         mixins: [MessageMixin],
+        components: {
+            AddBillDialog
+        },
         data() {
             return {
-                bills: []
+                bills: [],
+                showAddBillDialog: false,
+                selectedDocNo: ''
             }
         },
-        mounted(){
+        mounted() {
             this.fetchBillList();
         },
         methods: {
-            refresh(){
+            refresh() {
                 this.fetchBillList();
             },
-            fetchBillList(){
-                this.bills = store.fetchBillList();
-                console.log(this.bills);
+            fetchBillList() {
+                this.$http.get('/api/bill')
+                    .then(res => {
+                        if (res.success) {
+                            this.bills = res.result;
+                        } else {
+                            this.$message({message: res.msg, type: 'error'});
+                        }
+                    });
             },
-            addBill(){
-                const docNo = this.checkExistDocNo();
-                if (docNo === '') {
-                    this.$router.push({
-                        name: 'billDetail',
-                        params: {status: 'add'}
-                    })
-                } else {
-                    this.showBill(docNo);
-                }
+            addBill() {
+                this.selectedDocNo = '';
+                this.showAddBillDialog = true;
+//                this.$router.push({
+//                    name: 'billDetail',
+//                    params: {status: 'add'}
+//                })
             },
-            showBill(docNo){
+            showBill(docNo) {
                 this.$router.push({
                     name: 'billDetail',
                     params: {status: 'show', docNo: docNo}
                 })
             },
-            delAllBill(){
-                this.doConfirm(() => {
-                    store.delAllBill();
-                });
+            editBill(docNo) {
+                this.selectedDocNo = docNo;
+                this.showAddBillDialog = true;
             },
-            checkExistDocNo(){
-                const docNo = billCommon.initBillDocNo();
-                if (this.bills && this.bills.findIndex(item => item.docNo === docNo) > -1) {
-                    return docNo;
-                } else {
-                    return '';
-                }
+            deleteBill(index, docNo) {
+                this.doConfirm(() => {
+                    this.$http.delete('/api/bill/' + docNo)
+                        .then(res => {
+                            if (res.success) {
+                                this.bills.splice(index, 1);
+                                this.$message({message: '删除成功', type: 'success'});
+                            } else {
+                                this.$message({message: res.msg, type: 'error'});
+                            }
+                        });
+                })
+            },
+            addBillSuccess(msg) {
+                this.$message({message: msg, type: 'success'});
+                this.fetchBillList();
             }
         }
     }
