@@ -3,19 +3,18 @@
  */
 import GuidGenerate from '../../utils/GuidGenerate.js';
 
-export default{
-    initCustomer(docNo)
-    {
+export default {
+    initCustomer(docNo) {
         const billCustomerId = GuidGenerate.getAddId();
         return {
             id: billCustomerId,
             docNo: docNo,
             customerId: '',
             customerNickName: '',
-            quantity: '',
-            inTotalPrice: '',
-            outTotalPrice: '',
-            profit: '',
+            quantity: 1,
+            inTotalPrice: 0,
+            outTotalPrice: 0,
+            profit: 0,
             isPaid: false,
             memo: '',
             isAdd: true,
@@ -32,11 +31,11 @@ export default{
             goodsId: '',
             goodsName: '',
             quantity: 1,
-            inUnitPrice: '',
-            outUnitPrice: '',
-            inTotalPrice: '',
-            outTotalPrice: '',
-            profit: '',
+            inUnitPrice: 0,
+            outUnitPrice: 0,
+            inTotalPrice: 0,
+            outTotalPrice: 0,
+            profit: 0,
             isRMB: false,
             positionId: '',
             isAdd: true

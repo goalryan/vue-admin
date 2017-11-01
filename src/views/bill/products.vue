@@ -1,6 +1,6 @@
 <template>
     <el-table
-            :data="products" border :show-summary="false" :stripe="true"
+            :data="goodsList" border :show-summary="false" :stripe="true"
             style="width: 100%">
         <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
         </el-table-column>
@@ -48,8 +48,8 @@
         <el-table-column label="操作" width="160" header-align="center" align="center">
             <template scope="scope" v-if="isEdit">
                 <template v-if="isEdit">
-                    <el-button type="text" @click="addProduct(scope.$index)">添加商品</el-button>
-                    <el-button type="text" @click="delProduct(scope.$index, scope.row)">删除商品</el-button>
+                    <el-button type="text" @click="addGoods(scope.$index)">添加商品</el-button>
+                    <el-button type="text" @click="delGoods(scope.$index, scope.row)">删除商品</el-button>
                 </template>
             </template>
         </el-table-column>
@@ -73,7 +73,7 @@
             billCustomerId: {
                 type: String
             },
-            products: {
+            goodsList: {
                 type: Array,
                 default: []
             },
@@ -88,7 +88,7 @@
         computed: {},
         methods: {
             getSummaries(param) {
-                const { columns, data } = param;
+                const {columns, data} = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -113,14 +113,15 @@
 
                 return sums;
             },
-            addProduct(index){
-                this.products.splice(index + 1, 0, common.initProduct());
+            addGoods(index) {
+                this.goodsList.splice(index + 1, 0, common.initGoods(this.docNo, this.billCustomerId));
             },
-            delProduct(index){
-                if (this.products.length == 1) {
-                    this.$message({ message: '必须保留一个商品', type: 'warning' });
+            delGoods(index) {
+                if (this.goodsList.length == 1) {
+                    this.$message({message: '必须保留一个商品', type: 'warning'});
                 } else {
-                    this.products.splice(index, 1);
+                    this.$http.delete(`api/goods/`)
+                    this.goodsList.splice(index, 1);
                     this.$emit('updateCustomer');
                 }
             },
@@ -132,36 +133,36 @@
                 }
                 this.changeQuantity(index);
             },
-            changeQuantity(index){
+            changeQuantity(index) {
                 this.calculateOutTotalPrice(index);
                 this.calculateInTotalPrice(index);
                 this.calculateProfit(index);
                 this.$emit('updateCustomer');
             },
-            changeInUnitPrice(index){
+            changeInUnitPrice(index) {
                 this.calculateInTotalPrice(index);
                 this.calculateProfit(index);
                 this.$emit('updateCustomer');
             },
-            changeOutUnitPrice(index){
+            changeOutUnitPrice(index) {
                 this.calculateOutTotalPrice(index);
                 this.calculateProfit(index);
                 this.$emit('updateCustomer');
             },
-            calculateInTotalPrice(index){
-                const item = this.products[index];
+            calculateInTotalPrice(index) {
+                const item = this.goodsList[index];
                 if (item.isRMB) {
                     item.inTotalPrice = (item.inUnitPrice * item.quantity).toFixed(0);
                 } else {
                     item.inTotalPrice = (item.inUnitPrice * item.quantity * this.taxRate).toFixed(0);
                 }
             },
-            calculateOutTotalPrice(index){
-                const item = this.products[index];
+            calculateOutTotalPrice(index) {
+                const item = this.goodsList[index];
                 item.outTotalPrice = (item.outUnitPrice * item.quantity).toFixed(0);
             },
-            calculateProfit(index){
-                const item = this.products[index];
+            calculateProfit(index) {
+                const item = this.goodsList[index];
                 item.profit = (item.outTotalPrice - item.inTotalPrice).toFixed(0);
             }
         }
