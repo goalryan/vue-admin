@@ -1,41 +1,45 @@
 /**
  * Created by liushaojun on 2017/9/8.
  */
+import GuidGenerate from '../../utils/GuidGenerate.js';
+
 export default{
-    initBillDocNo() {
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        month = month < 10 ? `0${month}` : `${month}`;
-        let day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-        return `BILL${year}${month}${day}`;
-    },
-    initCustomer()
+    initCustomer(docNo)
     {
+        const billCustomerId = GuidGenerate.getAddId();
         return {
-            id: this.getRandom(),
-            customerName: '',
+            id: billCustomerId,
+            docNo: docNo,
+            customerId: '',
+            customerNickName: '',
             quantity: '',
             inTotalPrice: '',
             outTotalPrice: '',
             profit: '',
             isPaid: false,
-            remark: '',
-            products: [
-                this.initProduct()
+            memo: '',
+            isAdd: true,
+            goodsList: [
+                this.initGoods(docNo, billCustomerId)
             ]
         }
     },
-    initProduct() {
+    initGoods(docNo, billCustomerId) {
         return {
-            name: '',
+            id: GuidGenerate.getAddId(),
+            docNo: docNo,
+            billCustomerId: billCustomerId,
+            goodsId: '',
+            goodsName: '',
             quantity: 1,
             inUnitPrice: '',
             outUnitPrice: '',
             inTotalPrice: '',
             outTotalPrice: '',
             profit: '',
-            isRMB: false
+            isRMB: false,
+            positionId: '',
+            isAdd: true
         };
     },
     getRandom() {

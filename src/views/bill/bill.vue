@@ -1,7 +1,7 @@
 <template>
     <ec-container-item>
         <template slot="head">
-            <el-button size="small" type="primary" @click="addBill()">添加账单</el-button>
+            <el-button type="primary" @click="addBill()">添加账单</el-button>
         </template>
 
         <el-table :data="bills" highlight-current-row>
@@ -16,8 +16,8 @@
             <el-table-column prop="memo" label="备注"/>
             <el-table-column label="操作" align="center" width="150">
                 <template scope="scope">
-                    <el-button type="primary" size="small" @click="editBill(scope.row.docNo)">编辑</el-button>
-                    <el-button type="danger" size="small" @click="deleteBill(scope.$index, scope.row.docNo)">删除
+                    <el-button type="primary" @click="editBill(scope.row.docNo)">编辑</el-button>
+                    <el-button type="danger" @click="deleteBill(scope.$index, scope.row.docNo)">删除
                     </el-button>
                 </template>
             </el-table-column>
@@ -48,34 +48,30 @@
             }
         },
         mounted() {
-            this.fetchBillList();
+            this.fetchData();
         },
         methods: {
             refresh() {
-                this.fetchBillList();
+                this.fetchData();
             },
-            fetchBillList() {
+            fetchData() {
                 this.$http.get('/api/bill')
                     .then(res => {
                         if (res.success) {
                             this.bills = res.result;
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                     });
             },
             addBill() {
                 this.selectedDocNo = '';
                 this.showAddBillDialog = true;
-//                this.$router.push({
-//                    name: 'billDetail',
-//                    params: {status: 'add'}
-//                })
             },
             showBill(docNo) {
                 this.$router.push({
                     name: 'billDetail',
-                    params: {status: 'show', docNo: docNo}
+                    params: { status: 'show', docNo: docNo }
                 })
             },
             editBill(docNo) {
@@ -88,16 +84,16 @@
                         .then(res => {
                             if (res.success) {
                                 this.bills.splice(index, 1);
-                                this.$message({message: '删除成功', type: 'success'});
+                                this.$message({ message: '删除成功', type: 'success' });
                             } else {
-                                this.$message({message: res.msg, type: 'error'});
+                                this.$message({ message: res.msg, type: 'error' });
                             }
                         });
                 })
             },
             addBillSuccess(msg) {
-                this.$message({message: msg, type: 'success'});
-                this.fetchBillList();
+                this.$message({ message: msg, type: 'success' });
+                this.fetchData();
             }
         }
     }

@@ -8,12 +8,11 @@ import Qs from 'qs'
 import VueAxios from './utils/vueAxios'
 import VueQueryString from './utils/vueQueryString';
 import routes from './routes'
-
-import 'element-ui/lib/theme-default/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 import './assets/index.less';
 
-Vue.use(ElementUI)
+Vue.use(ElementUI,{ size: 'mini' })
 Vue.use(EcUI)
 Vue.use(VueRouter)
 Vue.use(VueAxios, Axios, Qs);

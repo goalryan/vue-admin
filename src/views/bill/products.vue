@@ -4,29 +4,29 @@
             style="width: 100%">
         <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
         </el-table-column>
-        <el-table-column label="商品名称">
+        <el-table-column label="商品名称" header-align="center" align="center">
             <template scope="scope">
-                <el-input v-if="isEdit" v-model="scope.row.name" size="small" placeholder="请输入商品名称"></el-input>
-                <p v-else="">{{scope.row.name}}</p>
+                <el-input v-if="isEdit" v-model="scope.row.goodsName" placeholder="请输入商品名称"></el-input>
+                <p v-else="">{{scope.row.goodsName}}</p>
             </template>
         </el-table-column>
         <el-table-column label="数量">
             <template scope="scope">
-                <el-input v-if="isEdit" v-model="scope.row.quantity" size="small" placeholder="请输入数量"
+                <el-input v-if="isEdit" v-model="scope.row.quantity" placeholder="请输入数量"
                           @change="changeQuantity(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.quantity}}</p>
             </template>
         </el-table-column>
         <el-table-column label="成本价">
             <template scope="scope">
-                <el-input v-if="isEdit" v-model="scope.row.inUnitPrice" size="small" placeholder="请输入成本价"
+                <el-input v-if="isEdit" v-model="scope.row.inUnitPrice" placeholder="请输入成本价"
                           @change="changeInUnitPrice(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.inUnitPrice}}</p>
             </template>
         </el-table-column>
         <el-table-column label="币种" width="60" header-align="center" align="center">
             <template scope="scope">
-                <el-button :disabled="!isEdit" size="small" :type="scope.row.isRMB ? 'danger' : 'primary'"
+                <el-button :disabled="!isEdit" :type="scope.row.isRMB ? 'danger' : 'primary'"
                            @click="changeCurrency(scope.$index,scope.row)">
                     {{scope.row.isRMB ? 'RMB' : 'HKD'}}
                 </el-button>
@@ -34,7 +34,7 @@
         </el-table-column>
         <el-table-column prop="outUnitPrice" label="卖出价(人民币)">
             <template scope="scope">
-                <el-input v-if="isEdit" v-model="scope.row.outUnitPrice" size="small" placeholder="请输入成本价"
+                <el-input v-if="isEdit" v-model="scope.row.outUnitPrice" placeholder="请输入成本价"
                           @change="changeOutUnitPrice(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.outUnitPrice}}</p>
             </template>
@@ -48,8 +48,8 @@
         <el-table-column label="操作" width="160" header-align="center" align="center">
             <template scope="scope" v-if="isEdit">
                 <template v-if="isEdit">
-                    <el-button size="small" type="text" @click="addProduct(scope.$index)">添加商品</el-button>
-                    <el-button size="small" type="text" @click="delProduct(scope.$index, scope.row)">删除商品</el-button>
+                    <el-button type="text" @click="addProduct(scope.$index)">添加商品</el-button>
+                    <el-button type="text" @click="delProduct(scope.$index, scope.row)">删除商品</el-button>
                 </template>
             </template>
         </el-table-column>
@@ -66,6 +66,12 @@
             isEdit: {
                 type: Boolean,
                 default: false
+            },
+            docNo: {
+                type: String
+            },
+            billCustomerId: {
+                type: String
             },
             products: {
                 type: Array,
@@ -112,10 +118,7 @@
             },
             delProduct(index){
                 if (this.products.length == 1) {
-                    // this.$message({message: '恭喜你，这是一条成功消息', type: 'success'});
                     this.$message({ message: '必须保留一个商品', type: 'warning' });
-                    // this.$message({message: '恭喜你，这是一条成功消息', type: 'error'});
-                    // this.$message({message: '恭喜你，这是一条成功消息'});
                 } else {
                     this.products.splice(index, 1);
                     this.$emit('updateCustomer');
