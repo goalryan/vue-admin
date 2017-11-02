@@ -20,9 +20,9 @@
             <el-table-column prop="phone" label="手机号" width="120" sortable></el-table-column>
             <el-table-column prop="deliveryAddress" label="地址" sortable></el-table-column>
             <!--<el-table-column label="操作" align="center" width="150">-->
-                <!--<template scope="scope">-->
-                    <!--<el-button type="danger" size="small" @click="deleteExpress(scope.row.id)">删除</el-button>-->
-                <!--</template>-->
+            <!--<template scope="scope">-->
+            <!--<el-button type="danger" size="small" @click="deleteExpress(scope.row.id)">删除</el-button>-->
+            <!--</template>-->
             <!--</el-table-column>-->
         </el-table>
     </ec-container-item>
@@ -59,7 +59,7 @@
                 this.$http.get('/api/express')
                     .then(res => {
                         if (res.success) {
-                            this.expressList = res.result.data;
+                            this.expressList = res.data;
                             this.searchExpress = this.expressList;
                         } else {
                             this.$message({message: res.msg, type: 'error'});

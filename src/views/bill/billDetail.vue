@@ -28,9 +28,12 @@
                                          v-model="scope.row.customerNickName"
                                          :fetch-suggestions="querySearchAsync"
                                          placeholder="请输入客户名称"
+                                         @onblur="checkExistCustomer"
                                          @select="handleSelect"></el-autocomplete>
                         <p v-else="">{{scope.row.customerNickName}}</p>
                     </template>
+                </el-table-column>
+                <el-table-column label="收货地址" prop="quantity" header-align="right" align="right">
                 </el-table-column>
                 <el-table-column label="数量" prop="quantity" header-align="right" align="right">
                 </el-table-column>
@@ -138,16 +141,16 @@
                 this.isEdit = false;
             },
             fetchData() {
-                const queryData = { docNo: this.bill.docNo };
-                this.$http.get(`/api/bill/detail`, { params: queryData })
+                const queryData = {docNo: this.bill.docNo};
+                this.$http.get(`/api/bill/detail`, {params: queryData})
                     .then(res => {
                         if (res.success) {
-                            this.bill = res.result;
+                            this.bill = res.data;
                             if (this.bill.customerList.length === 0) {
                                 this.bill.customerList.push(billCommon.initCustomer(this.bill.docNo));
                             }
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
                     });
             },
@@ -186,7 +189,7 @@
                 });
             },
             getSummaries(param) {
-                const { columns, data } = param;
+                const {columns, data} = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -255,11 +258,12 @@
                     cb([]);
                     return;
                 }
-                const queryData = { nickName: key.trim().toLowerCase() };
-                this.$http.get(`/api/customer/search`, { params: queryData })
+                const queryData = {nickName: key.trim().toLowerCase()};
+                this.$http.get(`/api/customer/search`, {params: queryData})
                     .then(res => {
                         if (res.success) {
-                            cb(res.result);
+                            billCommon.bindSearchKey(key, res.data, this.currentRow);
+                            cb(res.data);
                         } else {
                             cb([]);
                         }
@@ -268,15 +272,18 @@
             handleSelect(item) {
                 this.currentRow.customerId = item.id;
             },
+            checkExistCustomer() {
+                //检查是否存在相同的客户
+            },
             saveBill() {
                 this.lock = true;
                 this.$http.post('/api/bill/save', this.bill)
                     .then(res => {
                         if (res.success) {
                             this.saveSuccess();
-                            this.$message({ message: '保存成功', type: 'success' });
+                            this.$message({message: '保存成功', type: 'success'});
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
                         this.lock = false;
                     })
@@ -287,16 +294,16 @@
             },
             deleteCustomer(index) {
                 if (this.bill.customerList.length === 1) {
-                    this.$message({ message: '必须保留一个客户', type: 'warning' });
+                    this.$message({message: '必须保留一个客户', type: 'warning'});
                     return;
                 }
                 this.doConfirm(() => {
-                    this.$http.delete(`api/billCustomer/${this.customerList[index].id}`)
+                    this.$http.delete(`api/billCustomer/${this.bill.customerList[index].id}`)
                         .then(res => {
                             if (res.success) {
                                 this.bill.customerList.splice(index, 1);
                             } else {
-                                this.$message({ message: res.msg, type: 'error' });
+                                this.$message({message: res.msg, type: 'error'});
                             }
                         })
                 }, `确定删除客户【${this.bill.customerList[index].customerNickName}】?`)

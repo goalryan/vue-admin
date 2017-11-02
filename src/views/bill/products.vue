@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    import common from './billCommon.js';
+    import billCommon from './billCommon.js';
 
     export default {
         components: {},
@@ -95,7 +95,7 @@
         computed: {},
         methods: {
             getSummaries(param) {
-                const { columns, data } = param;
+                const {columns, data} = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -121,11 +121,11 @@
                 return sums;
             },
             addGoods(index) {
-                this.goodsList.splice(index + 1, 0, common.initGoods(this.docNo, this.billCustomerId));
+                this.goodsList.splice(index + 1, 0, billCommon.initGoods(this.docNo, this.billCustomerId));
             },
             delGoods(index) {
                 if (this.goodsList.length == 1) {
-                    this.$message({ message: '必须保留一个商品', type: 'warning' });
+                    this.$message({message: '必须保留一个商品', type: 'warning'});
                     return;
                 }
                 this.$http.delete(`api/billGoods/${this.goodsList[index].id}`)
@@ -134,11 +134,11 @@
                             this.goodsList.splice(index, 1);
                             this.$emit('updateCustomer');
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
                     })
             },
-            rowClick(row, event, column){
+            rowClick(row, event, column) {
                 this.currentRow = row;
             },
             querySearchAsync(key, cb) {
@@ -146,11 +146,12 @@
                     cb([]);
                     return;
                 }
-                const queryData = { name: key.trim().toLowerCase() };
-                this.$http.get(`/api/goods/search`, { params: queryData })
+                const queryData = {name: key.trim().toLowerCase()};
+                this.$http.get(`/api/goods/search`, {params: queryData})
                     .then(res => {
                         if (res.success) {
-                            cb(res.result);
+                            billCommon.bindSearchKey(key, res.data, this.currentRow);
+                            cb(res.data);
                         } else {
                             cb([]);
                         }
@@ -158,7 +159,6 @@
             },
             handleSelect(item) {
                 this.currentRow.goodsId = item.id;
-                console.log(this.currentRow);
             },
             changeCurrency(index, row) {
                 if (!row.isRMB) {

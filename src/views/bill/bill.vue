@@ -58,7 +58,7 @@
                 this.$http.get('/api/bill')
                     .then(res => {
                         if (res.success) {
-                            this.bills = res.result;
+                            this.bills = res.data;
                         } else {
                             this.$message({ message: res.msg, type: 'error' });
                         }
