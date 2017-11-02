@@ -17,8 +17,8 @@
                 </el-table-column>
                 <el-table-column type="expand">
                     <template scope="scope">
-                        <products :docNo="bill.docNo" :billCustomerId="scope.row.bill_customer_id"
-                                  :products="scope.row.goodsList" :taxRate="bill.taxRate" :isEdit="isEdit"
+                        <products :docNo="bill.docNo" :billCustomerId="scope.row.id"
+                                  :goodsList="scope.row.goodsList" :taxRate="bill.taxRate" :isEdit="isEdit"
                                   @updateCustomer="updateCustomer(scope.$index)"></products>
                     </template>
                 </el-table-column>
@@ -74,7 +74,7 @@
         <ec-page-item slot="footer">
             <template v-if="isEdit">
                 <el-button @click="cancel">取消</el-button>
-                <el-button @click="saveBill" type="primary">保存</el-button>
+                <el-button @click="saveBill" type="primary" :disabled="isLock">保存</el-button>
             </template>
             <template v-else="">
                 <el-button @click="close">关闭</el-button>
@@ -88,12 +88,13 @@
     import MessageMixin from '../../utils/MessageMixin.js';
     import Products from './products.vue';
     import billCommon from './billCommon.js';
+
     export default {
         mixins: [MessageMixin],
         components: {
             Products
         },
-        data () {
+        data() {
             return {
                 isEdit: false,
                 bill: {
@@ -107,25 +108,13 @@
                     return row.id;
                 },
                 // 要展开的行，数值的元素是row的key值
-                expands: []
+                expands: [],
+                lock: false
             }
         },
         computed: {
-            /**
-             * 是否最后一行
-             * @param index
-             * @returns {boolean}
-             */
-            isLastRow: function (index) {
-                return index === this.bill.customerList.length - 1;
-            },
-            /**
-             * 是否付款
-             * @param row
-             * @returns {boolean}
-             */
-            isPaid: function (row) {
-                return row.isPaid;
+            isLock() {
+                return this.lock;
             }
         },
         mounted() {
@@ -137,15 +126,15 @@
                 this.$router.back();
                 this.$emit('refresh');
             },
-            edit(){
+            edit() {
                 this.isEdit = true;
             },
-            cancel(){
+            cancel() {
                 this.isEdit = false;
             },
-            fetchData(){
-                const queryData = { docNo: this.bill.docNo };
-                this.$http.get(`/api/bill/detail/`, { params: queryData })
+            fetchData() {
+                const queryData = {docNo: this.bill.docNo};
+                this.$http.get(`/api/bill/detail`, {params: queryData})
                     .then(res => {
                         if (res.success) {
                             this.bill = res.result;
@@ -153,7 +142,7 @@
                                 this.bill.customerList.push(billCommon.initCustomer(this.bill.docNo));
                             }
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
                     });
             },
@@ -192,7 +181,7 @@
                 });
             },
             getSummaries(param) {
-                const { columns, data } = param;
+                const {columns, data} = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -216,10 +205,10 @@
                 });
                 return sums;
             },
-            paymentStatus (row) {
+            paymentStatus(row) {
                 return row.isPaid ? '已收款' : '未收款';
             },
-            operationText (row) {
+            operationText(row) {
                 return row.isPaid ? '取消收款' : '收款';
             },
             /**
@@ -255,26 +244,41 @@
                     }
                 }
             },
-            saveBill(){
+            saveBill() {
+                this.lock = true;
                 this.$http.post('/api/bill/save', this.bill)
                     .then(res => {
+                        debugger;
                         if (res.success) {
-                            this.$message({ message: '保存成功', type: 'success' });
+                            this.setRowStatus();
+                            this.$message({message: '保存成功', type: 'success'});
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
+                        this.lock = false;
+                    })
+                    .catch(e => {
+                        this.lock = false;
                     });
 
             },
             deleteCustomer(index) {
                 if (this.bill.customerList.length === 1) {
-                    this.$message({ message: '必须保留一个客户', type: 'warning' });
+                    this.$message({message: '必须保留一个客户', type: 'warning'});
                     return;
                 }
                 this.doConfirm(() => {
                     this.bill.customerList.splice(index, 1);
                 }, `确定删除客户【${this.bill.customerList[index].customerNickName}】?`)
             },
+            setRowStatus() {
+                this.bill.customerList.forEach(customer => {
+                    customer.isAdd = false;
+                    customer.goodsList.forEach(goods => {
+                        goods.isAdd = false;
+                    })
+                })
+            }
         }
     }
 </script>

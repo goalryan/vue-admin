@@ -2,7 +2,7 @@
  * Created by liushaojun on 2017/8/4.
  */
 
-export default function plugin(Vue, axios, qs) {
+export default function plugin(Vue, axios, qs, v) {
     const VueAxios = Vue;
 
     if (plugin.installed) {
@@ -34,9 +34,9 @@ export default function plugin(Vue, axios, qs) {
 
     axios.interceptors.response.use((response) => {
         //对响应数据做些事
-        if (!response.data.success) {
-            return Promise.reject(response);
-        }
+        // if (!response.data.success) {
+        //     return Promise.reject(response);
+        // }
         return response.data;
     }, (error) => {
         console.log("网络异常");
