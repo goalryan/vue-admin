@@ -24,7 +24,11 @@
                 </el-table-column>
                 <el-table-column label="客户名称">
                     <template scope="scope">
-                        <el-input v-if="isEdit" v-model="scope.row.customerNickName" placeholder="请输入客户名称"></el-input>
+                        <el-autocomplete v-if="isEdit"
+                                         v-model="scope.row.customerNickName"
+                                         :fetch-suggestions="querySearchAsync"
+                                         placeholder="请输入客户名称"
+                                         @select="handleSelect"></el-autocomplete>
                         <p v-else="">{{scope.row.customerNickName}}</p>
                     </template>
                 </el-table-column>
@@ -109,7 +113,8 @@
                 },
                 // 要展开的行，数值的元素是row的key值
                 expands: [],
-                lock: false
+                lock: false,
+                currentRow: {}
             }
         },
         computed: {
@@ -133,8 +138,8 @@
                 this.isEdit = false;
             },
             fetchData() {
-                const queryData = {docNo: this.bill.docNo};
-                this.$http.get(`/api/bill/detail`, {params: queryData})
+                const queryData = { docNo: this.bill.docNo };
+                this.$http.get(`/api/bill/detail`, { params: queryData })
                     .then(res => {
                         if (res.success) {
                             this.bill = res.result;
@@ -142,7 +147,7 @@
                                 this.bill.customerList.push(billCommon.initCustomer(this.bill.docNo));
                             }
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                     });
             },
@@ -181,7 +186,7 @@
                 });
             },
             getSummaries(param) {
-                const {columns, data} = param;
+                const { columns, data } = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -232,6 +237,7 @@
              */
             cellClick(row, column, cell, event) {
                 const colName = column.label;
+                this.currentRow = row;
                 if (colName !== '客户名称' && colName !== '收款' && colName !== '操作') {
                     if (this.expands.length === 0) {
                         this.expands.push(row.id);
@@ -244,16 +250,33 @@
                     }
                 }
             },
+            querySearchAsync(key, cb) {
+                if (key.trim() === '') {
+                    cb([]);
+                    return;
+                }
+                const queryData = { nickName: key.trim().toLowerCase() };
+                this.$http.get(`/api/customer/search`, { params: queryData })
+                    .then(res => {
+                        if (res.success) {
+                            cb(res.result);
+                        } else {
+                            cb([]);
+                        }
+                    })
+            },
+            handleSelect(item) {
+                this.currentRow.customerId = item.id;
+            },
             saveBill() {
                 this.lock = true;
                 this.$http.post('/api/bill/save', this.bill)
                     .then(res => {
-                        debugger;
                         if (res.success) {
-                            this.setRowStatus();
-                            this.$message({message: '保存成功', type: 'success'});
+                            this.saveSuccess();
+                            this.$message({ message: '保存成功', type: 'success' });
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                         this.lock = false;
                     })
@@ -264,18 +287,31 @@
             },
             deleteCustomer(index) {
                 if (this.bill.customerList.length === 1) {
-                    this.$message({message: '必须保留一个客户', type: 'warning'});
+                    this.$message({ message: '必须保留一个客户', type: 'warning' });
                     return;
                 }
                 this.doConfirm(() => {
-                    this.bill.customerList.splice(index, 1);
+                    this.$http.delete(`api/billCustomer/${this.customerList[index].id}`)
+                        .then(res => {
+                            if (res.success) {
+                                this.bill.customerList.splice(index, 1);
+                            } else {
+                                this.$message({ message: res.msg, type: 'error' });
+                            }
+                        })
                 }, `确定删除客户【${this.bill.customerList[index].customerNickName}】?`)
             },
-            setRowStatus() {
+            saveSuccess() {
                 this.bill.customerList.forEach(customer => {
                     customer.isAdd = false;
+                    if (customer.customerId === '') {
+                        customer.customerId = 'updated';
+                    }
                     customer.goodsList.forEach(goods => {
                         goods.isAdd = false;
+                        if (goods.goodsId === '') {
+                            goods.goodsId = 'updated';
+                        }
                     })
                 })
             }

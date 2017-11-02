@@ -1,12 +1,17 @@
 <template>
     <el-table
             :data="goodsList" border :show-summary="false" :stripe="true"
+            @row-click="rowClick"
             style="width: 100%">
         <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
         </el-table-column>
         <el-table-column label="商品名称" header-align="center" align="center">
             <template scope="scope">
-                <el-input v-if="isEdit" v-model="scope.row.goodsName" placeholder="请输入商品名称"></el-input>
+                <el-autocomplete v-if="isEdit"
+                                 v-model="scope.row.goodsName"
+                                 :fetch-suggestions="querySearchAsync"
+                                 placeholder="请输入商品名称"
+                                 @select="handleSelect"></el-autocomplete>
                 <p v-else="">{{scope.row.goodsName}}</p>
             </template>
         </el-table-column>
@@ -83,12 +88,14 @@
             }
         },
         data() {
-            return {};
+            return {
+                currentRow: {}
+            };
         },
         computed: {},
         methods: {
             getSummaries(param) {
-                const {columns, data} = param;
+                const { columns, data } = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -118,12 +125,40 @@
             },
             delGoods(index) {
                 if (this.goodsList.length == 1) {
-                    this.$message({message: '必须保留一个商品', type: 'warning'});
-                } else {
-                    this.$http.delete(`api/goods/`)
-                    this.goodsList.splice(index, 1);
-                    this.$emit('updateCustomer');
+                    this.$message({ message: '必须保留一个商品', type: 'warning' });
+                    return;
                 }
+                this.$http.delete(`api/billGoods/${this.goodsList[index].id}`)
+                    .then(res => {
+                        if (res.success) {
+                            this.goodsList.splice(index, 1);
+                            this.$emit('updateCustomer');
+                        } else {
+                            this.$message({ message: res.msg, type: 'error' });
+                        }
+                    })
+            },
+            rowClick(row, event, column){
+                this.currentRow = row;
+            },
+            querySearchAsync(key, cb) {
+                if (key.trim() === '') {
+                    cb([]);
+                    return;
+                }
+                const queryData = { name: key.trim().toLowerCase() };
+                this.$http.get(`/api/goods/search`, { params: queryData })
+                    .then(res => {
+                        if (res.success) {
+                            cb(res.result);
+                        } else {
+                            cb([]);
+                        }
+                    })
+            },
+            handleSelect(item) {
+                this.currentRow.goodsId = item.id;
+                console.log(this.currentRow);
             },
             changeCurrency(index, row) {
                 if (!row.isRMB) {
