@@ -13,8 +13,7 @@
                     :data="bill.customerList" :row-key="getRowKeys" :expand-row-keys="expands" :stripe="true"
                     @cell-click="cellClick"
                     :show-summary="true" class="ec-table-page" height="500">
-                <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
-                </el-table-column>
+
                 <el-table-column type="expand">
                     <template scope="scope">
                         <products :docNo="bill.docNo" :billCustomerId="scope.row.id"
@@ -22,7 +21,9 @@
                                   @updateCustomer="updateCustomer(scope.$index)"></products>
                     </template>
                 </el-table-column>
-                <el-table-column label="客户名称">
+                <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column label="客户名称" width="200">
                     <template scope="scope">
                         <el-autocomplete v-if="isEdit"
                                          v-model="scope.row.customerNickName"
@@ -277,6 +278,7 @@
             },
             saveBill() {
                 this.lock = true;
+                console.log(this.bill);
                 this.$http.post('/api/bill/save', this.bill)
                     .then(res => {
                         if (res.success) {

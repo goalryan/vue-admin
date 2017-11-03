@@ -1,7 +1,9 @@
 <template>
     <ec-dialog :show.sync="showDialog" title="getTitle" @confirm="confirm" @cancel="cancel"
                :showCancelButton="true" :showConfirmButton="true" width="400px">
-        <el-table>
+        <el-table :data="dataList" style="width: 100%">
+            <el-table-column prop="date" label="日期" width="180">
+            </el-table-column>
 
         </el-table>
     </ec-dialog>
@@ -24,7 +26,7 @@
         },
         data() {
             return {
-                address: this.initAddress()
+                dataList: []
             };
         },
         computed: {
@@ -49,16 +51,16 @@
                 this.fetchData();
         },
         methods: {
-            fetchData(){
+            fetchData() {
                 this.$http.get(`api/address/${this.addressId}`).then(res => {
                     if (res.success) {
                         this.address = res.data;
                     } else {
-                        this.$message({ message: res.msg, type: 'error' });
+                        this.$message({message: res.msg, type: 'error'});
                     }
                 })
             },
-            initAddress(){
+            initAddress() {
                 return {
                     id: '',
                     customerId: '',
@@ -67,25 +69,25 @@
                     deliveryAddress: '',
                 }
             },
-            addAddress(){
+            addAddress() {
                 this.$http.post(`api/address/add`, this.address).then(res => {
                     if (res.success) {
                         this.doSuccess();
                     } else {
-                        this.$message({ message: res.msg, type: 'error' });
+                        this.$message({message: res.msg, type: 'error'});
                     }
                 })
             },
-            updateAddress(){
+            updateAddress() {
                 this.$http.post(`api/address/update`, this.address).then(res => {
                     if (res.success) {
                         this.doSuccess();
                     } else {
-                        this.$message({ message: res.msg, type: 'error' });
+                        this.$message({message: res.msg, type: 'error'});
                     }
                 })
             },
-            doSuccess(){
+            doSuccess() {
                 this.showDialog = false;
                 this.$emit('confirm', this.address);
             },

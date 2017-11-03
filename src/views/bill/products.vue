@@ -1,11 +1,11 @@
 <template>
     <el-table
-            :data="goodsList" border :show-summary="false" :stripe="true"
+            :data="goodsList" border  :show-summary="false" :stripe="true"
             @row-click="rowClick"
             style="width: 100%">
         <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
         </el-table-column>
-        <el-table-column label="商品名称" header-align="center" align="center">
+        <el-table-column label="商品名称" header-align="center" align="center" width="200">
             <template scope="scope">
                 <el-autocomplete v-if="isEdit"
                                  v-model="scope.row.goodsName"
