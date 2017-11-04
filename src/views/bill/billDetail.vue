@@ -1,5 +1,7 @@
 <template>
     <ec-page @close="close" :title="bill.docNo">
+        <address-list-dialog :show.sync="showAddressListDialog"
+                             :billCustomer="currentRow"></address-list-dialog>
         <ec-page-item>
             <el-form :inline="true">
                 <el-form-item label="汇率:">
@@ -40,7 +42,16 @@
                         <p v-else="">{{scope.row.customerNickName}}</p>
                     </template>
                 </el-table-column>
-                <el-table-column label="收货地址" prop="quantity" header-align="right" align="right">
+                <el-table-column label="收货地址" header-align="center" align="center">
+                    <template scope="scope">
+                        <el-button v-if="scope.row.addressId === null||scope.row.addressId === ''" type="danger"
+                                   @click="openAddressList()">
+                            请选择
+                        </el-button>
+                        <el-button v-else type="primary" @click="openAddressList()">
+                            查看
+                        </el-button>
+                    </template>
                 </el-table-column>
                 <el-table-column label="数量" prop="quantity" header-align="right" align="right">
                 </el-table-column>
@@ -102,11 +113,13 @@
     import MessageMixin from '../../utils/MessageMixin.js';
     import Products from './products.vue';
     import billCommon from './billCommon.js';
+    import AddressListDialog from './billAddressList.vue'
 
     export default {
         mixins: [MessageMixin],
         components: {
-            Products
+            Products,
+            AddressListDialog
         },
         data() {
             return {
@@ -125,7 +138,8 @@
                 // 要展开的行，数值的元素是row的key值
                 expands: [],
                 lock: false,
-                currentRow: {}
+                currentRow: {},
+                showAddressListDialog: false,
             }
         },
         computed: {
@@ -257,7 +271,7 @@
             cellClick(row, column, cell, event) {
                 const colName = column.label;
                 this.currentRow = row;
-                if (colName !== '客户名称' && colName !== '收款' && colName !== '操作') {
+                if (colName !== '客户名称' && colName !== '收货地址' && colName !== '收款' && colName !== '操作') {
                     if (this.expands.length === 0) {
                         this.expands.push(row.id);
                     } else {
@@ -352,6 +366,9 @@
                 const newGoodsList = this.billBak.customerList[billCustomerIndex].goodsList.filter(goods => goods.id !== billGoodsId);
                 this.billBak.customerList[billCustomerIndex].goodsList = newGoodsList;
                 console.log(this.billBak);
+            },
+            openAddressList(row) {
+                this.showAddressListDialog = true;
             }
         }
     }
