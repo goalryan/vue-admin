@@ -1,6 +1,6 @@
 <template>
     <el-table
-            :data="goodsList" border  :show-summary="false" :stripe="true"
+            :data="goodsList" border :show-summary="false" :stripe="true"
             @row-click="rowClick"
             style="width: 100%">
         <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
@@ -128,21 +128,30 @@
                     this.$message({message: '必须保留一个商品', type: 'warning'});
                     return;
                 }
-                this.$http.delete(`api/billGoods/${this.goodsList[index].id}`)
-                    .then(res => {
-                        if (res.success) {
-                            this.goodsList.splice(index, 1);
-                            this.$emit('updateCustomer');
-                        } else {
-                            this.$message({message: res.msg, type: 'error'});
-                        }
-                    })
+
+                const billGoodsId = this.goodsList[index].id;
+                if (this.goodsList[index].isAdd) {
+                    this.goodsList.splice(index, 1);
+                } else {
+                    var _this = this;
+                    this.$http.delete(`api/billGoods/${billGoodsId}`)
+                        .then(res => {
+                            if (res.success) {
+                                this.goodsList.splice(index, 1);
+                                this.$emit('deleteGoodsEvent', _this.billCustomerId, billGoodsId);
+                                this.$emit('updateCustomer');
+                            } else {
+                                this.$message({message: res.msg, type: 'error'});
+                            }
+                        })
+                }
             },
             rowClick(row, event, column) {
                 this.currentRow = row;
             },
             querySearchAsync(key, cb) {
                 if (key.trim() === '') {
+                    this.currentRow.goodsId = '';
                     cb([]);
                     return;
                 }
@@ -150,7 +159,7 @@
                 this.$http.get(`/api/goods/search`, {params: queryData})
                     .then(res => {
                         if (res.success) {
-                            billCommon.bindSearchKey(key, res.data, this.currentRow);
+                            billCommon.bindSearchKey(key, res.data, this.currentRow, false);
                             cb(res.data);
                         } else {
                             cb([]);

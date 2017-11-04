@@ -62,7 +62,7 @@
                     this.$http.get(`/api/bill/info`, {params: queryData})
                         .then(res => {
                             if (res.success) {
-                                this.bill = res.result;
+                                this.bill = res.data;
                             } else {
                                 this.$message({message: res.msg, type: 'error'});
                             }

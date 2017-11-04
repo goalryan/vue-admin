@@ -7,6 +7,11 @@
                               @change="changeTaxRate"></el-input>
                     <p v-else="">{{bill.taxRate}}</p>
                 </el-form-item>
+                <el-form-item label="备注:">
+                    <el-input v-if="isEdit" v-model="bill.memo" placeholder="请输入备注"
+                              @change="changeTaxRate"></el-input>
+                    <p v-else="">{{bill.memo}}</p>
+                </el-form-item>
             </el-form>
 
             <el-table
@@ -18,7 +23,8 @@
                     <template scope="scope">
                         <products :docNo="bill.docNo" :billCustomerId="scope.row.id"
                                   :goodsList="scope.row.goodsList" :taxRate="bill.taxRate" :isEdit="isEdit"
-                                  @updateCustomer="updateCustomer(scope.$index)"></products>
+                                  @updateCustomer="updateCustomer(scope.$index)"
+                                  @deleteGoodsEvent="deleteGoodsEvent"></products>
                     </template>
                 </el-table-column>
                 <el-table-column label="序号" type="index" width="50" header-align="center" align="center">
@@ -111,6 +117,7 @@
                     isClose: false,
                     customerList: []
                 },
+                billBak: {},
                 // 获取row的key值
                 getRowKeys(row) {
                     return row.id;
@@ -139,7 +146,14 @@
                 this.isEdit = true;
             },
             cancel() {
-                this.isEdit = false;
+                if (JSON.stringify(this.bill) != JSON.stringify(this.billBak)) {
+                    this.doConfirm(() => {
+                        this.isEdit = false;
+                        this.bill = JSON.parse(JSON.stringify(this.billBak));
+                    }, '数据没有保存，确认退出编辑？')
+                } else {
+                    this.isEdit = false;
+                }
             },
             fetchData() {
                 const queryData = {docNo: this.bill.docNo};
@@ -150,6 +164,7 @@
                             if (this.bill.customerList.length === 0) {
                                 this.bill.customerList.push(billCommon.initCustomer(this.bill.docNo));
                             }
+                            this.billBak = JSON.parse(JSON.stringify(this.bill));
                         } else {
                             this.$message({message: res.msg, type: 'error'});
                         }
@@ -256,6 +271,7 @@
             },
             querySearchAsync(key, cb) {
                 if (key.trim() === '') {
+                    this.currentRow.customerId = '';
                     cb([]);
                     return;
                 }
@@ -263,7 +279,7 @@
                 this.$http.get(`/api/customer/search`, {params: queryData})
                     .then(res => {
                         if (res.success) {
-                            billCommon.bindSearchKey(key, res.data, this.currentRow);
+                            billCommon.bindSearchKey(key, res.data, this.currentRow, true);
                             cb(res.data);
                         } else {
                             cb([]);
@@ -299,30 +315,43 @@
                     this.$message({message: '必须保留一个客户', type: 'warning'});
                     return;
                 }
-                this.doConfirm(() => {
-                    this.$http.delete(`api/billCustomer/${this.bill.customerList[index].id}`)
-                        .then(res => {
-                            if (res.success) {
-                                this.bill.customerList.splice(index, 1);
-                            } else {
-                                this.$message({message: res.msg, type: 'error'});
-                            }
-                        })
-                }, `确定删除客户【${this.bill.customerList[index].customerNickName}】?`)
+                const customer = this.bill.customerList[index];
+                if (customer.isAdd) {
+                    this.doConfirm(() => {
+                        this.bill.customerList.splice(index, 1);
+                    }, `确定删除客户【${customer.customerNickName}】?`)
+                } else {
+                    this.doConfirm(() => {
+                        this.$http.delete(`api/billCustomer/${customer.id}`)
+                            .then(res => {
+                                if (res.success) {
+                                    this.bill.customerList.splice(index, 1);
+                                    this.deleteCustomerEvent(index);
+                                } else {
+                                    this.$message({message: res.msg, type: 'error'});
+                                }
+                            })
+                    }, `确定删除客户【${customer.customerNickName}】?`)
+                }
+
             },
             saveSuccess() {
                 this.bill.customerList.forEach(customer => {
                     customer.isAdd = false;
-                    if (customer.customerId === '') {
-                        customer.customerId = 'updated';
-                    }
                     customer.goodsList.forEach(goods => {
                         goods.isAdd = false;
-                        if (goods.goodsId === '') {
-                            goods.goodsId = 'updated';
-                        }
                     })
                 })
+                this.billBak = JSON.parse(JSON.stringify(this.bill));
+            },
+            deleteCustomerEvent(index) {
+                this.billBak.customerList.splice(index, 1);
+            },
+            deleteGoodsEvent(billCustomerId, billGoodsId) {
+                const billCustomerIndex = this.billBak.customerList.findIndex(customer => customer.id = billCustomerId);
+                const newGoodsList = this.billBak.customerList[billCustomerIndex].goodsList.filter(goods => goods.id !== billGoodsId);
+                this.billBak.customerList[billCustomerIndex].goodsList = newGoodsList;
+                console.log(this.billBak);
             }
         }
     }

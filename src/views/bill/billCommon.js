@@ -44,13 +44,19 @@ export default {
     getRandom() {
         return Math.random();
     },
-    bindSearchKey(key, result, currentRow) {
+    bindSearchKey(key, result, currentRow, isCustomer) {
         if (result.length === 0) {
-            currentRow.customerId = '';
+            if (isCustomer)
+                currentRow.customerId = '';
+            else
+                currentRow.goodsId = '';
         }
         let findItem = result.find(item => item.value === key.trim().toLowerCase());
-        if (findItem != null) {
-            currentRow.customerId = findItem.id;
+        if (findItem !== undefined) {
+            if (isCustomer)
+                currentRow.customerId = findItem.id;
+            else
+                currentRow.goodsId = findItem.id;
         }
     }
 }
