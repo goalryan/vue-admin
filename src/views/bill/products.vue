@@ -29,19 +29,19 @@
                 <p v-else="">{{scope.row.inUnitPrice}}</p>
             </template>
         </el-table-column>
+        <el-table-column prop="outUnitPrice" label="卖出价(人民币)">
+            <template scope="scope">
+                <el-input v-if="isEdit" v-model="scope.row.outUnitPrice" placeholder="请输入成本价"
+                          @keyup.native="changeOutUnitPrice(scope.$index)"></el-input>
+                <p v-else="">{{scope.row.outUnitPrice}}</p>
+            </template>
+        </el-table-column>
         <el-table-column label="币种" width="60" header-align="center" align="center">
             <template scope="scope">
                 <el-button :disabled="!isEdit" :type="scope.row.isRMB ? 'danger' : 'primary'"
                            @click="changeCurrency(scope.$index,scope.row)">
                     {{scope.row.isRMB ? 'RMB' : 'HKD'}}
                 </el-button>
-            </template>
-        </el-table-column>
-        <el-table-column prop="outUnitPrice" label="卖出价(人民币)">
-            <template scope="scope">
-                <el-input v-if="isEdit" v-model="scope.row.outUnitPrice" placeholder="请输入成本价"
-                          @keyup.native="changeOutUnitPrice(scope.$index)"></el-input>
-                <p v-else="">{{scope.row.outUnitPrice}}</p>
             </template>
         </el-table-column>
         <el-table-column prop="inTotalPrice" label="总成本(人民币)">
