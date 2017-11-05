@@ -400,7 +400,7 @@
                 this.billBak.customerList.splice(index, 1);
             },
             deleteGoodsEvent(billCustomerId, billGoodsId) {
-                const billCustomerIndex = this.billBak.customerList.findIndex(customer => customer.id = billCustomerId);
+                const billCustomerIndex = this.billBak.customerList.findIndex(customer => customer.id === billCustomerId);
                 const newGoodsList = this.billBak.customerList[billCustomerIndex].goodsList.filter(goods => goods.id !== billGoodsId);
                 this.billBak.customerList[billCustomerIndex].goodsList = newGoodsList;
                 console.log(this.billBak);

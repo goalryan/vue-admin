@@ -128,7 +128,6 @@
                     this.$message({message: '必须保留一个商品', type: 'warning'});
                     return;
                 }
-
                 const billGoodsId = this.goodsList[index].id;
                 if (this.goodsList[index].isAdd) {
                     this.goodsList.splice(index, 1);

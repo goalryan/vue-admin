@@ -61,11 +61,11 @@ export default {
             if (findItem !== undefined) {
                 if (isCustomer) {
                     currentRow.customerId = findItem.id;
-                    currentRow.isNewCustomer = true;
+                    currentRow.isNewCustomer = false;
                 }
                 else {
                     currentRow.goodsId = findItem.id;
-                    currentRow.isNewGoods = true;
+                    currentRow.isNewGoods = false;
                 }
 
             }
