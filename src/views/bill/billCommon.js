@@ -18,6 +18,7 @@ export default {
             isPaid: false,
             memo: '',
             isAdd: true,
+            isNewCustomer: false,
             goodsList: [
                 this.initGoods(docNo, billCustomerId)
             ]
@@ -38,7 +39,8 @@ export default {
             profit: 0,
             isRMB: false,
             positionId: '',
-            isAdd: true
+            isAdd: true,
+            isNewGoods: false,
         };
     },
     getRandom() {
@@ -46,10 +48,15 @@ export default {
     },
     bindSearchKey(key, result, currentRow, isCustomer) {
         if (result.length === 0) {
-            if (isCustomer)
-                currentRow.customerId = '';
-            else
-                currentRow.goodsId = '';
+            if (isCustomer) {
+                currentRow.customerId = GuidGenerate.getAddId();
+                currentRow.isNewCustomer = true;
+            }
+            else {
+                currentRow.goodsId = GuidGenerate.getAddId();
+                currentRow.isNewGoods = true;
+            }
+
         }
         let findItem = result.find(item => item.value === key.trim().toLowerCase());
         if (findItem !== undefined) {

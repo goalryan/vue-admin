@@ -13,8 +13,8 @@
                     <ec-text type="primary" @click="showBill(scope.row.docNo)">{{scope.row.docNo}}</ec-text>
                 </template>
             </el-table-column>
-            <el-table-column prop="taxRate" label="汇率" width="100"/>
-            <el-table-column prop="memo" label="备注"/>
+            <el-table-column prop="taxRate" label="汇率"/>
+            <!--<el-table-column prop="memo" label="备注"/>-->
             <el-table-column label="操作" align="center" width="150">
                 <template scope="scope">
                     <el-button type="primary" @click="editBill(scope.row.docNo)">编辑</el-button>

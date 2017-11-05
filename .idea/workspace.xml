@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc369b15-91d5-4e88-84d4-eb4c94e5987f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/common/addressDetailView.vue" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/views/bill/billBindAddress" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/style/dialog.less" afterPath="$PROJECT_DIR$/src/assets/style/dialog.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes.js" afterPath="$PROJECT_DIR$/src/routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/bill/bill.vue" afterPath="$PROJECT_DIR$/src/views/bill/bill.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/bill/billAddressList.vue" afterPath="$PROJECT_DIR$/src/views/bill/billAddressList.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/bill/billCommon.js" afterPath="$PROJECT_DIR$/src/views/bill/billCommon.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/bill/billDetail.vue" afterPath="$PROJECT_DIR$/src/views/bill/billDetail.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/common/addressesView.vue" afterPath="$PROJECT_DIR$/src/views/common/addressesView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/customer/address.vue" afterPath="$PROJECT_DIR$/src/views/customer/address.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/customer/addressDetail.vue" afterPath="$PROJECT_DIR$/src/views/customer/addressDetail.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/bill/products.vue" afterPath="$PROJECT_DIR$/src/views/bill/products.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,33 +23,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="addressDetail.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/customer/addressDetail.vue">
+      <file leaf-file-name="bill.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/bill/bill.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="77" lean-forward="false" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="495">
+              <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
               <folding>
-                <element signature="e#0#37#0" expanded="true" />
+                <element signature="e#1510#1565#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="address.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="billCommon.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/bill/billCommon.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="52" column="48" lean-forward="false" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="address.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/customer/address.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="87" column="25" lean-forward="true" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
+            <state relative-caret-position="-46">
+              <caret line="5" column="65" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="65" />
               <folding>
                 <element signature="e#1925#1980#0" expanded="true" />
               </folding>
@@ -57,14 +59,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addressesView.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/common/addressesView.vue">
+      <file leaf-file-name="billDetail.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/views/bill/billDetail.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="66" column="24" lean-forward="false" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="73" />
+            <state relative-caret-position="318">
+              <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+              <folding>
+                <element signature="n#ec-page-item#1;n#ec-page#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="e#5833#5888#0" expanded="true" />
+                <element signature="e#14803#15932#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="billAddressList.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/bill/billAddressList.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="21" column="73" lean-forward="false" selection-start-line="21" selection-start-column="73" selection-end-line="21" selection-end-column="73" />
               <folding>
                 <element signature="n#style#0;n#el-form#0;n#ec-dialog#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#835#841#1" expanded="true" />
+                <element signature="e#1885#1941#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addressDetailView.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/views/common/addressDetailView.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1051">
+              <caret line="75" column="77" lean-forward="false" selection-start-line="75" selection-start-column="77" selection-end-line="75" selection-end-column="77" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -80,23 +108,13 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>searchCustomers</find>
-      <find>updateAddress</find>
-      <find>filterCustomers</find>
-      <find>searchValue</find>
-      <find>filterAddresses</find>
-      <find>search</find>
-      <find>showConfirmButton</find>
-      <find>selectAddress</find>
       <find>showAddressListDialog</find>
       <find>fetchData</find>
       <find>row-click</find>
       <find>\n</find>
       <find>selectBillCustomerId</find>
       <find>billCustomerId</find>
-      <find>customerId</find>
       <find>selectAddressId</find>
-      <find>currentRow</find>
       <find>openAddressList</find>
       <find>getTitle</find>
       <find>confirmTitle</find>
@@ -110,9 +128,18 @@
       <find>addressList</find>
       <find>searchAddress</find>
       <find>clearFilter</find>
+      <find>save</find>
+      <find>StreamUtils</find>
+      <find>billBak</find>
+      <find>currentRow</find>
+      <find>clearBind</find>
+      <find>showAddressesDialog</find>
+      <find>customerId</find>
+      <find>addCustomer</find>
+      <find>checkExistCustomer</find>
+      <find>querySearchAsync</find>
     </findStrings>
     <replaceStrings>
-      <replace>delete</replace>
       <replace>store</replace>
       <replace>EcTransferPanel</replace>
       <replace>customers</replace>
@@ -141,6 +168,7 @@
       <replace>filterAddresses</replace>
       <replace>addressList</replace>
       <replace>searchResult</replace>
+      <replace>doNotSend</replace>
       <replace>addresses</replace>
     </replaceStrings>
     <dirStrings>
@@ -163,7 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/assets/style/table.less" />
         <option value="$PROJECT_DIR$/src/components/button/button.vue" />
         <option value="$PROJECT_DIR$/src/common/js/store.js" />
         <option value="$PROJECT_DIR$/src/utils/MessageMixin.js" />
@@ -201,19 +228,20 @@
         <option value="$PROJECT_DIR$/src/service/billService.js" />
         <option value="$PROJECT_DIR$/src/utils/GuidGenerate.js" />
         <option value="$PROJECT_DIR$/src/views/customer/express.vue" />
-        <option value="$PROJECT_DIR$/src/views/bill/bill.vue" />
         <option value="$PROJECT_DIR$/src/views/bill/billAdd.vue" />
         <option value="$PROJECT_DIR$/src/assets/style/page.less" />
-        <option value="$PROJECT_DIR$/src/views/bill/billCommon.js" />
-        <option value="$PROJECT_DIR$/src/views/bill/products.vue" />
         <option value="$PROJECT_DIR$/src/views/common/addressView.vue" />
-        <option value="$PROJECT_DIR$/src/views/bill/billDetail.vue" />
-        <option value="$PROJECT_DIR$/src/views/bill/billAddressList.vue" />
         <option value="$PROJECT_DIR$/src/views/common/addressesView.vue" />
         <option value="$PROJECT_DIR$/src/assets/style/dialog.less" />
         <option value="$PROJECT_DIR$/src/routes.js" />
         <option value="$PROJECT_DIR$/src/views/customer/addressDetail.vue" />
         <option value="$PROJECT_DIR$/src/views/customer/address.vue" />
+        <option value="$PROJECT_DIR$/src/views/bill/products.vue" />
+        <option value="$PROJECT_DIR$/src/views/bill/bill.vue" />
+        <option value="$PROJECT_DIR$/src/views/common/addressDetailView.vue" />
+        <option value="$PROJECT_DIR$/src/views/bill/billAddressList.vue" />
+        <option value="$PROJECT_DIR$/src/views/bill/billCommon.js" />
+        <option value="$PROJECT_DIR$/src/views/bill/billDetail.vue" />
       </list>
     </option>
   </component>
@@ -228,7 +256,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="773" />
@@ -277,26 +305,6 @@
               <item name="vue-admin" type="b2602c69:ProjectViewProjectNode" />
               <item name="vue-admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vue-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="button" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vue-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="dialog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="vue-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="vue-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -339,15 +347,15 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/utils" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/views/common" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/views/customer" />
       <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src/excelTemplate" />
-      <recent name="$PROJECT_DIR$/src/assets/style" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/utils" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -463,7 +471,7 @@
       <workItem from="1509327976496" duration="2224000" />
       <workItem from="1509393688200" duration="17840000" />
       <workItem from="1509631093681" duration="6368000" />
-      <workItem from="1509718062227" duration="36667000" />
+      <workItem from="1509718062227" duration="44261000" />
     </task>
     <task id="LOCAL-00001" summary="添加样式文件">
       <created>1505886531795</created>
@@ -679,13 +687,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="216603000" />
+    <option name="totallyTimeSpent" value="224197000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="773" extended-state="1" />
+    <frame x="0" y="23" width="1280" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2573471" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2573471" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -793,7 +801,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/axios/lib/axios.js" />
     <entry file="file://$PROJECT_DIR$/src/utils/httpTest.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/axios/index.d.ts" />
     <entry file="file://$PROJECT_DIR$/src/views/customer/customerExport.vue">
@@ -913,13 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/GuidGenerate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="7" column="54" lean-forward="false" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/vars.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -989,34 +989,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/bill/billCommon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="46" column="17" lean-forward="false" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/bill/products.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="865">
-          <caret line="181" column="50" lean-forward="true" selection-start-line="181" selection-start-column="50" selection-end-line="181" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/bill/bill.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="55" lean-forward="false" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="55" />
-          <folding>
-            <element signature="e#1515#1570#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/customer/customerDetail.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1030,37 +1002,6 @@
         <state relative-caret-position="223">
           <caret line="60" column="58" lean-forward="true" selection-start-line="60" selection-start-column="20" selection-end-line="60" selection-end-column="58" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/bill/billDetail.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="273" column="56" lean-forward="false" selection-start-line="273" selection-start-column="56" selection-end-line="273" selection-end-column="56" />
-          <folding>
-            <element signature="n#el-form#0;n#ec-page-item#0;n#ec-page#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#ec-page-item#1;n#ec-page#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#5890#5945#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/bill/billBindAddress">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/bill/billAddressList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="50" lean-forward="false" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
-          <folding>
-            <element signature="n#style#0;n#el-form#0;n#ec-dialog#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#835#841#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1132,9 +1073,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/bill/products.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="161" column="46" lean-forward="true" selection-start-line="161" selection-start-column="46" selection-end-line="161" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/GuidGenerate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/bill/bill.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+          <folding>
+            <element signature="e#1510#1565#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/customer/address.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-46">
+          <caret line="5" column="65" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="65" />
+          <folding>
+            <element signature="e#1925#1980#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/bill/billBindAddress">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/common/addressesView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
+        <state relative-caret-position="990">
           <caret line="66" column="24" lean-forward="false" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="73" />
           <folding>
             <element signature="n#style#0;n#el-form#0;n#ec-dialog#0;n#template#0;n#!!top" expanded="true" />
@@ -1142,12 +1127,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/customer/address.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/common/addressDetailView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="87" column="25" lean-forward="true" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
+        <state relative-caret-position="1051">
+          <caret line="75" column="77" lean-forward="false" selection-start-line="75" selection-start-column="77" selection-end-line="75" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/bill/billAddressList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="21" column="73" lean-forward="false" selection-start-line="21" selection-start-column="73" selection-end-line="21" selection-end-column="73" />
           <folding>
-            <element signature="e#1925#1980#0" expanded="true" />
+            <element signature="n#style#0;n#el-form#0;n#ec-dialog#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#835#841#1" expanded="true" />
+            <element signature="e#1885#1941#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/bill/billCommon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="52" column="48" lean-forward="false" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/bill/billDetail.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+          <folding>
+            <element signature="n#ec-page-item#1;n#ec-page#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#5833#5888#0" expanded="true" />
+            <element signature="e#14803#15932#0" expanded="false" />
           </folding>
         </state>
       </provider>

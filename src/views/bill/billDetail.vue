@@ -9,11 +9,11 @@
                               @change="changeTaxRate"></el-input>
                     <p v-else="">{{bill.taxRate}}</p>
                 </el-form-item>
-                <el-form-item label="备注:">
-                    <el-input v-if="isEdit" v-model="bill.memo" placeholder="请输入备注"
-                              @change="changeTaxRate"></el-input>
-                    <p v-else="">{{bill.memo}}</p>
-                </el-form-item>
+                <!--<el-form-item label="备注:">-->
+                <!--<el-input v-if="isEdit" v-model="bill.memo" placeholder="请输入备注"-->
+                <!--@change="changeTaxRate"></el-input>-->
+                <!--<p v-else="">{{bill.memo}}</p>-->
+                <!--</el-form-item>-->
             </el-form>
 
             <el-table
@@ -37,7 +37,6 @@
                                          v-model="scope.row.customerNickName"
                                          :fetch-suggestions="querySearchAsync"
                                          placeholder="请输入客户名称"
-                                         @onblur="checkExistCustomer"
                                          @select="handleSelect"></el-autocomplete>
                         <p v-else="">{{scope.row.customerNickName}}</p>
                     </template>
@@ -306,10 +305,20 @@
             },
             checkExistCustomer() {
                 //检查是否存在相同的客户
+                for (let cIndex = 0; cIndex < this.bill.customerList.length; cIndex += 1) {
+                    const customer = this.bill.customerList[cIndex];
+                    const findCustomers = this.bill.customerList.filter(cus => cus.customerId === customer.customerId);
+                    if (findCustomers != undefined && findCustomers.length > 1) {
+                        this.$message({message: `存在相同的客户【${customer.customerNickName}】`, type: 'error'});
+                        return false
+                    }
+                }
+                return true;
             },
             saveBill() {
+                console.log('======save======', this.bill);
+                if (!this.checkExistCustomer()) return;
                 this.lock = true;
-                console.log(this.bill);
                 this.$http.post('/api/bill/save', this.bill)
                     .then(res => {
                         if (res.success) {
@@ -353,8 +362,10 @@
             saveSuccess() {
                 this.bill.customerList.forEach(customer => {
                     customer.isAdd = false;
+                    customer.isNewCustomer = false;
                     customer.goodsList.forEach(goods => {
                         goods.isAdd = false;
+                        goods.isNewGoods = false;
                     })
                 })
                 this.billBak = JSON.parse(JSON.stringify(this.bill));

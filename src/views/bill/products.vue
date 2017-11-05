@@ -18,14 +18,14 @@
         <el-table-column label="数量">
             <template scope="scope">
                 <el-input v-if="isEdit" v-model="scope.row.quantity" placeholder="请输入数量"
-                          @change="changeQuantity(scope.$index)"></el-input>
+                          @keyup.native="changeQuantity(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.quantity}}</p>
             </template>
         </el-table-column>
         <el-table-column label="成本价">
             <template scope="scope">
                 <el-input v-if="isEdit" v-model="scope.row.inUnitPrice" placeholder="请输入成本价"
-                          @change="changeInUnitPrice(scope.$index)"></el-input>
+                          @keyup.native="changeInUnitPrice(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.inUnitPrice}}</p>
             </template>
         </el-table-column>
@@ -40,7 +40,7 @@
         <el-table-column prop="outUnitPrice" label="卖出价(人民币)">
             <template scope="scope">
                 <el-input v-if="isEdit" v-model="scope.row.outUnitPrice" placeholder="请输入成本价"
-                          @change="changeOutUnitPrice(scope.$index)"></el-input>
+                          @keyup.native="changeOutUnitPrice(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.outUnitPrice}}</p>
             </template>
         </el-table-column>

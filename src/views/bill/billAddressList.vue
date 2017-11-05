@@ -3,7 +3,7 @@
                :showCancelButton="false" confirmTitle="关闭" width="600px">
         <el-form :inline="true" class="module-form" style="margin-left: 10px">
             <el-form-item>
-                <el-button type="danger" @click="clearBind">不发货</el-button>
+                <el-button type="danger" @click="doNotSend">不发货</el-button>
                 <el-button type="primary" @click="addAddress">添加地址</el-button>
                 <el-button type="primary" @click="selectAddress">选择地址</el-button>
             </el-form-item>
@@ -17,19 +17,29 @@
             <el-table-column prop="receiver" label="姓名" width="80"></el-table-column>
             <el-table-column prop="phone" label="手机号" width="100"></el-table-column>
             <el-table-column prop="deliveryAddress" label="地址"></el-table-column>
+            <el-table-column label="操作" header-align="center" align="center" width="100">
+                <template scope="scope">
+                    <el-button type="text" @click="editAddress(scope.row)">修改 </el-button>
+                    <el-button type="text" @click="">解绑</el-button>
+                </template>
+            </el-table-column>
         </el-table>
         <addresses-view :show.sync="showAddressesDialog" @selectedAddressEvent="selectedAddressEvent"></addresses-view>
+        <address-detail-view :show.sync="showAddressDetailDialog" :isAdd="isAdd" :id="addressId"
+                             :customerId="billCustomer.customerId"></address-detail-view>
     </ec-dialog>
 </template>
 
 
 <script>
     import AddressesView from '../common/addressesView.vue';
+    import AddressDetailView from '../common/addressDetailView.vue'
 
     export default {
         name: 'addresses',
         components: {
-            AddressesView
+            AddressesView,
+            AddressDetailView
         },
         props: {
             billCustomer: {
@@ -44,7 +54,10 @@
         data() {
             return {
                 addresses: [],
-                showAddressesDialog: false
+                showAddressesDialog: false,
+                showAddressDetailDialog: false,
+                isAdd: false,
+                addressId: ''
             };
         },
         computed: {
@@ -81,8 +94,14 @@
                 this.showDialog = false;
                 this.$emit('confirm', this.address);
             },
-            addAddress() {
-
+            addAddress(row) {
+                this.isAdd = true;
+                this.showAddressDetailDialog = true;
+            },
+            editAddress(row) {
+                this.isAdd = false;
+                this.addressId = row.id;
+                this.showAddressDetailDialog = true;
             },
             selectAddress() {
                 this.showAddressesDialog = true;
@@ -101,7 +120,7 @@
                 }
 
             },
-            clearBind() {
+            doNotSend() {
                 const billCustomer = {
                     id: this.billCustomer.id,
                     addressId: ''
@@ -115,6 +134,7 @@
                     })
             },
             rowClick(row, event, column) {
+                if (column.label === '操作') return;
                 const billCustomer = {
                     id: this.billCustomer.id,
                     addressId: row.id
@@ -126,7 +146,6 @@
                             this.showDialog = false;
                         }
                     })
-
             },
             confirm() {
                 this.showDialog = false;
