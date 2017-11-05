@@ -56,14 +56,19 @@ export default {
                 currentRow.goodsId = GuidGenerate.getAddId();
                 currentRow.isNewGoods = true;
             }
+        } else {
+            let findItem = result.find(item => item.value === key.trim().toLowerCase());
+            if (findItem !== undefined) {
+                if (isCustomer) {
+                    currentRow.customerId = findItem.id;
+                    currentRow.isNewCustomer = true;
+                }
+                else {
+                    currentRow.goodsId = findItem.id;
+                    currentRow.isNewGoods = true;
+                }
 
-        }
-        let findItem = result.find(item => item.value === key.trim().toLowerCase());
-        if (findItem !== undefined) {
-            if (isCustomer)
-                currentRow.customerId = findItem.id;
-            else
-                currentRow.goodsId = findItem.id;
+            }
         }
     }
 }
