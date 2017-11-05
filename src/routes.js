@@ -7,6 +7,7 @@ import Bill from './views/bill/bill.vue'
 import BillDetail from './views/bill/billDetail.vue'
 import Customer from './views/customer/customer.vue'
 import CustomerExport from './views/customer/customerExport.vue'
+import Address from './views/customer/address.vue'
 import Express from './views/customer/express.vue'
 import echarts from './views/charts/echarts.vue'
 
@@ -53,6 +54,10 @@ let routes = [
         iconCls: 'fa fa-id-card-o',
         leaf: false,//只有一个节点
         children: [
+            {
+                path: '/address', component: Address, name: '收货地址',
+                children: []
+            },
             {
                 path: '/customer', component: Customer, name: '客户清单',
                 children: [{

@@ -1,9 +1,9 @@
 <template>
     <ec-dialog :show.sync="showDialog" title="本次发货地址" @confirm="confirm"
                :showCancelButton="false" confirmTitle="关闭" width="600px">
-        <el-form :inline="true" class="module-form">
+        <el-form :inline="true" class="module-form" style="margin-left: 10px">
             <el-form-item>
-                <el-button type="primary" @click="clearBind">不发货</el-button>
+                <el-button type="danger" @click="clearBind">不发货</el-button>
                 <el-button type="primary" @click="addAddress">添加地址</el-button>
                 <el-button type="primary" @click="selectAddress">选择地址</el-button>
             </el-form-item>

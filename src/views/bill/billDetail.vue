@@ -42,7 +42,7 @@
                         <p v-else="">{{scope.row.customerNickName}}</p>
                     </template>
                 </el-table-column>
-                <el-table-column label="收货地址" header-align="center" align="center">
+                <el-table-column v-if="!isEdit" label="收货地址" header-align="center" align="center">
                     <template scope="scope">
                         <el-button v-if="scope.row.addressId === null||scope.row.addressId === ''" type="danger"
                                    @click="openAddressList()">
@@ -271,7 +271,8 @@
             cellClick(row, column, cell, event) {
                 const colName = column.label;
                 this.currentRow = row;
-                if (colName !== '客户名称' && colName !== '收货地址' && colName !== '收款' && colName !== '操作') {
+                if ((!this.isEdit && colName !== '收货地址')
+                    || ( colName !== '客户名称' && colName !== '收货地址' && colName !== '收款' && colName !== '操作')) {
                     if (this.expands.length === 0) {
                         this.expands.push(row.id);
                     } else {

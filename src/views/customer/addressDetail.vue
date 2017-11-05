@@ -3,13 +3,16 @@
                :showCancelButton="true" :showConfirmButton="true" :showAddressButton="isAdd" width="400px">
         <el-form label-width="90px">
             <el-form-item label="收件人：">
-                <el-input v-model="address.name" size="small" placeholder="请输入姓名"></el-input>
+                <el-input v-model="address.receiver" size="small" placeholder="请输入姓名"></el-input>
             </el-form-item>
             <el-form-item label="手机号：">
                 <el-input v-model="address.phone" size="small" placeholder="手机号"></el-input>
             </el-form-item>
             <el-form-item label="地址：">
                 <el-input v-model="address.deliveryAddress" size="small" placeholder="地址"></el-input>
+            </el-form-item>
+            <el-form-item label="备注：">
+                <el-input v-model="address.memo" size="small" placeholder="备注"></el-input>
             </el-form-item>
         </el-form>
     </ec-dialog>

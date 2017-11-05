@@ -1,7 +1,7 @@
 <template>
     <ec-dialog :show.sync="showDialog" title="选择收货地址" @confirm="confirm"
                :showCancelButton="false" confirmTitle="关闭" width="700px">
-        <el-form :inline="true" class="module-form">
+        <el-form :inline="true" class="module-form" style="margin-left: 10px">
             <el-form-item label="查找范围">
                 <el-input v-model="searchValue" @keyup.native="fetchData" placeholder="输入手机号/姓名"
                           size="small"></el-input>
@@ -53,14 +53,12 @@
         watch: {
             show(val) {
                 if (val) {
-//                    this.fetchData();
+                    this.fetchData();
                 }
             }
         },
         methods: {
             fetchData() {
-                if (this.searchValue === '') return;
-                debugger;
                 const queryData = {key: this.searchValue};
                 this.$http.get(`api/address/searchUnBind`, {params: queryData}).then(res => {
                     if (res.success) {
