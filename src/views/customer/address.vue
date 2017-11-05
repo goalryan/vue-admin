@@ -28,8 +28,9 @@
                 </template>
             </el-table-column>
         </el-table>
-        <address-dialog :show.sync="showAddressDialog" :isAdd="isAdd" :address="address"
-                        @confirm="updateAddress" @addressEvent="addNextAddress"></address-dialog>
+
+        <address-detail-view :show.sync="showAddressDetailDialog" :isAdd="isAdd" :isCustomer="isAdd"
+                             :id="addressId" @confirm="confirmAddressDetail"></address-detail-view>
         <router-view @refresh="refresh"></router-view>
     </ec-container-item>
 
@@ -38,21 +39,20 @@
 <script>
     import MessageMixin from '../../utils/MessageMixin.js';
     import CommonMixin from '../../utils/CommonMixin.js';
-    import addressDialog from './addressDetail.vue';
-    import Vue from 'vue';
+    import AddressDetailView from '../common/addressDetailView.vue'
 
     export default {
         mixins: [MessageMixin, CommonMixin],
         components: {
-            addressDialog
+            AddressDetailView
         },
         data() {
             return {
                 isAdd: false,
                 searchValue: '',
                 addresses: [],
-                address: {},
-                showAddressDialog: false
+                addressId: '',
+                showAddressDetailDialog: false
             }
         },
         mounted() {
@@ -65,7 +65,7 @@
             },
             fetchData() {
                 const queryData = {key: this.searchValue};
-                this.$http.get(`api/address/searchUnBind`, {params: queryData}).then(res => {
+                this.$http.get(`api/address/search`, {params: queryData}).then(res => {
                     if (res.success) {
                         this.addresses = res.data;
                     } else {
@@ -75,19 +75,12 @@
             },
             addAddress() {
                 this.isAdd = true;
-                this.address = {
-                    receiver: '',
-                    phone: '',
-                    deliveryAddress: '',
-                    memo: ''
-                };
-                this.showAddressDialog = true;
+                this.showAddressDetailDialog = true;
             },
-            editAddress(address) {
+            editAddress(row) {
                 this.isAdd = false;
-                // 要给新的对象
-                this.address = JSON.parse(JSON.stringify(address));
-                this.showAddressDialog = true;
+                this.addressId = row.id;
+                this.showAddressDetailDialog = true;
             },
             deleteAddress(id) {
                 let index = this.addresses.findIndex(item => item.id === id);
@@ -103,21 +96,9 @@
 
                 }, `确定删除客户【${this.addresses[index].receiver}】?`)
             },
-            updateAddress(isAdd) {
-                if (isAdd) {
-                    if (!this.addresses) {
-                        this.addresses.push(this.getDeepObj(this.address));
-                    } else {
-                        this.addresses.splice(0, 0, this.getDeepObj(this.address));
-                    }
-                } else {
-                    let index = this.addresses.findIndex(item => item.id === this.address.id);
-                    Vue.set(this.addresses, index, this.address);
-                }
-            },
-            addNextAddress(isAdd) {
-                this.updateAddress(isAdd);
-                this.addAddress();
+            confirmAddressDetail() {
+                this.$message({message: '成功', type: 'success'});
+                this.fetchData()
             },
             exportAddress() {
                 this.$router.push({

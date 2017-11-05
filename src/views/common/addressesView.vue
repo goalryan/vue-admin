@@ -3,8 +3,7 @@
                :showCancelButton="false" confirmTitle="关闭" width="700px">
         <el-form :inline="true" class="module-form" style="margin-left: 10px">
             <el-form-item label="查找范围">
-                <el-input v-model="searchValue" @keyup.native="fetchData" placeholder="输入手机号/姓名"
-                          size="small"></el-input>
+                <el-input v-model="searchValue" @keyup.native="fetchData" placeholder="输入手机号/姓名"></el-input>
             </el-form-item>
         </el-form>
         <el-table :data="addresses" highlight-current-row height="350">

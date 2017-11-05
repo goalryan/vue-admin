@@ -103,6 +103,7 @@
             <template v-else="">
                 <el-button @click="close">关闭</el-button>
                 <el-button @click="edit" type="primary">编辑</el-button>
+                <el-button @click="export2Excel" type="primary">导出地址</el-button>
             </template>
         </ec-page-item>
     </ec-page>
@@ -167,6 +168,31 @@
                 } else {
                     this.isEdit = false;
                 }
+            },
+            export2Excel() {
+                const queryData = {docNo: this.bill.docNo};
+                this.$http.get('api/address/export', {params: queryData})
+                    .then(res => {
+                        if (res.success) {
+                            res.data.forEach(item => {
+                                item.zeroCol = '';
+                            });
+                            require.ensure([], () => {
+                                const {export_json_to_excel} = require('../../utils/ExportExcel');
+                                const tHeader = ['订单编号', '收件人姓名（必填）', '收件人手机（二选一）', '收件人电话（二选一）', '收件人地址（必填）', '商品信息', '寄件人姓名', '寄件人手机（二选一）', '寄件人电话（二选一）', '寄件人地址'];
+                                const filterVal = ['zeroCol', 'receiver', 'phone', 'zeroCol', 'deliveryAddress', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol'];
+                                const list = res.data;
+                                const data = this.formatJson(filterVal, list);
+                                export_json_to_excel(tHeader, data, '收件人信息');//自定义打印导入数据模板
+                            })
+                        } else {
+                            this.$message({message: res.msg, type: 'error'});
+                        }
+                    })
+
+            },
+            formatJson(filterVal, jsonData) {
+                return jsonData.map(v => filterVal.map(j => v[j]))
             },
             fetchData() {
                 const queryData = {docNo: this.bill.docNo};

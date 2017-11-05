@@ -4,7 +4,7 @@
             <div class="dialog-wrap" :style="dialogCustomer">
                 <div class="dialog-head">
                     <span>{{title}}</span>
-                    <i v-if="showClose" class="icon-modal__close cursor" @click="close"></i>
+                    <!--<i v-if="showClose" class="icon-modal__close cursor" @click="close"></i>-->
                 </div>
                 <slot></slot>
                 <div class="dialog-footer" v-if="showCancelButton || showConfirmButton">

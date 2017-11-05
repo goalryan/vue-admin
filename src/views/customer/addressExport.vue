@@ -2,7 +2,7 @@
     <ec-page @close="close" title="导出收件人">
         <ec-page-item>
             <el-transfer
-                    v-model="selectCustomers"
+                    v-model="selectAddresses"
                     filterable
                     :filter-method="filterMethod"
                     :left-default-checked="[]"
@@ -31,9 +31,9 @@
         mixins: [MessageMixin],
         data() {
             return {
-                customers: [],
-                selectCustomers: [],
-                exportCustomers: [],
+                addresses: [],
+                selectAddresses: [],
+                exportAddresses: [],
                 renderFunc(createElement, option) {
                     return createElement('div', [renderFirstRow(createElement, option), renderSecondRow(createElement, option)])
                 },
@@ -74,13 +74,13 @@
                 this.$http.get('api/address')
                     .then(res => {
                         if (res.success) {
-                            this.customers = res.data;
-                            this.customers.forEach(item => {
+                            this.addresses = res.data;
+                            this.addresses.forEach(item => {
                                 item.key = item.id;
                                 item.label = item.receiver + item.phone + item.deliveryAddress;
                                 item.disabled = false;
                             })
-                            console.log(this.customers);
+                            console.log(this.addresses);
                         } else {
                             this.$message({message: res.msg, type: 'error'});
                         }
@@ -90,11 +90,11 @@
                 console.log(value, direction, movedKeys);
             },
             export2Excel() {
-                this.selectCustomers.forEach(item => {
-                    for (let i = 0; i < this.customers.length; i++) {
-                        if (item === this.customers[i].id) {
-                            this.customers[i].zeroCol = '';
-                            this.exportCustomers.push(this.customers[i]);
+                this.selectAddresses.forEach(item => {
+                    for (let i = 0; i < this.addresses.length; i++) {
+                        if (item === this.addresses[i].id) {
+                            this.addresses[i].zeroCol = '';
+                            this.exportAddresses.push(this.addresses[i]);
                             break;
                         }
                     }
@@ -103,11 +103,9 @@
                     const {export_json_to_excel} = require('../../utils/ExportExcel');
                     const tHeader = ['订单编号', '收件人姓名（必填）', '收件人手机（二选一）', '收件人电话（二选一）', '收件人地址（必填）', '商品信息', '寄件人姓名', '寄件人手机（二选一）', '寄件人电话（二选一）', '寄件人地址'];
                     const filterVal = ['zeroCol', 'receiver', 'phone', 'zeroCol', 'deliveryAddress', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol'];
-                    const list = this.exportCustomers;
+                    const list = this.exportAddresses;
                     const data = this.formatJson(filterVal, list);
                     export_json_to_excel(tHeader, data, '收件人信息');//自定义打印导入数据模板
-
-
                 })
             },
             formatJson(filterVal, jsonData) {

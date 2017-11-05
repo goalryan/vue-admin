@@ -20,13 +20,14 @@
             <el-table-column label="操作" header-align="center" align="center" width="100">
                 <template scope="scope">
                     <el-button type="text" @click="editAddress(scope.row)">修改 </el-button>
-                    <el-button type="text" @click="">解绑</el-button>
+                    <el-button type="text" @click="unBind(scope.row)">解绑</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <addresses-view :show.sync="showAddressesDialog" @selectedAddressEvent="selectedAddressEvent"></addresses-view>
         <address-detail-view :show.sync="showAddressDetailDialog" :isAdd="isAdd" :id="addressId"
-                             :customerId="billCustomer.customerId"></address-detail-view>
+                             :customerId="billCustomer.customerId"
+                             @confirm="confirmAddressDetail"></address-detail-view>
     </ec-dialog>
 </template>
 
@@ -98,11 +99,6 @@
                 this.isAdd = true;
                 this.showAddressDetailDialog = true;
             },
-            editAddress(row) {
-                this.isAdd = false;
-                this.addressId = row.id;
-                this.showAddressDetailDialog = true;
-            },
             selectAddress() {
                 this.showAddressesDialog = true;
             },
@@ -133,6 +129,22 @@
                         }
                     })
             },
+            editAddress(row) {
+                this.isAdd = false;
+                this.addressId = row.id;
+                this.showAddressDetailDialog = true;
+            },
+            unBind(row) {
+                row.customerId = '';
+                this.$http.post('api/address/updateCustomerId', row)
+                    .then(res => {
+                        if (res.success) {
+                            this.fetchData();
+                        } else {
+                            this.$message({message: res.msg, type: 'error'});
+                        }
+                    })
+            },
             rowClick(row, event, column) {
                 if (column.label === '操作') return;
                 const billCustomer = {
@@ -149,6 +161,9 @@
             },
             confirm() {
                 this.showDialog = false;
+            },
+            confirmAddressDetail() {
+                this.fetchData()
             }
         }
     };

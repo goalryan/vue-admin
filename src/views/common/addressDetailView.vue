@@ -1,6 +1,6 @@
 <template>
-    <ec-dialog :show.sync="showDialog" :title="getTitle" @confirm="confirm" @addressEvent="addressEvent"
-               :showCancelButton="true" :showConfirmButton="true" :showAddressButton="isAdd" width="400px">
+    <ec-dialog :show.sync="showDialog" :title="getTitle" @confirm="confirm" @customerEvent="customerEvent"
+               :showCancelButton="true" :showConfirmButton="true" :showCustomerButton="isCustomer" width="400px">
         <el-form label-width="90px">
             <el-form-item label="收件人：">
                 <el-input v-model="address.receiver" placeholder="请输入姓名"></el-input>
@@ -30,8 +30,12 @@
                 type: Boolean,
                 default: false
             },
-            id: {
+            isCustomer: {
                 type: Boolean,
+                default: false
+            },
+            id: {
+                type: String,
                 default: false
             },
             customerId: {
@@ -79,7 +83,7 @@
             },
             initData() {
                 this.address = {
-                    customerId: '',
+                    customerId: this.customerId,
                     receiver: '',
                     phone: '',
                     deliveryAddress: '',
@@ -87,11 +91,50 @@
                 }
             },
             confirm() {
-                this.showDialog = false;
-                this.$emit('confirm', this.isAdd);
+                if (this.isAdd) {
+                    this.add(false);
+                } else {
+                    this.$http.put(`api/address/${this.id}`, this.address)
+                        .then(res => {
+                            if (res.success) {
+                                this.showDialog = false;
+                                this.$emit('confirm');
+                            } else {
+                                this.$message({message: res.msg, type: 'error'});
+                            }
+                        })
+                }
+
             },
-            addressEvent() {
-                this.$emit('addressEvent', this.isAdd);
+            customerEvent() {
+                this.add(true);
+                this.initData();
+            },
+            add(next) {
+                if (!this.checkData()) return;
+                debugger;
+                this.$http.post(`api/address/add`, this.address)
+                    .then(res => {
+                        if (res.success) {
+                            this.showDialog = next;
+                            this.$emit('confirm');
+                        } else {
+                            this.$message({message: res.msg, type: 'error'});
+                        }
+                    })
+            },
+            checkData() {
+                if (!this.doCheck(this.address.receiver, '收件人')) return false;
+                if (!this.doCheck(this.address.phone, '手机号')) return false;
+                if (!this.doCheck(this.address.deliveryAddress, '地址')) return false;
+                return true;
+            },
+            doCheck(value, msg) {
+                if (value === '') {
+                    this.$message({message: `请输入${msg}`, type: 'info'});
+                    return false;
+                }
+                return true;
             }
         }
     };
