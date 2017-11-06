@@ -11,7 +11,8 @@
                                  v-model="scope.row.goodsName"
                                  :fetch-suggestions="querySearchAsync"
                                  placeholder="请输入商品名称"
-                                 @select="handleSelect"></el-autocomplete>
+                                 @select="handleSelect"
+                                 @blur="insertNewGoods"></el-autocomplete>
                 <p v-else="">{{scope.row.goodsName}}</p>
             </template>
         </el-table-column>
@@ -63,6 +64,7 @@
 
 <script>
     import billCommon from './billCommon.js';
+    import GuidGenerate from '../../utils/GuidGenerate.js';
 
     export default {
         components: {},
@@ -95,7 +97,7 @@
         computed: {},
         methods: {
             getSummaries(param) {
-                const {columns, data} = param;
+                const { columns, data } = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -125,7 +127,7 @@
             },
             delGoods(index) {
                 if (this.goodsList.length == 1) {
-                    this.$message({message: '必须保留一个商品', type: 'warning'});
+                    this.$message({ message: '必须保留一个商品', type: 'warning' });
                     return;
                 }
                 const billGoodsId = this.goodsList[index].id;
@@ -140,7 +142,7 @@
                                 this.$emit('deleteGoodsEvent', _this.billCustomerId, billGoodsId);
                                 this.$emit('updateCustomer');
                             } else {
-                                this.$message({message: res.msg, type: 'error'});
+                                this.$message({ message: res.msg, type: 'error' });
                             }
                         })
                 }
@@ -148,14 +150,15 @@
             rowClick(row, event, column) {
                 this.currentRow = row;
             },
+
             querySearchAsync(key, cb) {
                 if (key.trim() === '') {
                     this.currentRow.goodsId = '';
                     cb([]);
                     return;
                 }
-                const queryData = {name: key.trim().toLowerCase()};
-                this.$http.get(`/api/goods/search`, {params: queryData})
+                const queryData = { name: key.trim().toLowerCase() };
+                this.$http.get(`/api/goods/search`, { params: queryData })
                     .then(res => {
                         if (res.success) {
                             billCommon.bindSearchKey(key, res.data, this.currentRow, false);
@@ -168,6 +171,40 @@
             handleSelect(item) {
                 this.currentRow.goodsId = item.id;
             },
+            /**
+             * 插入商品到后台
+             */
+            insertNewGoods(){
+                if (this.currentRow.isNewGoods) {
+                    const goods={
+                        id:gen
+                    }
+                    this.$http.put('api/goods')
+                        .then(res => {
+                            if (res.success) {
+                                this.currentRow.isNewGoods = false;
+                            } else {
+                                this.resetGoods();
+                            }
+                        })
+                        .catch(() => {
+                            this.resetGoods();
+                        })
+                }
+            },
+            /**
+             * 重置商品
+             */
+            resetGoods(){
+                this.currentRow.goodsId = '';
+                this.currentRow.goodsName = '';
+                this.$message({ message: '请重新输入商品名称', type: 'info' });
+            },
+            /**
+             * 改变币种类型
+             * @param index
+             * @param row
+             */
             changeCurrency(index, row) {
                 if (!row.isRMB) {
                     row.isRMB = true;

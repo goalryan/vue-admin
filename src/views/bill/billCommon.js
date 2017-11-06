@@ -46,7 +46,15 @@ export default {
     getRandom() {
         return Math.random();
     },
+    /**
+     * 匹配模糊搜索出来的结果
+     * @param key 输入值
+     * @param result 匹配数组
+     * @param currentRow 当前行
+     * @param isCustomer 是否客户
+     */
     bindSearchKey(key, result, currentRow, isCustomer) {
+        // 无匹配数组，设置为新对象
         if (result.length === 0) {
             if (isCustomer) {
                 currentRow.customerId = GuidGenerate.getAddId();
@@ -57,6 +65,7 @@ export default {
                 currentRow.isNewGoods = true;
             }
         } else {
+            // 匹配到相同的对象
             let findItem = result.find(item => item.value === key.trim().toLowerCase());
             if (findItem !== undefined) {
                 if (isCustomer) {
