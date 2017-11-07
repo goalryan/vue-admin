@@ -149,6 +149,7 @@
             },
             rowClick(row, event, column) {
                 this.currentRow = row;
+                this.currentRow.isNewGoods = false;
             },
 
             querySearchAsync(key, cb) {
@@ -174,12 +175,13 @@
             /**
              * 插入商品到后台
              */
-            insertNewGoods(){
+            insertNewGoods() {
                 if (this.currentRow.isNewGoods) {
-                    const goods={
-                        id:gen
+                    const goods = {
+                        id: this.currentRow.goodsId,
+                        name: this.currentRow.goodsName
                     }
-                    this.$http.put('api/goods')
+                    this.$http.post('api/goods/add', goods)
                         .then(res => {
                             if (res.success) {
                                 this.currentRow.isNewGoods = false;
@@ -195,7 +197,7 @@
             /**
              * 重置商品
              */
-            resetGoods(){
+            resetGoods() {
                 this.currentRow.goodsId = '';
                 this.currentRow.goodsName = '';
                 this.$message({ message: '请重新输入商品名称', type: 'info' });
