@@ -66,7 +66,7 @@ export default {
             }
         } else {
             // 匹配到相同的对象
-            let findItem = result.find(item => item.value === key.trim().toLowerCase());
+            let findItem = result.find(item => item.value.toLowerCase() === key.trim().toLowerCase());
             if (findItem !== undefined) {
                 if (isCustomer) {
                     currentRow.customerId = findItem.id;
