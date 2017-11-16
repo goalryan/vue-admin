@@ -56,6 +56,11 @@
                                 if (res.success) {
                                     sessionStorage.setItem("token", res.data.access_token);
                                     localStorage.setItem("token", res.data.access_token);
+                                    const user = {
+                                        name: '刘绍俊',
+                                        avatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png'
+                                    };
+                                    sessionStorage.setItem('user', JSON.stringify(user));
                                     this.$router.push({path: '/bill'});
                                 } else {
                                     this.$message({message: res.msg, type: 'error'});
@@ -66,11 +71,6 @@
                                 this.logining = false;
                             });
 
-                        const user = {
-                            name: '刘绍俊',
-                            avatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png'
-                        };
-//                        sessionStorage.setItem('user', JSON.stringify(user));
 
                     }
                 });
