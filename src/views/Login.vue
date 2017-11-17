@@ -60,8 +60,8 @@
                                         name: data.user.nickName,
                                         avatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png'
                                     }
-                                    localStorage.setItem("token", token);
-                                    localStorage.setItem("user", JSON.stringify(user));
+                                    sessionStorage.setItem("token", token);
+                                    sessionStorage.setItem("user", JSON.stringify(user));
                                     this.$router.push({ path: '/bill' });
                                 } else {
                                     this.$message({ message: res.msg, type: 'error' });

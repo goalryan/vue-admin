@@ -92,4 +92,3 @@ export default [
         redirect: { path: '/404' }
     }
 ];
-

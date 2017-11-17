@@ -38,6 +38,7 @@ export default function plugin(Vue, axios, qs, v) {
         return response.data;
     }, (error) => {
         if (error.response.status === 401) {
+            debugger;
             window.location.href = '/login';
         }
         return Promise.reject(error);

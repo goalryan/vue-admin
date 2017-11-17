@@ -131,9 +131,9 @@
                 this.$confirm('确认退出吗?', '提示', {
                     //type: 'warning'
                 }).then(() => {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('user');
-                    _this.$router.push('/login');
+                    sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('user');
+                    _this.$router.push({ path: '/login' });
                 }).catch(() => {
 
                 });
@@ -147,7 +147,7 @@
             }
         },
         mounted() {
-            var user = localStorage.getItem('user');
+            var user = sessionStorage.getItem('user');
             if (user) {
                 user = JSON.parse(user);
                 this.sysUserName = user.name || '';

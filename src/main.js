@@ -25,16 +25,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.path == '/login') {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-    }
-    let user = JSON.parse(localStorage.getItem('user'));
-    if (!user && to.path != '/login') {
-        next({ path: '/login' });
-    } else {
+    // debugger;
+    // if (to.path == '/login') {
+    //     sessionStorage.removeItem('token');
+    //     sessionStorage.removeItem('user');
+    // }
+    // let user = JSON.parse(sessionStorage.getItem('user'));
+    // if (!user && to.path != '/login') {
+    //     next({ path: '/login' });
+    // } else {
         next()
-    }
+    // }
 })
 
 new Vue({
