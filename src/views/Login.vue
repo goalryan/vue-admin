@@ -31,11 +31,11 @@
                 },
                 rules: {
                     userName: [
-                        {required: true, message: '请输入账号', trigger: 'blur'},
+                        { required: true, message: '请输入账号', trigger: 'blur' },
                         //{ validator: validaePass }
                     ],
                     password: [
-                        {required: true, message: '请输入密码', trigger: 'blur'},
+                        { required: true, message: '请输入密码', trigger: 'blur' },
                         //{ validator: validaePass2 }
                     ]
                 },
@@ -53,28 +53,26 @@
                         this.logining = true;
                         this.$http.post('/api/user/login', this.ruleForm)
                             .then(res => {
-                                if (res.success) {
-                                    sessionStorage.setItem("token", res.data.access_token);
-                                    localStorage.setItem("token", res.data.access_token);
+                                const { data, success } = res;
+                                if (success) {
+                                    const token = `${data.token.token_type} ${data.token.access_token}`;
                                     const user = {
-                                        name: '刘绍俊',
+                                        name: data.user.nickName,
                                         avatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png'
-                                    };
-                                    sessionStorage.setItem('user', JSON.stringify(user));
-                                    this.$router.push({path: '/bill'});
+                                    }
+                                    localStorage.setItem("token", token);
+                                    localStorage.setItem("user", JSON.stringify(user));
+                                    this.$router.push({ path: '/bill' });
                                 } else {
-                                    this.$message({message: res.msg, type: 'error'});
+                                    this.$message({ message: res.msg, type: 'error' });
                                 }
                                 this.logining = false;
                             })
                             .catch(e => {
                                 this.logining = false;
                             });
-
-
                     }
                 });
-
             },
             createUser() {
                 const user = {
@@ -106,15 +104,15 @@
         border: 1px solid #eaeaea;
         box-shadow: 0 0 25px #cac6c6;
 
-        .title {
-            margin: 0px auto 40px auto;
-            text-align: center;
-            color: #505458;
-        }
+    .title {
+        margin: 0px auto 40px auto;
+        text-align: center;
+        color: #505458;
+    }
 
-        .remember {
-            margin: 0px 0px 35px 0px;
-        }
+    .remember {
+        margin: 0px 0px 35px 0px;
+    }
 
     }
 </style>

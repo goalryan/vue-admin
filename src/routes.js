@@ -12,7 +12,7 @@ import AddressExport from './views/customer/addressExport.vue'
 import Express from './views/customer/express.vue'
 import echarts from './views/charts/echarts.vue'
 
-let routes = [
+export default [
     {
         path: '/test',
         component: Test,
@@ -83,14 +83,13 @@ let routes = [
         name: 'Charts',
         iconCls: 'fa fa-bar-chart',
         children: [
-            {path: '/echarts', component: echarts, name: '图表'}
+            { path: '/echarts', component: echarts, name: '图表' }
         ]
     },
     {
         path: '*',
         hidden: true,
-        redirect: {path: '/404'}
+        redirect: { path: '/404' }
     }
 ];
 
-export default routes;

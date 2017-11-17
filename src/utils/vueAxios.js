@@ -18,6 +18,8 @@ export default function plugin(Vue, axios, qs, v) {
     // axios.defaults.timeout = 5000;
     //配置请求头
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+    console.log(localStorage.getItem("token"));
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
     //配置接口地址
     axios.defaults.baseURL = 'http://localhost:5000';
 
@@ -33,14 +35,11 @@ export default function plugin(Vue, axios, qs, v) {
     });
 
     axios.interceptors.response.use((response) => {
-        //对响应数据做些事
-        // if (!response.data.success) {
-        //     return Promise.reject(response);
-        // }
         return response.data;
     }, (error) => {
-        console.log("网络异常");
-        // this.$message({message: error, type: 'error'});
+        if (error.response.status === 401) {
+            window.location.href = '/login';
+        }
         return Promise.reject(error);
     });
 
