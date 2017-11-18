@@ -2,7 +2,7 @@
     <el-row class="container">
         <el-col :span="24" class="header">
             <el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-                {{collapsed?'':sysName}}
+                {{collapsed ? '' : sysName}}
             </el-col>
             <el-col :span="10">
                 <div class="tools" @click.prevent="collapse">
@@ -15,7 +15,7 @@
                             :src="this.sysUserAvatar"/> {{sysUserName}}</span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>我的消息</el-dropdown-item>
-                        <el-dropdown-item>设置</el-dropdown-item>
+                        <el-dropdown-item @click.native="showEditPassword">修改密码</el-dropdown-item>
                         <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -89,14 +89,20 @@
                 </div>
             </section>
         </el-col>
+        <edit-password-dialog :show.sync="isShowEditPassword"></edit-password-dialog>
     </el-row>
 </template>
 
 <script>
+    import EditPasswordDialog from './common/editPasswordView.vue';
+
     export default {
+        components: {
+            EditPasswordDialog
+        },
         data() {
             return {
-                sysName: 'EasyGou',
+                sysName: '代购助手',
                 collapsed: false,
                 sysUserName: '',
                 sysUserAvatar: '',
@@ -109,9 +115,11 @@
                     type: [],
                     resource: '',
                     desc: ''
-                }
+                },
+                isShowEditPassword: false
             }
-        },
+        }
+        ,
         methods: {
             onSubmit() {
                 console.log('submit!');
@@ -125,15 +133,18 @@
             handleSelect: function (a, b) {
                 console.log(a, b);
             },
+            showEditPassword() {
+                this.isShowEditPassword = true;
+            },
             //退出登录
             logout: function () {
                 var _this = this;
                 this.$confirm('确认退出吗?', '提示', {
-                    //type: 'warning'
+                    type: 'warning'
                 }).then(() => {
                     sessionStorage.removeItem('token');
                     sessionStorage.removeItem('user');
-                    _this.$router.push({ path: '/login' });
+                    _this.$router.push({path: '/login'});
                 }).catch(() => {
 
                 });

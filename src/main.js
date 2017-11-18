@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 import './assets/index.less';
 
-Vue.use(ElementUI, { size: 'mini' })
+Vue.use(ElementUI, {size: 'mini'})
 Vue.use(EcUI)
 Vue.use(VueRouter)
 Vue.use(VueAxios, Axios, Qs);
@@ -25,17 +25,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    // debugger;
-    // if (to.path == '/login') {
-    //     sessionStorage.removeItem('token');
-    //     sessionStorage.removeItem('user');
-    // }
-    // let user = JSON.parse(sessionStorage.getItem('user'));
-    // if (!user && to.path != '/login') {
-    //     next({ path: '/login' });
-    // } else {
+    let token = sessionStorage.getItem('token');
+    if (!token && to.path != '/login') {
+        next({path: '/login'});
+    } else {
         next()
-    // }
+    }
 })
 
 new Vue({

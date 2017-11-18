@@ -4,12 +4,12 @@
             <div class="dialog-wrap" :style="dialogCustomer">
                 <div class="dialog-head">
                     <span>{{title}}</span>
-                    <!--<i v-if="showClose" class="icon-modal__close cursor" @click="close"></i>-->
+                    <i v-if="showClose" class="icon-modal__close cursor" @click="close"></i>
                 </div>
                 <slot></slot>
                 <div class="dialog-footer" v-if="showCancelButton || showConfirmButton">
                     <slot name="footer">
-                        <ec-button v-if="showCancelButton" :loading="cancelLoading" type="plain-default"
+                        <ec-button v-if="showCancelButton" :loading="cancelLoading" type=""
                                    @click="cancel">{{cancelTitle}}
                         </ec-button>
                         <ec-button v-if="showConfirmButton" :loading="confirmLoading" @click="confirm">
@@ -38,7 +38,7 @@
             },
             showClose: {
                 type: Boolean,
-                default: true
+                default: false
             },
             showCancelButton: {
                 type: Boolean,

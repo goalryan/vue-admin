@@ -1,8 +1,12 @@
 <template>
     <ec-container-item>
         <template slot="head">
-            <el-button type="primary" @click="addBill()">添加账单</el-button>
-            <!--<el-button type="primary" @click="importAddress()">导入账单</el-button>-->
+            <el-form :inline="true" class="module-form">
+                <el-form-item>
+                    <el-button type="primary" @click="refresh()">刷新账单</el-button>
+                    <el-button type="primary" @click="addBill()">添加账单</el-button>
+                </el-form-item>
+            </el-form>
         </template>
 
         <el-table :data="bills" highlight-current-row>
@@ -74,7 +78,7 @@
             showBill(docNo) {
                 this.$router.push({
                     name: 'billDetail',
-                    params: {status: 'show', docNo: docNo}
+                    params: {docNo: docNo}
                 })
             },
             editBill(docNo) {
@@ -143,10 +147,6 @@
                             goodsList: goodsList
                         });
                     });
-                    console.log('newBill');
-                    console.log(newBill);
-
-
                     this.$http.post('/api/bill/save', newBill)
                         .then(res => {
                             if (res.success) {

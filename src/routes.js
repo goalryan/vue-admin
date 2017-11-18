@@ -41,9 +41,9 @@ export default [
         children: [
             // {path: '/main', component: Main, name: '主页', hidden: true},
             {
-                path: '/bill', component: Bill, name: '账单清单',
+                path: '/bill', component: Bill, name: '账单管理',
                 children: [{
-                    path: 'detail/:status/:docNo?', component: BillDetail, name: 'billDetail'
+                    path: 'detail/:docNo', component: BillDetail, name: 'billDetail'
                 }]
             }
         ]
