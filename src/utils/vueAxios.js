@@ -37,6 +37,7 @@ export default function plugin(Vue, axios, qs, v) {
         return response.data;
     }, (error) => {
         if (error.response.status === 401) {
+            // VueAxios.prototype.$message({message: '服务异常，请联系供应商', type: 'error'});
             window.location.href = '#/login';
         }
         return Promise.reject(error);
