@@ -23,6 +23,8 @@ export default function plugin(Vue, axios, qs, v) {
 
     axios.interceptors.request.use((config) => {
         config.headers.common['Authorization'] = sessionStorage.getItem("token");
+        config.headers.common['EnterpriseId'] = sessionStorage.getItem("enterpriseId");
+        config.headers.common['UserName'] = sessionStorage.getItem("userName");
         //在发送请求之前做某件事（以表单形式提交数据）
         // if (config.method === 'post') {
         //     config.data = qs.stringify(config.data);

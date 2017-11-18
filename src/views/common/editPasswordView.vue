@@ -96,11 +96,7 @@
             }
         },
         mounted() {
-            var user = sessionStorage.getItem('user');
-            if (user) {
-                user = JSON.parse(user);
-                this.userForm.userName = user.name;
-            }
+            this.userForm.userName = sessionStorage.getItem('userName');
         },
         methods: {
             handleSubmit(formName) {

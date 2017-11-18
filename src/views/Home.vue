@@ -143,6 +143,8 @@
                     type: 'warning'
                 }).then(() => {
                     sessionStorage.removeItem('token');
+                    sessionStorage.removeItem("enterpriseId");
+                    sessionStorage.removeItem("userName");
                     sessionStorage.removeItem('user');
                     _this.$router.push({path: '/login'});
                 }).catch(() => {
@@ -158,12 +160,7 @@
             }
         },
         mounted() {
-            var user = sessionStorage.getItem('user');
-            if (user) {
-                user = JSON.parse(user);
-                this.sysUserName = user.name || '';
-                this.sysUserAvatar = user.avatar || '';
-            }
+            this.sysUserName = sessionStorage.getItem('userName');
         }
     }
 

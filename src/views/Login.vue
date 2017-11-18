@@ -54,12 +54,9 @@
                                 const {data, success} = res;
                                 if (success) {
                                     const token = `${data.token.token_type} ${data.token.access_token}`;
-                                    const user = {
-                                        name: data.user.userName,
-                                        avatar: 'https://raw.githubusercontent.com/taylorchen709/markdown-images/master/vueadmin/user.png'
-                                    }
                                     sessionStorage.setItem("token", token);
-                                    sessionStorage.setItem("user", JSON.stringify(user));
+                                    sessionStorage.setItem("enterpriseId", data.user.enterpriseId);
+                                    sessionStorage.setItem("userName", data.user.userName);
                                     setTimeout(() => {
                                         this.$router.push({path: '/bill'});
                                     }, 500);
