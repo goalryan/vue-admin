@@ -19,8 +19,8 @@ export default function plugin(Vue, axios, qs, v) {
     //配置请求头
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
     //配置接口地址
-    axios.defaults.baseURL = 'http://localhost:5000';
-
+    axios.defaults.baseURL = 'http://120.79.19.251:5000';
+    // axios.defaults.baseURL = 'http://localhost:5000';
     axios.interceptors.request.use((config) => {
         config.headers.common['Authorization'] = sessionStorage.getItem("token");
         config.headers.common['EnterpriseId'] = sessionStorage.getItem("enterpriseId");
@@ -38,11 +38,14 @@ export default function plugin(Vue, axios, qs, v) {
     axios.interceptors.response.use((response) => {
         return response.data;
     }, (error) => {
+        if (error.response === undefined) {
+            Vue.prototype.$message({ message: '服务异常，请联系供应商', type: 'error' });
+            return;
+        }
         if (error.response.status === 401) {
-            // VueAxios.prototype.$message({message: '服务异常，请联系供应商', type: 'error'});
             window.location.href = '#/login';
         }
-        return Promise.reject(error);
+        // return Promise.reject(error);
     });
 
     VueAxios.axios = axios;
