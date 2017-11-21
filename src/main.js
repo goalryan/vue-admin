@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 import './assets/index.less';
 
-Vue.use(ElementUI, {size: 'mini'})
+Vue.use(ElementUI, { size: 'mini' })
 Vue.use(EcUI)
 Vue.use(VueRouter)
 Vue.use(VueAxios, Axios, Qs);
@@ -24,10 +24,12 @@ const router = new VueRouter({
     routes: routes
 })
 
+const TITLE = 'EasyGou';
 router.beforeEach((to, from, next) => {
+    document.title = TITLE;
     let token = sessionStorage.getItem('token');
     if (!token && to.path != '/login') {
-        next({path: '/login'});
+        next({ path: '/login' });
     } else {
         next()
     }
