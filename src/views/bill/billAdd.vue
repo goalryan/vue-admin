@@ -20,13 +20,15 @@
                 type: Boolean,
                 default: false
             },
-            docNo: {
-                type: String
+            id: {
+                type: String,
+                default: ''
             }
         },
         data() {
             return {
                 bill: {
+                    id: '',
                     docNo: '',
                     taxRate: 1,
                     memo: ''
@@ -44,7 +46,7 @@
             },
             getTitle: {
                 get() {
-                    return this.docNo === '' ? "添加账单" : '编辑账单';
+                    return this.id === '' ? "添加账单" : '编辑账单';
                 }
             }
         },
@@ -57,28 +59,28 @@
         },
         methods: {
             getData() {
-                if (this.docNo != '') {
-                    const queryData = {docNo: this.docNo};
-                    this.$http.get(`/api/bill/info`, {params: queryData})
+                if (this.id != '') {
+                    const queryData = { id: this.id };
+                    this.$http.get(`/api/bill/info`, { params: queryData })
                         .then(res => {
                             if (res.success) {
                                 this.bill = res.data;
                             } else {
-                                this.$message({message: res.msg, type: 'error'});
+                                this.$message({ message: res.msg, type: 'error' });
                             }
                         });
                 }
 
             },
             confirm() {
-                if (this.docNo != '') {
-                    this.$http.put(`/api/bill/${this.docNo}`, this.bill)
+                if (this.id != '') {
+                    this.$http.put(`/api/bill/${this.id}`, this.bill)
                         .then(res => {
                             if (res.success) {
                                 this.reset();
                                 this.$emit('confirm', '更新成功');
                             } else {
-                                this.$message({message: res.msg, type: 'error'});
+                                this.$message({ message: res.msg, type: 'error' });
                             }
                         });
                 } else {
@@ -88,7 +90,7 @@
                                 this.reset();
                                 this.$emit('confirm', '添加成功');
                             } else {
-                                this.$message({message: res.msg, type: 'error'});
+                                this.$message({ message: res.msg, type: 'error' });
                             }
                         });
                 }

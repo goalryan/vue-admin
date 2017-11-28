@@ -14,20 +14,20 @@
             </el-table-column>
             <el-table-column prop="docNo" label="单号" width="160" sortable>
                 <template scope="scope">
-                    <ec-text type="primary" @click="showBill(scope.row.docNo)">{{scope.row.docNo}}</ec-text>
+                    <ec-text type="primary" @click="showBill(scope.row.id)">{{scope.row.docNo}}</ec-text>
                 </template>
             </el-table-column>
             <el-table-column prop="taxRate" label="汇率"/>
             <!--<el-table-column prop="memo" label="备注"/>-->
             <el-table-column label="操作" align="center" width="150">
                 <template scope="scope">
-                    <el-button type="primary" @click="editBill(scope.row.docNo)">编辑</el-button>
-                    <el-button type="danger" @click="deleteBill(scope.$index, scope.row.docNo)">删除
+                    <el-button type="primary" @click="editBill(scope.row.id)">编辑</el-button>
+                    <el-button type="danger" @click="deleteBill(scope.$index, scope.row.id)">删除
                     </el-button>
                 </template>
             </el-table-column>
         </el-table>
-        <add-bill-dialog :show.sync="showAddBillDialog" :docNo="selectedDocNo"
+        <add-bill-dialog :show.sync="showAddBillDialog" :id="selectedBillId"
                          @confirm="addBillSuccess"></add-bill-dialog>
         <router-view @refresh="refresh"></router-view>
     </ec-container-item>
@@ -51,7 +51,7 @@
             return {
                 bills: [],
                 showAddBillDialog: false,
-                selectedDocNo: ''
+                selectedBillId: ''
             }
         },
         mounted() {
@@ -67,113 +67,41 @@
                         if (res.success) {
                             this.bills = res.data;
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                     });
             },
             addBill() {
-                this.selectedDocNo = '';
+                this.selectedBillId = '';
                 this.showAddBillDialog = true;
             },
-            showBill(docNo) {
+            showBill(id) {
                 this.$router.push({
                     name: 'billDetail',
-                    params: {docNo: docNo}
+                    params: { id: id }
                 })
             },
-            editBill(docNo) {
-                this.selectedDocNo = docNo;
+            editBill(id) {
+                this.selectedBillId = id;
                 this.showAddBillDialog = true;
             },
-            deleteBill(index, docNo) {
+            deleteBill(index, id) {
                 this.doConfirm(() => {
-                    this.$http.delete('/api/bill/' + docNo)
+                    this.$http.delete('/api/bill/' + id)
                         .then(res => {
                             if (res.success) {
                                 this.bills.splice(index, 1);
-                                this.$message({message: '删除成功', type: 'success'});
+                                this.$message({ message: '删除成功', type: 'success' });
                             } else {
-                                this.$message({message: res.msg, type: 'error'});
+                                this.$message({ message: res.msg, type: 'error' });
                             }
                         });
                 })
             },
             addBillSuccess(msg) {
-                this.$message({message: msg, type: 'success'});
+                this.$message({ message: msg, type: 'success' });
                 this.fetchData();
-            },
-            importAddress() {
-                const bills = store.fetchBillList();
-//                console.log(bills);
-
-                bills.forEach(bill => {
-                    let order = store.fetchBill(bill.docNo.substring(0, 12));
-                    console.log('order');
-                    console.log(order);
-                    bill.docNo = `${bill.docNo}001`;
-                    let newBill = {
-                        docNo: bill.docNo,
-                        taxRate: order.taxRate,
-                        memo: '',
-                        customerList: []
-                    };
-                    order.customers.forEach(customer => {
-                        const billCustomerId = GuidGenerate.getAddId();
-
-                        let goodsList = [];
-                        customer.products.forEach(goods => {
-                            goodsList.push({
-                                id: GuidGenerate.getAddId(),
-                                docNo: bill.docNo,
-                                billCustomerId: billCustomerId,
-                                goodsId: '',
-                                goodsName: goods.name,
-                                quantity: goods.quantity,
-                                inUnitPrice: goods.inUnitPrice,
-                                outUnitPrice: goods.outUnitPrice,
-                                isRMB: goods.isRMB,
-                                positionId: '',
-                                isAdd: true
-                            })
-                        })
-                        newBill.customerList.push({
-                            id: billCustomerId,
-                            docNo: bill.docNo,
-                            customerId: '',
-                            customerNickName: customer.customerName,
-                            isPaid: customer.isPaid,
-                            memo: '',
-                            isAdd: true,
-                            goodsList: goodsList
-                        });
-                    });
-                    this.$http.post('/api/bill/save', newBill)
-                        .then(res => {
-                            if (res.success) {
-                                this.$message({message: '保存成功', type: 'success'});
-                            } else {
-                                this.$message({message: res.msg, type: 'error'});
-                            }
-                        })
-                })
-
-
-//                let addressList = storeCustomer.fetchCustomers();
-//                addressList = addressList.map(address => {
-//                    address.receiver = address.name;
-//                    address.deliveryAddress = address.address;
-//                    address.memo = '';
-//                    return address;
-//                });
-//
-//                console.log(addressList);
-//                this.$http.post('/api/address/import', addressList)
-//                    .then(res => {
-//                        this.$message({message: '成功', type: 'success'});
-//                    })
-
             }
-
         }
     }
 
