@@ -4,11 +4,11 @@
 import GuidGenerate from '../../utils/GuidGenerate.js';
 
 export default {
-    initCustomer(docNo) {
+    initCustomer(billId) {
         const billCustomerId = GuidGenerate.getAddId();
         return {
             id: billCustomerId,
-            docNo: docNo,
+            billId: billId,
             customerId: '',
             customerNickName: '',
             quantity: 1,
@@ -20,14 +20,14 @@ export default {
             isAdd: true,
             isNewCustomer: false,
             goodsList: [
-                this.initGoods(docNo, billCustomerId)
+                this.initGoods(billId, billCustomerId)
             ]
         }
     },
-    initGoods(docNo, billCustomerId) {
+    initGoods(billId, billCustomerId) {
         return {
             id: GuidGenerate.getAddId(),
-            docNo: docNo,
+            billId: billId,
             billCustomerId: billCustomerId,
             goodsId: '',
             goodsName: '',

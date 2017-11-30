@@ -9,11 +9,6 @@
                               @change="changeTaxRate"></el-input>
                     <p v-else="">{{bill.taxRate}}</p>
                 </el-form-item>
-                <!--<el-form-item label="备注:">-->
-                <!--<el-input v-if="isEdit" v-model="bill.memo" placeholder="请输入备注"-->
-                <!--@change="changeTaxRate"></el-input>-->
-                <!--<p v-else="">{{bill.memo}}</p>-->
-                <!--</el-form-item>-->
             </el-form>
 
             <el-table
@@ -23,7 +18,7 @@
 
                 <el-table-column type="expand">
                     <template scope="scope">
-                        <products :docNo="bill.docNo" :billCustomerId="scope.row.id"
+                        <products :billId="bill.id" :billCustomerId="scope.row.id"
                                   :goodsList="scope.row.goodsList" :taxRate="bill.taxRate" :isEdit="isEdit"
                                   @updateCustomer="updateCustomer(scope.$index)"
                                   @deleteGoodsEvent="deleteGoodsEvent"></products>
@@ -114,7 +109,8 @@
     import MessageMixin from '../../utils/MessageMixin.js';
     import Products from './products.vue';
     import billCommon from './billCommon.js';
-    import AddressListDialog from './billAddressList.vue'
+    import AddressListDialog from './billAddressList.vue';
+    import lodash from 'lodash';
 
     export default {
         mixins: [MessageMixin],
@@ -203,7 +199,7 @@
                         if (res.success) {
                             this.bill = res.data;
                             if (this.bill.customerList.length === 0) {
-                                this.bill.customerList.push(billCommon.initCustomer(this.bill.docNo));
+                                this.bill.customerList.push(billCommon.initCustomer(this.bill.id));
                             }
                             this.billBak = JSON.parse(JSON.stringify(this.bill));
                         } else {
@@ -212,7 +208,7 @@
                     });
             },
             addCustomer(index) {
-                this.bill.customerList.push(billCommon.initCustomer(this.bill.docNo));
+                this.bill.customerList.push(billCommon.initCustomer(this.bill.id));
             },
             updateCustomer(index) {
                 let quantity = 0;
@@ -311,7 +307,10 @@
                     }
                 }
             },
-            querySearchAsync(key, cb) {
+            /**
+             * 输入500毫秒后才开始查询数据
+             */
+            querySearchAsync: lodash.debounce(function (key, cb) {
                 if (key.trim() === '') {
                     this.currentRow.customerId = '';
                     cb([]);
@@ -327,7 +326,24 @@
                             cb([]);
                         }
                     })
-            },
+            }, 500),
+//            querySearchAsync(key, cb) {
+//                if (key.trim() === '') {
+//                    this.currentRow.customerId = '';
+//                    cb([]);
+//                    return;
+//                }
+//                const queryData = { nickName: key.trim().toLowerCase() };
+//                this.$http.get(`/api/customer/search`, { params: queryData })
+//                    .then(res => {
+//                        if (res.success) {
+//                            billCommon.bindSearchKey(key, res.data, this.currentRow, true);
+//                            cb(res.data);
+//                        } else {
+//                            cb([]);
+//                        }
+//                    })
+//            },
             handleSelect(item) {
                 this.currentRow.customerId = item.id;
                 this.currentRow.isNewCustomer = false;

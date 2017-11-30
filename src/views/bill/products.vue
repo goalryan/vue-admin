@@ -74,7 +74,7 @@
                 type: Boolean,
                 default: false
             },
-            docNo: {
+            billId: {
                 type: String
             },
             billCustomerId: {
@@ -123,7 +123,7 @@
                 return sums;
             },
             addGoods(index) {
-                this.goodsList.splice(index + 1, 0, billCommon.initGoods(this.docNo, this.billCustomerId));
+                this.goodsList.splice(index + 1, 0, billCommon.initGoods(this.billId, this.billCustomerId));
             },
             delGoods(index) {
                 if (this.goodsList.length == 1) {
