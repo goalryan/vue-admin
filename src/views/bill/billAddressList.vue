@@ -74,7 +74,9 @@
         watch: {
             show(val) {
                 if (val) {
-                    this.fetchData()
+                    this.fetchData();
+                } else {
+                    this.addresses = [];
                 }
             }
         },

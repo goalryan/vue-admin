@@ -39,13 +39,16 @@
                 </el-table-column>
                 <el-table-column v-if="!isEdit" label="收货地址" header-align="center" align="center">
                     <template scope="scope">
-                        <el-button v-if="scope.row.addressId === null||scope.row.addressId === ''" type="danger"
-                                   @click="openAddressList()">
-                            请选择
-                        </el-button>
-                        <el-button v-else type="primary" @click="openAddressList()">
-                            查看
-                        </el-button>
+                        <template v-if="scope.row.customerId!==''">
+                            <el-button v-if="scope.row.addressId === null||scope.row.addressId === ''" type="danger"
+                                       @click="openAddressList()">
+                                请选择
+                            </el-button>
+                            <el-button v-else type="primary" @click="openAddressList()">
+                                查看
+                            </el-button>
+                        </template>
+
                     </template>
                 </el-table-column>
                 <el-table-column label="数量" prop="quantity" header-align="right" align="right">
@@ -168,15 +171,15 @@
                 }
             },
             export2Excel() {
-                const queryData = { docNo: this.bill.docNo };
-                this.$http.get('api/address/export', { params: queryData })
+                const queryData = {id: this.bill.id};
+                this.$http.get('api/address/export', {params: queryData})
                     .then(res => {
                         if (res.success) {
                             res.data.forEach(item => {
                                 item.zeroCol = '';
                             });
                             require.ensure([], () => {
-                                const { export_json_to_excel } = require('../../utils/ExportExcel');
+                                const {export_json_to_excel} = require('../../utils/ExportExcel');
                                 const tHeader = ['订单编号', '收件人姓名（必填）', '收件人手机（二选一）', '收件人电话（二选一）', '收件人地址（必填）', '商品信息', '寄件人姓名', '寄件人手机（二选一）', '寄件人电话（二选一）', '寄件人地址'];
                                 const filterVal = ['zeroCol', 'receiver', 'phone', 'zeroCol', 'deliveryAddress', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol'];
                                 const list = res.data;
@@ -184,7 +187,7 @@
                                 export_json_to_excel(tHeader, data, '收件人信息');//自定义打印导入数据模板
                             })
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
                     })
 
@@ -193,8 +196,8 @@
                 return jsonData.map(v => filterVal.map(j => v[j]))
             },
             fetchData() {
-                const queryData = { id: this.bill.id };
-                this.$http.get(`/api/bill/detail`, { params: queryData })
+                const queryData = {id: this.bill.id};
+                this.$http.get(`/api/bill/detail`, {params: queryData})
                     .then(res => {
                         if (res.success) {
                             this.bill = res.data;
@@ -203,7 +206,7 @@
                             }
                             this.billBak = JSON.parse(JSON.stringify(this.bill));
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
                     });
             },
@@ -242,7 +245,7 @@
                 });
             },
             getSummaries(param) {
-                const { columns, data } = param;
+                const {columns, data} = param;
                 const sums = [];
                 columns.forEach((column, index) => {
                     if (index === 0) {
@@ -309,15 +312,14 @@
             },
             /**
              * 输入500毫秒后才开始查询数据
-             */
-            querySearchAsync: lodash.debounce(function (key, cb) {
+             querySearchAsync: lodash.debounce(function (key, cb) {
                 if (key.trim() === '') {
                     this.currentRow.customerId = '';
                     cb([]);
                     return;
                 }
-                const queryData = { nickName: key.trim().toLowerCase() };
-                this.$http.get(`/api/customer/search`, { params: queryData })
+                const queryData = {nickName: key.trim().toLowerCase()};
+                this.$http.get(`/api/customer/search`, {params: queryData})
                     .then(res => {
                         if (res.success) {
                             billCommon.bindSearchKey(key, res.data, this.currentRow, true);
@@ -327,23 +329,24 @@
                         }
                     })
             }, 500),
-//            querySearchAsync(key, cb) {
-//                if (key.trim() === '') {
-//                    this.currentRow.customerId = '';
-//                    cb([]);
-//                    return;
-//                }
-//                const queryData = { nickName: key.trim().toLowerCase() };
-//                this.$http.get(`/api/customer/search`, { params: queryData })
-//                    .then(res => {
-//                        if (res.success) {
-//                            billCommon.bindSearchKey(key, res.data, this.currentRow, true);
-//                            cb(res.data);
-//                        } else {
-//                            cb([]);
-//                        }
-//                    })
-//            },
+             */
+            querySearchAsync(key, cb) {
+                if (key.trim() === '') {
+                    this.currentRow.customerId = '';
+                    cb([]);
+                    return;
+                }
+                const queryData = {nickName: key.trim().toLowerCase()};
+                this.$http.get(`/api/customer/search`, {params: queryData})
+                    .then(res => {
+                        if (res.success) {
+                            billCommon.bindSearchKey(key, res.data, this.currentRow, true);
+                            cb(res.data);
+                        } else {
+                            cb([]);
+                        }
+                    })
+            },
             handleSelect(item) {
                 this.currentRow.customerId = item.id;
                 this.currentRow.isNewCustomer = false;
@@ -376,7 +379,7 @@
             resetCustomer() {
                 this.currentRow.customerId = '';
                 this.currentRow.customerNickName = '';
-                this.$message({ message: '请重新输入客户名称', type: 'info' });
+                this.$message({message: '请重新输入客户名称', type: 'info'});
             },
             checkExistCustomer() {
                 //检查是否存在相同的客户
@@ -384,7 +387,7 @@
                     const customer = this.bill.customerList[cIndex];
                     const findCustomers = this.bill.customerList.filter(cus => cus.customerId === customer.customerId);
                     if (findCustomers != undefined && findCustomers.length > 1) {
-                        this.$message({ message: `存在相同的客户【${customer.customerNickName}】`, type: 'error' });
+                        this.$message({message: `存在相同的客户【${customer.customerNickName}】`, type: 'error'});
                         return false
                     }
                 }
@@ -398,9 +401,9 @@
                     .then(res => {
                         if (res.success) {
                             this.saveSuccess();
-                            this.$message({ message: '保存成功', type: 'success' });
+                            this.$message({message: '保存成功', type: 'success'});
                         } else {
-                            this.$message({ message: res.msg, type: 'error' });
+                            this.$message({message: res.msg, type: 'error'});
                         }
                         this.lock = false;
                     })
@@ -411,7 +414,7 @@
             },
             deleteCustomer(index) {
                 if (this.bill.customerList.length === 1) {
-                    this.$message({ message: '必须保留一个客户', type: 'warning' });
+                    this.$message({message: '必须保留一个客户', type: 'warning'});
                     return;
                 }
                 const customer = this.bill.customerList[index];
@@ -427,7 +430,7 @@
                                     this.bill.customerList.splice(index, 1);
                                     this.deleteCustomerEvent(index);
                                 } else {
-                                    this.$message({ message: res.msg, type: 'error' });
+                                    this.$message({message: res.msg, type: 'error'});
                                 }
                             })
                     }, `确定删除客户【${customer.customerNickName}】?`)
