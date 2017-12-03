@@ -43,7 +43,7 @@ export default [
             {
                 path: '/bill', component: Bill, name: '账单管理',
                 children: [{
-                    path: 'detail/:docNo', component: BillDetail, name: 'billDetail'
+                    path: 'detail/:id', component: BillDetail, name: 'billDetail'
                 }]
             }
         ]

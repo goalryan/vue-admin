@@ -40,7 +40,7 @@
                 <el-table-column v-if="!isEdit" label="收货地址" header-align="center" align="center">
                     <template scope="scope">
                         <template v-if="scope.row.customerId!==''">
-                            <el-button v-if="scope.row.addressId === null||scope.row.addressId === ''" type="danger"
+                            <el-button v-if="!scope.row.addressId||scope.row.addressId === ''" type="danger"
                                        @click="openAddressList()">
                                 请选择
                             </el-button>
