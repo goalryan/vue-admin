@@ -1,0 +1,60 @@
+nginx启动、停止、无间断服务重启，可选  start | stop | restart | reload | status |  help
+service nginx start
+service nginx stop
+service nginx reload
+
+查看服务进程
+ps -aux | grep nginx
+
+查看端口进程
+lsof -i:80
+
+终止进程
+kill -9 [PID]
+
+删除文件夹
+rm -rf aaa/var/log/httpd/access
+删除文件
+rm -f aaa/var/log/httpd/access.log
+
+复制文件
+ cp -r service.easydaigou.com.key /usr/mycert
+
+查看服务
+netstat -ant | grep 9000
+
+如要查询是否开启80端口则：
+
+[root@joe-pc ~]# firewall-cmd --query-port=80/tcp
+ no
+显然80端口没有开启
+
+下面我们开启80端口：
+
+[root@joe-pc ~]# firewall-cmd --add-port=80/tcp
+success
+
+1.按照文件名查找
+
+(1)find / -name httpd.conf　　#在根目录下查找文件httpd.conf，表示在整个硬盘查找
+(2)find /etc -name httpd.conf　　#在/etc目录下文件httpd.conf
+
+
+
+
+netstat -lntup | grep 9000
+
+/var/log/php-fpm
+
+vi /etc/php-fpm.d/www.conf
+vi /usr/local/nginx/conf/nginx.conf
+
+/etc/php-fpm.conf
+sudo /usr/sbin/php-fpm
+
+/etc/logrotate.d/php-fpm
+/etc/rc.d/init.d/php-fpm
+/etc/sysconfig/php-fpm
+/usr/sbin/php-fpm
+/var/log/php-fpm
+/run/php-fpm
