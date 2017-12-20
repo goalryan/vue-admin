@@ -170,11 +170,9 @@
 
 <script>
     import EditPasswordDialog from './common/editPasswordView.vue';
-    import ElCol from "element-ui/packages/col/src/col";
 
     export default {
         components: {
-            ElCol,
             EditPasswordDialog
         },
         data() {
