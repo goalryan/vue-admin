@@ -102,7 +102,7 @@
         },
         data() {
             return {
-                sysName: '代购助手',
+                sysName: 'VUE',
                 collapsed: false,
                 sysUserName: '',
                 sysUserAvatar: '',

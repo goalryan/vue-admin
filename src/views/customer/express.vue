@@ -1,32 +1,34 @@
 <template>
-    <ec-container-item>
-        <template slot="head">
-            <el-form :inline="true" class="module-form">
-                <el-form-item label="查找范围">
-                    <el-input v-model="searchValue" @change="filterExpress" icon="close" :on-icon-click="clearFilter"
-                              placeholder="输入单号/手机号/姓名" size="small"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <ec-load-excel @success="postData"></ec-load-excel>
-                </el-form-item>
-            </el-form>
-        </template>
+    <ec-container>
+        <ec-container-item>
+            <template slot="head">
+                <el-form :inline="true" class="module-form">
+                    <el-form-item label="查找范围">
+                        <el-input v-model="searchValue" @change="filterExpress" icon="close"
+                                  :on-icon-click="clearFilter"
+                                  placeholder="输入单号/手机号/姓名" size="small"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <ec-load-excel @success="postData"></ec-load-excel>
+                    </el-form-item>
+                </el-form>
+            </template>
 
-        <el-table :data="searchExpress" highlight-current-row height="500">
-            <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
-            </el-table-column>
-            <el-table-column prop="id" label="单号" width="180" sortable></el-table-column>
-            <el-table-column prop="receiver" label="姓名" width="80" sortable></el-table-column>
-            <el-table-column prop="phone" label="手机号" width="120" sortable></el-table-column>
-            <el-table-column prop="deliveryAddress" label="地址" sortable></el-table-column>
-            <!--<el-table-column label="操作" align="center" width="150">-->
-            <!--<template scope="scope">-->
-            <!--<el-button type="danger" size="small" @click="deleteExpress(scope.row.id)">删除</el-button>-->
-            <!--</template>-->
-            <!--</el-table-column>-->
-        </el-table>
-    </ec-container-item>
-
+            <el-table :data="searchExpress" highlight-current-row height="500">
+                <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column prop="id" label="单号" width="180" sortable></el-table-column>
+                <el-table-column prop="receiver" label="姓名" width="80" sortable></el-table-column>
+                <el-table-column prop="phone" label="手机号" width="120" sortable></el-table-column>
+                <el-table-column prop="deliveryAddress" label="地址" sortable></el-table-column>
+                <!--<el-table-column label="操作" align="center" width="150">-->
+                <!--<template scope="scope">-->
+                <!--<el-button type="danger" size="small" @click="deleteExpress(scope.row.id)">删除</el-button>-->
+                <!--</template>-->
+                <!--</el-table-column>-->
+            </el-table>
+        </ec-container-item>
+    </ec-container>
 </template>
 
 <script>
@@ -62,7 +64,7 @@
                             this.expressList = res.data;
                             this.searchExpress = this.expressList;
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                     });
             },
@@ -100,9 +102,9 @@
                 this.$http.post('/api/express/import', params)
                     .then(res => {
                         if (res.success) {
-                            this.$message({message: '导入成功', type: 'success'});
+                            this.$message({ message: '导入成功', type: 'success' });
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                     });
             }

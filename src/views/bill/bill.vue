@@ -1,37 +1,39 @@
 <template>
-    <ec-container-item>
-        <template slot="head">
-            <el-form :inline="true" class="module-form">
-                <el-form-item>
-                    <el-button type="primary" @click="refresh()">刷新账单</el-button>
-                    <el-button type="primary" @click="addBill()">添加账单</el-button>
-                </el-form-item>
-            </el-form>
-        </template>
+    <ec-container>
+        <ec-container-item>
+            <template slot="head">
+                <el-form :inline="true" class="module-form">
+                    <el-form-item>
+                        <el-button type="primary" @click="refresh()">刷新账单</el-button>
+                        <el-button type="primary" @click="addBill()">添加账单</el-button>
+                    </el-form-item>
+                </el-form>
+            </template>
 
-        <el-table :data="bills" highlight-current-row>
-            <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
-            </el-table-column>
-            <el-table-column prop="docNo" label="单号" width="160" sortable>
-                <template scope="scope">
-                    <ec-text type="primary" @click="showBill(scope.row.id)">{{scope.row.docNo}}</ec-text>
-                </template>
-            </el-table-column>
-            <el-table-column prop="taxRate" label="汇率"/>
-            <!--<el-table-column prop="memo" label="备注"/>-->
-            <el-table-column label="操作" align="center" width="150">
-                <template scope="scope">
-                    <el-button type="primary" @click="editBill(scope.row.id)">编辑</el-button>
-                    <el-button type="danger" @click="deleteBill(scope.$index, scope.row.id)">删除
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <add-bill-dialog :show.sync="showAddBillDialog" :id="selectedBillId"
-                         @confirm="addBillSuccess"></add-bill-dialog>
+            <el-table :data="bills" highlight-current-row>
+                <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
+                </el-table-column>
+                <el-table-column prop="docNo" label="单号" width="160" sortable>
+                    <template scope="scope">
+                        <ec-text type="primary" @click="showBill(scope.row.id)">{{scope.row.docNo}}</ec-text>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="taxRate" label="汇率"/>
+                <!--<el-table-column prop="memo" label="备注"/>-->
+                <el-table-column label="操作" align="center" width="150">
+                    <template scope="scope">
+                        <el-button type="primary" @click="editBill(scope.row.id)">编辑</el-button>
+                        <el-button type="danger" @click="deleteBill(scope.$index, scope.row.id)">删除
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <add-bill-dialog :show.sync="showAddBillDialog" :id="selectedBillId"
+                             @confirm="addBillSuccess"></add-bill-dialog>
+
+        </ec-container-item>
         <router-view @refresh="refresh"></router-view>
-    </ec-container-item>
-
+    </ec-container>
 </template>
 
 <script>
