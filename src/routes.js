@@ -36,7 +36,7 @@ export default [
         path: '/',
         component: Home,
         name: '账单管理',
-        iconCls: 'el-icon-message',//图标样式class
+        iconCls: 'fa fa-file-o', //图标样式class
         leaf: true,//只有一个节点
         children: [
             // {path: '/main', component: Main, name: '主页', hidden: true},
