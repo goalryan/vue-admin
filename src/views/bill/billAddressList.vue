@@ -19,7 +19,7 @@
             <el-table-column prop="deliveryAddress" label="地址"></el-table-column>
             <el-table-column label="操作" header-align="center" align="center" width="100">
                 <template scope="scope">
-                    <el-button type="text" @click="editAddress(scope.row)">修改 </el-button>
+                    <el-button type="text" @click="editAddress(scope.row)">修改</el-button>
                     <el-button type="text" @click="unBind(scope.row)">解绑</el-button>
                 </template>
             </el-table-column>
@@ -84,12 +84,12 @@
         },
         methods: {
             fetchData() {
-                const queryData = {customerId: this.billCustomer.customerId};
-                this.$http.get(`api/address/customerAddress`, {params: queryData}).then(res => {
+                const queryData = { customerId: this.billCustomer.customerId };
+                this.$http.get(`api/address/customerAddress`, { params: queryData }).then(res => {
                     if (res.success) {
                         this.addresses = res.data;
                     } else {
-                        this.$message({message: res.msg, type: 'error'});
+                        this.$message({ message: res.msg, type: 'error' });
                     }
                 })
             },
@@ -143,7 +143,7 @@
                         if (res.success) {
                             this.fetchData();
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                     })
             },

@@ -17,8 +17,10 @@
                     :data="customers"
                     class="ec-transfer">
             </el-transfer>
+
         </ec-page-item>
         <ec-page-item slot="footer">
+            <el-button @click="loadData" type="primary">加载收件人</el-button>
             <el-button @click="export2Excel" type="primary">导出</el-button>
         </ec-page-item>
     </ec-page>
@@ -82,9 +84,12 @@
                             })
                             console.log(this.addresses);
                         } else {
-                            this.$message({message: res.msg, type: 'error'});
+                            this.$message({ message: res.msg, type: 'error' });
                         }
                     })
+            },
+            loadData() {
+                this.fetchData();
             },
             handleChange(value, direction, movedKeys) {
                 console.log(value, direction, movedKeys);
@@ -100,7 +105,7 @@
                     }
                 });
                 require.ensure([], () => {
-                    const {export_json_to_excel} = require('../../utils/ExportExcel');
+                    const { export_json_to_excel } = require('../../utils/ExportExcel');
                     const tHeader = ['订单编号', '收件人姓名（必填）', '收件人手机（二选一）', '收件人电话（二选一）', '收件人地址（必填）', '商品信息', '寄件人姓名', '寄件人手机（二选一）', '寄件人电话（二选一）', '寄件人地址'];
                     const filterVal = ['zeroCol', 'receiver', 'phone', 'zeroCol', 'deliveryAddress', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol', 'zeroCol'];
                     const list = this.exportAddresses;

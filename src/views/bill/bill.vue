@@ -1,6 +1,8 @@
 <template>
     <ec-container>
         <ec-container-item>
+            <add-bill-dialog :show.sync="showAddBillDialog" :id="selectedBillId"
+                             @confirm="addBillSuccess"></add-bill-dialog>
             <template slot="head">
                 <el-form :inline="true" class="module-form">
                     <el-form-item>
@@ -9,8 +11,7 @@
                     </el-form-item>
                 </el-form>
             </template>
-
-            <el-table :data="bills" highlight-current-row>
+            <el-table :data="bills" highlight-current-row class="ec-table">
                 <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
                 </el-table-column>
                 <el-table-column prop="docNo" label="单号" width="160" sortable>
@@ -28,8 +29,6 @@
                     </template>
                 </el-table-column>
             </el-table>
-            <add-bill-dialog :show.sync="showAddBillDialog" :id="selectedBillId"
-                             @confirm="addBillSuccess"></add-bill-dialog>
 
         </ec-container-item>
         <router-view @refresh="refresh"></router-view>
@@ -106,9 +105,4 @@
             }
         }
     }
-
 </script>
-
-<style scoped>
-
-</style>

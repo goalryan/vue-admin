@@ -6,7 +6,7 @@
                     <el-form-item label="查找范围">
                         <el-input v-model="searchValue" @change="filterExpress" icon="close"
                                   :on-icon-click="clearFilter"
-                                  placeholder="输入单号/手机号/姓名" size="small"></el-input>
+                                  placeholder="输入单号/手机号/姓名"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <ec-load-excel @success="postData"></ec-load-excel>
@@ -14,7 +14,7 @@
                 </el-form>
             </template>
 
-            <el-table :data="searchExpress" highlight-current-row height="500">
+            <el-table :data="searchExpress" highlight-current-row  class="ec-table">
                 <el-table-column type="index" label="序号" width="60" header-align="center" align="center">
                 </el-table-column>
                 <el-table-column prop="id" label="单号" width="180" sortable></el-table-column>

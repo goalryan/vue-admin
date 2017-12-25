@@ -18,7 +18,7 @@
         </el-table-column>
         <el-table-column label="数量">
             <template scope="scope">
-                <el-input v-if="isEdit" v-model="scope.row.quantity" placeholder="请输入数量"
+                <el-input v-if="isEdit" v-model="scope.row.quantity" placeholder="数量为1可不填"
                           @keyup.native="changeQuantity(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.quantity}}</p>
             </template>

@@ -1,23 +1,28 @@
 <template>
-    <section class="chart-container">
-        <el-row>
-            <el-col :span="12">
-                <div id="chartColumn" style="width:100%; height:400px;"></div>
-            </el-col>
-            <el-col :span="12">
-                <div id="chartBar" style="width:100%; height:400px;"></div>
-            </el-col>
-            <el-col :span="12">
-                <div id="chartLine" style="width:100%; height:400px;"></div>
-            </el-col>
-            <el-col :span="12">
-                <div id="chartPie" style="width:100%; height:400px;"></div>
-            </el-col>
-            <el-col :span="24">
-                <a href="http://echarts.baidu.com/examples.html" target="_blank" style="float: right;">more>></a>
-            </el-col>
-        </el-row>
-    </section>
+    <ec-container>
+        <ec-container-item>
+            <section class="chart-container">
+                <el-row>
+                    <el-col :span="12">
+                        <div id="chartColumn" style="width:100%; height:400px;"></div>
+                    </el-col>
+                    <el-col :span="12">
+                        <div id="chartBar" style="width:100%; height:400px;"></div>
+                    </el-col>
+                    <el-col :span="12">
+                        <div id="chartLine" style="width:100%; height:400px;"></div>
+                    </el-col>
+                    <el-col :span="12">
+                        <div id="chartPie" style="width:100%; height:400px;"></div>
+                    </el-col>
+                    <el-col :span="24">
+                        <a href="http://echarts.baidu.com/examples.html" target="_blank"
+                           style="float: right;">more>></a>
+                    </el-col>
+                </el-row>
+            </section>
+        </ec-container-item>
+    </ec-container>
 </template>
 
 <script>
@@ -37,16 +42,16 @@
             drawColumnChart() {
                 this.chartColumn = echarts.init(document.getElementById('chartColumn'));
                 this.chartColumn.setOption({
-                  title: { text: 'Column Chart' },
-                  tooltip: {},
-                  xAxis: {
-                      data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-                  },
-                  yAxis: {},
-                  series: [{
-                      name: '销量',
-                      type: 'bar',
-                      data: [5, 20, 36, 10, 10, 20]
+                    title: { text: 'Column Chart' },
+                    tooltip: {},
+                    xAxis: {
+                        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销量',
+                        type: 'bar',
+                        data: [5, 20, 36, 10, 10, 20]
                     }]
                 });
             },
@@ -205,6 +210,7 @@
         width: 100%;
         float: left;
     }
+
     /*.chart div {
         height: 400px;
         float: left;

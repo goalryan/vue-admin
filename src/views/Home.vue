@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app">
         <div class="header">
             <div class="tools" @click.prevent="collapse">
                 <i class="fa fa-align-justify"></i>
@@ -177,7 +177,7 @@
         },
         data() {
             return {
-                sysName: 'VUE',
+                sysName: '代购助手',
                 collapsed: false,
                 sysUserName: '',
                 sysUserAvatar: '',
@@ -228,7 +228,7 @@
             },
             //折叠导航栏
             collapse: function () {
-                this.collapsed = !this.collapsed;
+//                this.collapsed = !this.collapsed;
             },
             showMenu(i, status) {
                 this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
