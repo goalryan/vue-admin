@@ -52,11 +52,11 @@
                 </el-table-column>
                 <el-table-column label="数量" prop="quantity" header-align="right" align="right">
                 </el-table-column>
-                <el-table-column label="成本" prop="inTotalPrice" header-align="right" align="right">
+                <el-table-column label="成本(RMB)" prop="inTotalPrice" header-align="right" align="right">
                 </el-table-column>
-                <el-table-column label="收入" prop="outTotalPrice" header-align="right" align="right">
+                <el-table-column label="收入(RMB)" prop="outTotalPrice" header-align="right" align="right">
                 </el-table-column>
-                <el-table-column label="利润" prop="profit" header-align="right" align="right">
+                <el-table-column label="利润(RMB)" prop="profit" header-align="right" align="right">
                 </el-table-column>
                 <el-table-column
                         prop="tag"

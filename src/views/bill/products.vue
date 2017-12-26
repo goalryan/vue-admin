@@ -16,28 +16,28 @@
                 <p v-else="">{{scope.row.goodsName}}</p>
             </template>
         </el-table-column>
-        <el-table-column label="数量">
+        <el-table-column label="数量" header-align="right" align="right">
             <template scope="scope">
                 <el-input v-if="isEdit" v-model="scope.row.quantity" placeholder="数量为1可不填"
                           @keyup.native="changeQuantity(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.quantity}}</p>
             </template>
         </el-table-column>
-        <el-table-column label="成本价">
+        <el-table-column label="成本价" header-align="right" align="right">
             <template scope="scope">
                 <el-input v-if="isEdit" v-model="scope.row.inUnitPrice" placeholder="请输入成本价"
                           @keyup.native="changeInUnitPrice(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.inUnitPrice}}</p>
             </template>
         </el-table-column>
-        <el-table-column prop="outUnitPrice" label="卖出价(人民币)">
+        <el-table-column prop="outUnitPrice" label="卖出价(RMB)" header-align="right" align="right">
             <template scope="scope">
                 <el-input v-if="isEdit" v-model="scope.row.outUnitPrice" placeholder="请输入成本价"
                           @keyup.native="changeOutUnitPrice(scope.$index)"></el-input>
                 <p v-else="">{{scope.row.outUnitPrice}}</p>
             </template>
         </el-table-column>
-        <el-table-column label="币种" width="60" header-align="center" align="center">
+        <el-table-column label="币种" width="70" header-align="center" align="center">
             <template scope="scope">
                 <el-button :disabled="!isEdit" :type="scope.row.isRMB ? 'danger' : 'primary'"
                            @click="changeCurrency(scope.$index,scope.row)">
@@ -45,11 +45,11 @@
                 </el-button>
             </template>
         </el-table-column>
-        <el-table-column prop="inTotalPrice" label="总成本(人民币)">
+        <el-table-column prop="inTotalPrice" label="总成本(RMB)" header-align="right" align="right">
         </el-table-column>
-        <el-table-column prop="outTotalPrice" label="总收入(人民币)">
+        <el-table-column prop="outTotalPrice" label="总收入(RMB)" header-align="right" align="right">
         </el-table-column>
-        <el-table-column prop="profit" sortable label="利润">
+        <el-table-column prop="profit" sortable label="利润" header-align="right" align="right">
         </el-table-column>
         <el-table-column label="操作" width="160" header-align="center" align="center">
             <template scope="scope" v-if="isEdit">
